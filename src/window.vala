@@ -1,4 +1,4 @@
-/* Copyright 2024 <<DEVELOPER-DATA>>
+/* Copyright 2024 Vladimir Vaskov <rirusha@altlinux.org>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,15 +16,15 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-[GtkTemplate (ui = "<<RESOURCES-PATH>>ui/window.ui")]
-public sealed class <<APP-NAMESPACE>>.Window: Adw.ApplicationWindow {
+[GtkTemplate (ui = "/ru/alt_atomic/Manager/ui/window.ui")]
+public sealed class Manager.Window: Adw.ApplicationWindow {
 
     const ActionEntry[] ACTION_ENTRIES = {
         { "preferences", on_preferences_action },
         { "about", on_about_action },
     };
 
-    public Window (<<APP-NAMESPACE>>.Application app) {
+    public Window (Manager.Application app) {
         Object (application: app);
     }
 

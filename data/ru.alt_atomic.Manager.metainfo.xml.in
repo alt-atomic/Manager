@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
-  <name><<APP-NAME>></name>
-  <id><<APP-ID>></id>
+  <name>Manager</name>
+  <id>ru.alt_atomic.Manager</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
   <description>
@@ -23,15 +23,15 @@
   <summary>
 
   </summary>
-  <launchable type="desktop-id"><<APP-ID>>.desktop</launchable>
+  <launchable type="desktop-id">ru.alt_atomic.Manager.desktop</launchable>
   <releases>
 
   </releases>
   <url type="homepage"></url>
   <url type="bugtracker"></url>
   <url type="help"></url>
-  <developer id="<<DEVELOPER-ID>>">
-    <name><<DEVELOPER-NAME>></name>
+  <developer id="ru.alt_atomic.Manager">
+    <name>Vladimir Vaskov</name>
   </developer>
 </component>
 

@@ -1,11 +1,11 @@
 [Desktop Entry]
 # Translators: app name should be translated
-Name=<<APP-NAME>>
+Name=Manager
 Comment=
 # Translators: keep number of ';'
 Keywords=
-Exec=<<APP-COMMAND>>
-Icon=<<APP-ID>>
+Exec=manager
+Icon=ru.alt_atomic.Manager
 Terminal=false
 Type=Application
 Categories=

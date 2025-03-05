@@ -1,4 +1,4 @@
-/* Copyright 2024 <<DEVELOPER-DATA>>
+/* Copyright 2024 Vladimir Vaskov <rirusha@altlinux.org>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,6 +21,6 @@ int main (string[] args) {
     Intl.bind_textdomain_codeset (Config.GETTEXT_PACKAGE, "UTF-8");
     Intl.textdomain (Config.GETTEXT_PACKAGE);
 
-    var app = new <<APP-NAMESPACE>>.Application ();
+    var app = new Manager.Application ();
     return app.run (args);
 }

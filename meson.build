@@ -1,18 +1,18 @@
 project(
-  '<<APP-COMMAND>>',
+  'manager',
   'vala',
   version: '0.1.0',
   meson_version: '>= 1.0.0',
   license: 'GPL-3.0-or-later',
 )
 
-app_name = '<<APP-NAME>>'
+app_name = 'Manager'
 
-app_id = '<<APP-ID>>'
+app_id = 'ru.alt_atomic.Manager'
 app_id_dyn = app_id
 
-developer_name = '<<DEVELOPER-NAME>>'
-developer_data = '<<DEVELOPER-DATA>>'
+developer_name = 'Vladimir Vaskov'
+developer_data = 'Vladimir Vaskov <rirusha@altlinux.org>'
 
 glib_min_version = '2.76'
 

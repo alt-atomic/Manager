@@ -1,9 +1,9 @@
 {
-    "id" : "<<APP-ID>>-Devel",
+    "id" : "ru.alt_atomic.Manager-Devel",
     "runtime" : "org.gnome.Platform",
     "runtime-version" : "master",
     "sdk" : "org.gnome.Sdk",
-    "command" : "<<APP-COMMAND>>",
+    "command" : "manager",
     "finish-args" : [
         "--share=network",
         "--share=ipc",
@@ -42,7 +42,7 @@
             ]
         },
         {
-            "name" : "<<APP-COMMAND>>",
+            "name" : "manager",
             "builddir" : true,
             "buildsystem" : "meson",
             "config-opts": [ "-Dis_devel=true" ],

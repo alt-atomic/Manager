@@ -1,4 +1,4 @@
-/* Copyright 2024 <<DEVELOPER-DATA>>
+/* Copyright 2024 Vladimir Vaskov <rirusha@altlinux.org>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-public sealed class <<APP-NAMESPACE>>.Application: Adw.Application {
+public sealed class Manager.Application: Adw.Application {
 
     const ActionEntry[] ACTION_ENTRIES = {
         { "quit", quit },
@@ -25,7 +25,7 @@ public sealed class <<APP-NAMESPACE>>.Application: Adw.Application {
     public Application () {
         Object (
             application_id: Config.APP_ID_DYN,
-            resource_base_path: "<<RESOURCES-PATH>>"
+            resource_base_path: "/ru/alt_atomic/Manager/"
         );
     }
 

@@ -1,4 +1,4 @@
-/* Copyright 2024 <<DEVELOPER-DATA>>
+/* Copyright 2024 Vladimir Vaskov <rirusha@altlinux.org>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-namespace <<APP-NAMESPACE>> {
+namespace Manager {
     public Adw.AboutDialog build_about () {
         string[] developers = {
             Config.DEVELOPER_DATA,
