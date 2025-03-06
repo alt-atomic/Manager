@@ -1,5 +1,5 @@
 {
-    "id" : "ru.alt_atomic.Manager-Devel",
+    "id" : "ru.alt_atomic.Manager.Devel",
     "runtime" : "org.gnome.Platform",
     "runtime-version" : "master",
     "sdk" : "org.gnome.Sdk",
