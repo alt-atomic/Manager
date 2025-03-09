@@ -52,6 +52,7 @@ resources = gnome.compile_resources(
   meson.project_name() + '-resources',
   resource_files,
   dependencies: blueprints,
+  source_dir: meson.current_build_dir(),
   c_name: 'manager'
 )
 
