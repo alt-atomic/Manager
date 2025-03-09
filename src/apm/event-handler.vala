@@ -65,7 +65,6 @@ public sealed class Manager.EventHandler : Object {
                             apm_talker.notification.connect ((data) => {
                                 try {
                                     var jsoner = new ApiBase.Jsoner (data, null, ApiBase.Case.CAMEL);
-                                    message (data);
                                     event_recieved ((Event) jsoner.deserialize_object (typeof (Event)));
 
                                 } catch (ApiBase.CommonError e) {
