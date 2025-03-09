@@ -3,6 +3,12 @@ vapi_sources = files(
 )
 
 vala_sources = files(
+  'apm/event-handler.vala',
+  'apm/session-talker.vala',
+  'apm/system-talker.vala',
+
+  'objects/event.vala',
+
   'about.vala',
   'application.vala',
   'main.vala',
