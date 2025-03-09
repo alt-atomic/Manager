@@ -32,6 +32,10 @@ public sealed class Manager.Application: Adw.Application {
     construct {
         add_action_entries (ACTION_ENTRIES, this);
         set_accels_for_action ("app.quit", { "<primary>q" });
+
+        EventHandler.ensure ();
+        SessionTalker.ensure ();
+        SystemTalker.ensure ();
     }
 
     public override void activate () {
