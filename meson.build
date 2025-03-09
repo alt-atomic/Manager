@@ -17,9 +17,11 @@ developer_data = 'Vladimir Vaskov <rirusha@altlinux.org>'
 glib_min_version = '2.76'
 
 libadwaita_dep = dependency('libadwaita-1', version: '>= 1.6')
+libapi_base_dep = dependency('libapi-base-1', fallback : ['libapi-base', 'lib_dep'])
 
 dependencies = [
-  libadwaita_dep
+  libadwaita_dep,
+  libapi_base_dep,
 ]
 
 add_project_arguments(
