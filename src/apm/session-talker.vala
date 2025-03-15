@@ -301,8 +301,8 @@ public sealed class Manager.SessionTalker : Object {
 
     public async List? list (
         string container,
-        string sort,
-        ListParamsOrder order,
+        string sort = "",
+        ListParamsOrder order = ListParamsOrder.ASC,
         int limit = 10,
         int offset = 10,
         string[] filter_field = {},
