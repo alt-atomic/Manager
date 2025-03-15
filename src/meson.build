@@ -18,9 +18,13 @@ vala_sources = files(
   'objects/search.vala',
   'objects/update.vala',
 
+  'pages/software-page.vala',
+  'pages/system-page.vala',
+
   'about.vala',
   'application.vala',
   'main.vala',
+  'preferences-dialog.vala',
   'utils.vala',
   'window.vala',
 )

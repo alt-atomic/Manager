@@ -39,7 +39,7 @@ public sealed class Manager.Window: Adw.ApplicationWindow {
     }
 
     void on_preferences_action () {
-        message ("Hello, stranger…");
+        new PreferencesDialog ().present (this);
     }
 
     void on_about_action () {
