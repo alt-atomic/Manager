@@ -7,7 +7,16 @@ vala_sources = files(
   'apm/session-talker.vala',
   'apm/system-talker.vala',
 
+  'objects/container-info.vala',
   'objects/event.vala',
+  'objects/filter-info.vala',
+  'objects/info.vala',
+  'objects/list-params.vala',
+  'objects/list.vala',
+  'objects/package-info.vala',
+  'objects/package.vala',
+  'objects/search.vala',
+  'objects/update.vala',
 
   'about.vala',
   'application.vala',

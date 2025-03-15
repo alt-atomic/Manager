@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 Vladimir Vaskov
+ * Copyright (C) 2025 Vladimir Vaskov <rirusha@altlinux.org>
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,6 +34,11 @@ public interface Distrobox : Object {
 
     public abstract async string container_remove (
         string name,
+        string transaction
+    ) throws GLib.DBusError, GLib.IOError;
+
+    public abstract async string get_filter_fields (
+        string container,
         string transaction
     ) throws GLib.DBusError, GLib.IOError;
 
@@ -79,7 +84,7 @@ public sealed class Manager.SessionTalker : Object {
     static SessionTalker instance;
 
     DBusConnection con;
-    public Distrobox talker { get; private set; }
+    Distrobox talker;
 
     SessionTalker () {
         Object ();
@@ -132,5 +137,283 @@ public sealed class Manager.SessionTalker : Object {
         }
 
         return instance;
+    }
+
+    public async ContainerInfo? container_add (
+        string image,
+        string name,
+        string additional_packages = "",
+        string init_hooks = "",
+        string transaction = Uuid.string_random ()
+    ) {
+        try {
+            string result = yield talker.container_add (
+                image,
+                name,
+                additional_packages,
+                init_hooks,
+                transaction
+            );
+
+            var obj = new ContainerInfo ();
+            obj.fill_from_json (
+                result,
+                { "data", "containerInfo" },
+                ApiBase.Case.CAMEL
+            );
+            return obj;
+
+        } catch (Error e) {
+            warning (e.message);
+        }
+
+        return null;
+    }
+
+    public async ContainerInfo[]? container_list (
+        string transaction = Uuid.string_random ()
+    ) {
+        try {
+            string result = yield talker.contaner_list (
+                transaction
+            );
+
+            var obj_array = new Gee.ArrayList<ContainerInfo> ();
+
+            var jsoner = new ApiBase.Jsoner (result, { "data", "containers" }, ApiBase.Case.CAMEL);
+            jsoner.deserialize_object_into (obj_array);
+
+            return obj_array.to_array ();
+
+        } catch (Error e) {
+            warning (e.message);
+        }
+
+        return null;
+    }
+
+    public async ContainerInfo? container_remove (
+        string image,
+        string transaction = Uuid.string_random ()
+    ) {
+        try {
+            string result = yield talker.container_remove (
+                image,
+                transaction
+            );
+
+            var obj = new ContainerInfo ();
+            obj.fill_from_json (
+                result,
+                { "data", "containerInfo" },
+                ApiBase.Case.CAMEL
+            );
+            return obj;
+
+        } catch (Error e) {
+            warning (e.message);
+        }
+
+        return null;
+    }
+
+    public async FilterInfo[]? get_filter_fields (
+        string container,
+        string transaction = Uuid.string_random ()
+    ) {
+        try {
+            string result = yield talker.get_filter_fields (
+                container,
+                transaction
+            );
+
+            var obj_array = new Gee.ArrayList<FilterInfo> ();
+
+            var jsoner = new ApiBase.Jsoner (result, { "data" }, ApiBase.Case.CAMEL);
+            jsoner.deserialize_object_into (obj_array);
+
+            return obj_array.to_array ();
+
+        } catch (Error e) {
+            warning (e.message);
+        }
+
+        return null;
+    }
+
+    public async Info? info (
+        string container,
+        string package_name,
+        string transaction = Uuid.string_random ()
+    ) {
+        try {
+            string result = yield talker.info (
+                container,
+                package_name,
+                transaction
+            );
+
+            var obj = new Info ();
+            obj.fill_from_json (
+                result,
+                { "data" },
+                ApiBase.Case.CAMEL
+            );
+            return obj;
+
+        } catch (Error e) {
+            warning (e.message);
+        }
+
+        return null;
+    }
+
+    public async Info? install (
+        string container,
+        string package_name,
+        bool export = false,
+        string transaction = Uuid.string_random ()
+    ) {
+        try {
+            string result = yield talker.install (
+                container,
+                package_name,
+                export,
+                transaction
+            );
+
+            var obj = new Info ();
+            obj.fill_from_json (
+                result,
+                { "data" },
+                ApiBase.Case.CAMEL
+            );
+            return obj;
+
+        } catch (Error e) {
+            warning (e.message);
+        }
+
+        return null;
+    }
+
+    public async List? list (
+        string container,
+        string sort,
+        ListParamsOrder order,
+        int limit = 10,
+        int offset = 10,
+        string[] filter_field = {},
+        bool force_update = false,
+        string transaction = Uuid.string_random ()
+    ) {
+        try {
+            string result = yield talker.list (
+                new ListParams () {
+                    container = container,
+                    sort = sort,
+                    order = order,
+                    limit = limit,
+                    offset = offset,
+                    filters = new Gee.ArrayList<string>.wrap (filter_field),
+                    force_update = force_update
+                }.to_json (),
+                transaction
+            );
+
+            var obj = new List ();
+            obj.fill_from_json (
+                result,
+                { "data" },
+                ApiBase.Case.CAMEL
+            );
+            return obj;
+
+        } catch (Error e) {
+            warning (e.message);
+        }
+
+        return null;
+    }
+
+    public async Info? remove (
+        string container,
+        string package_name,
+        bool only_export = false,
+        string transaction = Uuid.string_random ()
+    ) {
+        try {
+            string result = yield talker.remove (
+                container,
+                package_name,
+                only_export,
+                transaction
+            );
+
+            var obj = new Info ();
+            obj.fill_from_json (
+                result,
+                { "data" },
+                ApiBase.Case.CAMEL
+            );
+            return obj;
+
+        } catch (Error e) {
+            warning (e.message);
+        }
+
+        return null;
+    }
+
+    public async Search? search (
+        string container,
+        string package_name,
+        string transaction = Uuid.string_random ()
+    ) {
+        try {
+            string result = yield talker.search (
+                container,
+                package_name,
+                transaction
+            );
+
+            var obj = new Search ();
+            obj.fill_from_json (
+                result,
+                { "data" },
+                ApiBase.Case.CAMEL
+            );
+            return obj;
+
+        } catch (Error e) {
+            warning (e.message);
+        }
+
+        return null;
+    }
+
+    public async Update? update (
+        string container,
+        string transaction = Uuid.string_random ()
+    ) {
+        try {
+            string result = yield talker.update (
+                container,
+                transaction
+            );
+
+            var obj = new Update ();
+            obj.fill_from_json (
+                result,
+                { "data" },
+                ApiBase.Case.CAMEL
+            );
+            return obj;
+
+        } catch (Error e) {
+            warning (e.message);
+        }
+
+        return null;
     }
 }

@@ -17,27 +17,12 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-public enum EventState {
-    BEFORE,
-    AFTER,
-}
+public sealed class Manager.Info : ApiBase.DataObject {
 
-public enum EventType {
-    NOTIFICATION,
-    PROGRESS,
-}
-
-public sealed class Manager.Event : ApiBase.DataObject {
-
-    public string name { get; set; }
-
+    /**
+     * Human readable message.
+     */
     public string message { get; set; }
 
-    public EventState state { get; set; }
-
-    public EventType type_ { get; set; }
-
-    public int progress { get; set; }
-
-    public string transaction { get; set; }
+    public PackageInfo package_info { get; set; }
 }

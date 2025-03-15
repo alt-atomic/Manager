@@ -12,32 +12,19 @@
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ * along with this program. If not, see
+ * <https://www.gnu.org/licenses/gpl-3.0-standalone.html>.
  * 
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-public enum EventState {
-    BEFORE,
-    AFTER,
-}
-
-public enum EventType {
-    NOTIFICATION,
-    PROGRESS,
-}
-
-public sealed class Manager.Event : ApiBase.DataObject {
+public sealed class Manager.FilterInfo : ApiBase.DataObject {
 
     public string name { get; set; }
 
-    public string message { get; set; }
+    public string text { get; set; }
 
-    public EventState state { get; set; }
+    public string type_ { get; set; }
 
-    public EventType type_ { get; set; }
-
-    public int progress { get; set; }
-
-    public string transaction { get; set; }
+    public Gee.ArrayList<string> choice { get; set; default = new Gee.ArrayList<string> (); }
 }

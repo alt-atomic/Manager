@@ -17,27 +17,11 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-public enum EventState {
-    BEFORE,
-    AFTER,
-}
+public sealed class Manager.PackageInfo : ApiBase.DataObject {
 
-public enum EventType {
-    NOTIFICATION,
-    PROGRESS,
-}
+    public Package package { get; set; }
 
-public sealed class Manager.Event : ApiBase.DataObject {
+    public Gee.ArrayList<string> paths { get; set; default = new Gee.ArrayList<string> (); }
 
-    public string name { get; set; }
-
-    public string message { get; set; }
-
-    public EventState state { get; set; }
-
-    public EventType type_ { get; set; }
-
-    public int progress { get; set; }
-
-    public string transaction { get; set; }
+    public bool is_console { get; set; }
 }
