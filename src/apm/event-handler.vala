@@ -58,6 +58,8 @@ public sealed class Manager.EventHandler : Object {
                         try {
                             apm_talker = con.get_proxy.end<Apm> (res);
 
+                            ((DBusProxy) apm_talker).set_default_timeout (DBUS_TIMEOUT);
+
                             if (apm_talker == null) {
                                 error ("Failed to connect to bus");
                             }

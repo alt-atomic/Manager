@@ -21,6 +21,7 @@ vala_sources = files(
   'about.vala',
   'application.vala',
   'main.vala',
+  'utils.vala',
   'window.vala',
 )
 

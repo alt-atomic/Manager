@@ -93,6 +93,8 @@ public sealed class Manager.SystemTalker : Object {
                         try {
                             talker = con.get_proxy.end<System> (res);
 
+                            ((DBusProxy) talker).set_default_timeout (DBUS_TIMEOUT);
+
                             if (talker == null) {
                                 error ("Failed to connect to bus");
                             }
