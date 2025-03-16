@@ -25,57 +25,67 @@ public interface Distrobox : Object {
         string name,
         string additional_packages,
         string init_hooks,
-        string transaction
+        string transaction,
+        Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
     public abstract async string contaner_list (
-        string transaction
+        string transaction,
+        Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
     public abstract async string container_remove (
         string name,
-        string transaction
+        string transaction,
+        Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
     public abstract async string get_filter_fields (
         string container,
-        string transaction
+        string transaction,
+        Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
     public abstract async string info (
         string container,
         string package_name,
-        string transaction
+        string transaction,
+        Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
     public abstract async string install (
         string container,
         string package_name,
         bool export,
-        string transaction
+        string transaction,
+        Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
     public abstract async string list (
         string params_j_s_o_n,
-        string transaction
+        string transaction,
+        Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
     public abstract async string remove (
         string container,
         string package_name,
         bool only_export,
-        string transaction
+        string transaction,
+        Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
     public abstract async string search (
         string container,
         string package_name,
-        string transaction
+        string transaction,
+        Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
     public abstract async string update (
         string container,
-        string transaction
+        string transaction,
+        Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 }
 
@@ -146,7 +156,8 @@ public sealed class Manager.SessionTalker : Object {
         string name,
         string additional_packages = "",
         string init_hooks = "",
-        string transaction = Uuid.string_random ()
+        string transaction = Uuid.string_random (),
+        Cancellable? cancellable = null
     ) {
         try {
             string result = yield talker.container_add (
@@ -154,7 +165,8 @@ public sealed class Manager.SessionTalker : Object {
                 name,
                 additional_packages,
                 init_hooks,
-                transaction
+                transaction,
+                cancellable
             );
 
             var obj = new ContainerInfo ();
@@ -173,11 +185,13 @@ public sealed class Manager.SessionTalker : Object {
     }
 
     public async ContainerInfo[]? container_list (
-        string transaction = Uuid.string_random ()
+        string transaction = Uuid.string_random (),
+        Cancellable? cancellable = null
     ) {
         try {
             string result = yield talker.contaner_list (
-                transaction
+                transaction,
+                cancellable
             );
 
             var obj_array = new Gee.ArrayList<ContainerInfo> ();
@@ -196,12 +210,14 @@ public sealed class Manager.SessionTalker : Object {
 
     public async ContainerInfo? container_remove (
         string image,
-        string transaction = Uuid.string_random ()
+        string transaction = Uuid.string_random (),
+        Cancellable? cancellable = null
     ) {
         try {
             string result = yield talker.container_remove (
                 image,
-                transaction
+                transaction,
+                cancellable
             );
 
             var obj = new ContainerInfo ();
@@ -221,12 +237,14 @@ public sealed class Manager.SessionTalker : Object {
 
     public async FilterInfo[]? get_filter_fields (
         string container,
-        string transaction = Uuid.string_random ()
+        string transaction = Uuid.string_random (),
+        Cancellable? cancellable = null
     ) {
         try {
             string result = yield talker.get_filter_fields (
                 container,
-                transaction
+                transaction,
+                cancellable
             );
 
             var obj_array = new Gee.ArrayList<FilterInfo> ();
@@ -246,13 +264,15 @@ public sealed class Manager.SessionTalker : Object {
     public async Info? info (
         string container,
         string package_name,
-        string transaction = Uuid.string_random ()
+        string transaction = Uuid.string_random (),
+        Cancellable? cancellable = null
     ) {
         try {
             string result = yield talker.info (
                 container,
                 package_name,
-                transaction
+                transaction,
+                cancellable
             );
 
             var obj = new Info ();
@@ -274,14 +294,16 @@ public sealed class Manager.SessionTalker : Object {
         string container,
         string package_name,
         bool export = false,
-        string transaction = Uuid.string_random ()
+        string transaction = Uuid.string_random (),
+        Cancellable? cancellable = null
     ) {
         try {
             string result = yield talker.install (
                 container,
                 package_name,
                 export,
-                transaction
+                transaction,
+                cancellable
             );
 
             var obj = new Info ();
@@ -307,7 +329,8 @@ public sealed class Manager.SessionTalker : Object {
         int offset = 10,
         string[] filter_field = {},
         bool force_update = false,
-        string transaction = Uuid.string_random ()
+        string transaction = Uuid.string_random (),
+        Cancellable? cancellable = null
     ) {
         try {
             string result = yield talker.list (
@@ -320,7 +343,8 @@ public sealed class Manager.SessionTalker : Object {
                     filters = new Gee.ArrayList<string>.wrap (filter_field),
                     force_update = force_update
                 }.to_json (),
-                transaction
+                transaction,
+                cancellable
             );
 
             var obj = new List ();
@@ -342,14 +366,16 @@ public sealed class Manager.SessionTalker : Object {
         string container,
         string package_name,
         bool only_export = false,
-        string transaction = Uuid.string_random ()
+        string transaction = Uuid.string_random (),
+        Cancellable? cancellable = null
     ) {
         try {
             string result = yield talker.remove (
                 container,
                 package_name,
                 only_export,
-                transaction
+                transaction,
+                cancellable
             );
 
             var obj = new Info ();
@@ -370,13 +396,15 @@ public sealed class Manager.SessionTalker : Object {
     public async Search? search (
         string container,
         string package_name,
-        string transaction = Uuid.string_random ()
+        string transaction = Uuid.string_random (),
+        Cancellable? cancellable = null
     ) {
         try {
             string result = yield talker.search (
                 container,
                 package_name,
-                transaction
+                transaction,
+                cancellable
             );
 
             var obj = new Search ();
@@ -396,12 +424,14 @@ public sealed class Manager.SessionTalker : Object {
 
     public async Update? update (
         string container,
-        string transaction = Uuid.string_random ()
+        string transaction = Uuid.string_random (),
+        Cancellable? cancellable = null
     ) {
         try {
             string result = yield talker.update (
                 container,
-                transaction
+                transaction,
+                cancellable
             );
 
             var obj = new Update ();
