@@ -26,6 +26,7 @@ dependencies = [
 
 add_project_arguments(
   '-include', 'config.h',
+  '-w',
   language: ['c']
 )
 
