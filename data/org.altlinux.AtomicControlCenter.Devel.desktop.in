@@ -1,12 +1,15 @@
 [Desktop Entry]
 # Translators: app name should be translated
 Name=Atomic Control Center (Devel)
-Comment=
+Comment=Control center for ALT Atomic
 # Translators: keep number of ';'
-Keywords=
+Keywords=atomic;control;center;settings;
 Exec=atomic-control-center
 Icon=org.altlinux.AtomicControlCenter.Devel
 Terminal=false
 Type=Application
-Categories=
+Categories=Utility;GNOME;GTK;
 StartupNotify=true
+X-SingleMainWindow=true
+X-Purism-FormFactor=Workstation;Mobile;
+X-GNOME-Gettext-Domain=atomic-control-center
