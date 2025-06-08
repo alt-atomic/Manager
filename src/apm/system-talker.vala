@@ -20,45 +20,77 @@
 [DBus (name = "com.application.system")]
 public interface System : Object {
 
-    public abstract async string image_status (
-        string transaction
+    public abstract async string check_install (
+        string[] packages,
+        string transaction,
+        Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
-    public abstract async string image_switch_local (
-        string transaction
+    public abstract async string check_remove (
+        string[] packages,
+        string transaction,
+        Cancellable? cancellable
+    ) throws GLib.DBusError, GLib.IOError;
+
+    public abstract async string image_apply (
+        string transaction,
+        Cancellable? cancellable
+    ) throws GLib.DBusError, GLib.IOError;
+
+    public abstract async string image_history (
+        string transaction,
+        string image_name,
+        int64 limit,
+        int64 offset,
+        Cancellable? cancellable
+    ) throws GLib.DBusError, GLib.IOError;
+
+    public abstract async string image_status (
+        string transaction,
+        Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
     public abstract async string image_update (
-        string transaction
+        string transaction,
+        Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
     public abstract async string info (
         string package_name,
-        string transaction
+        string transaction,
+        Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
     public abstract async string install (
-        string package_name,
-        string transaction
+        string[] packages,
+        bool apply_atomic,
+        string transaction,
+        Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
-    //  public abstract async string list (
-    //      string transaction
-    //  ) throws GLib.DBusError, GLib.IOError;
+    public abstract async string list (
+        string params_j_s_o_n,
+        string transaction,
+        Cancellable? cancellable
+    ) throws GLib.DBusError, GLib.IOError;
 
     public abstract async string remove (
-        string package_name,
-        string transaction
+        string[] packages,
+        bool apply_atomic,
+        string transaction,
+        Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
     public abstract async string search (
         string package_name,
-        string transaction
+        string transaction,
+        bool installed,
+        Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
     public abstract async string update (
-        string package_name,
-        string transaction
+        string transaction,
+        Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 }
 
