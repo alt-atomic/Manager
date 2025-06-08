@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/ru/alt_atomic/Manager/">
-    <file alias="gtk/help-overlay.ui" preprocess="xml-stripblanks">ui/help-overlay.ui</file>
     <file>style.css</file>
     <file preprocess="xml-stripblanks">ui/window.ui</file>
   </gresource>
