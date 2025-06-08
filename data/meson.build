@@ -1,4 +1,7 @@
 blueprint_files = files(
+  'ui/menu-button.blp',
+  'ui/software-page.blp',
+  'ui/system-page.blp',
   'ui/window.blp',
 )
 

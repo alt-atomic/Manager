@@ -21,6 +21,8 @@ vala_sources = files(
   'pages/software-page.vala',
   'pages/system-page.vala',
 
+  'widgets/menu-button.vala',
+
   'about.vala',
   'application.vala',
   'main.vala',

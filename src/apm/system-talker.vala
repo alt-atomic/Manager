@@ -17,7 +17,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-[DBus (name = "com.application.system")]
+[DBus (name = "org.altlinux.system")]
 public interface System : Object {
 
     public abstract async string check_install (
@@ -106,42 +106,28 @@ public sealed class ACC.SystemTalker : Object {
     }
 
     construct {
-        Bus.get.begin (BusType.SYSTEM, null, (obj, res) => {
+        try {
+            con = Bus.get_sync (BusType.SYSTEM);
 
-            try {
-                con = Bus.get.end (res);
-
-                if (con == null) {
-                    error ("Failed to connect to bus");
-                }
-
-                con.get_proxy.begin<System> (
-                    "com.application.APM",
-                    "/com/application/APM",
-                    DBusProxyFlags.NONE,
-                    null,
-                    (obj, res) => {
-
-                        try {
-                            talker = con.get_proxy.end<System> (res);
-
-                            ((DBusProxy) talker).set_default_timeout (DBUS_TIMEOUT);
-
-                            if (talker == null) {
-                                error ("Failed to connect to bus");
-                            }
-
-                        } catch (IOError e) {
-                            warning (e.message);
-
-                        }
-                    }
-                );
-
-            } catch (IOError e) {
-                warning (e.message);
+            if (con == null) {
+                error ("Failed to connect to bus");
             }
-        });
+
+            talker = con.get_proxy_sync<System> (
+                "org.altlinux.APM",
+                "/org/altlinux/APM",
+                DBusProxyFlags.NONE
+            );
+
+            ((DBusProxy) talker).set_default_timeout (DBUS_TIMEOUT);
+
+            if (talker == null) {
+                error ("Failed to connect to bus");
+            }
+
+        } catch (IOError e) {
+            warning (e.message);
+        }
     }
 
     public static void ensure () {

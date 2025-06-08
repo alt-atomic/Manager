@@ -17,3 +17,28 @@
  * 
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
+
+[GtkTemplate (ui = "/org/altlinux/AtomicControlCenter/ui/software-page.ui")]
+public sealed class ACC.SoftwarePage: Adw.Bin {
+
+    [GtkChild]
+    unowned Gtk.ListBox list_box;
+
+    construct {
+        start.begin ();
+    }
+
+    async void start () throws Error {
+        var talker = SessionTalker.get_default ();
+
+        var containers = yield talker.container_list ();
+
+        foreach (var container in containers) {
+            list_box.append (new Gtk.Label ("%s : %s, %s".printf (
+                container.name,
+                container.os,
+                container.active ? "active" : "inactive"
+            )));
+        }
+    }
+}

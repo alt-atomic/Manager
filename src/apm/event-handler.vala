@@ -17,7 +17,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-[DBus (name = "com.application.APM")]
+[DBus (name = "org.altlinux.APM")]
 interface Apm : Object {
     public signal void notification (string data);
 }
@@ -49,12 +49,11 @@ public sealed class ACC.EventHandler : Object {
                 }
 
                 con.get_proxy.begin<Apm> (
-                    "com.application.APM",
-                    "/com/application/APM",
+                    "org.altlinux.APM",
+                    "/org/altlinux/APM",
                     DBusProxyFlags.NONE,
                     null,
                     (obj, res) => {
-
                         try {
                             apm_talker = con.get_proxy.end<Apm> (res);
 

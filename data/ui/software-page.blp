@@ -1,0 +1,21 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $ACCSoftwarePage : Adw.Bin {
+  ScrolledWindow {
+    propagate-natural-height: true;
+    hscrollbar-policy: never;
+
+    Adw.Clamp {
+      margin-bottom: 12;
+      margin-end: 12;
+      margin-top: 12;
+      margin-start: 12;
+      maximum-size: 500;
+
+      ListBox list_box {
+        styles ["boxed-list"]
+      }
+    }
+  }
+}

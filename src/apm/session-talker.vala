@@ -17,7 +17,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-[DBus (name = "com.application.distrobox")]
+[DBus (name = "org.altlinux.distrobox")]
 public interface Distrobox : Object {
 
     public abstract async string container_add (
@@ -29,7 +29,7 @@ public interface Distrobox : Object {
         Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
-    public abstract async string contaner_list (
+    public abstract async string container_list (
         string transaction,
         Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
@@ -107,42 +107,28 @@ public sealed class ACC.SessionTalker : Object {
     }
 
     construct {
-        Bus.get.begin (BusType.SESSION, null, (obj, res) => {
+        try {
+            con = Bus.get_sync (BusType.SESSION);
 
-            try {
-                con = Bus.get.end (res);
-
-                if (con == null) {
-                    error ("Failed to connect to bus");
-                }
-
-                con.get_proxy.begin<Distrobox> (
-                    "com.application.APM",
-                    "/com/application/APM",
-                    DBusProxyFlags.NONE,
-                    null,
-                    (obj, res) => {
-
-                        try {
-                            talker = con.get_proxy.end<Distrobox> (res);
-
-                            ((DBusProxy) talker).set_default_timeout (DBUS_TIMEOUT);
-
-                            if (talker == null) {
-                                error ("Failed to connect to bus");
-                            }
-
-                        } catch (IOError e) {
-                            warning (e.message);
-
-                        }
-                    }
-                );
-
-            } catch (IOError e) {
-                warning (e.message);
+            if (con == null) {
+                error ("Failed to connect to bus");
             }
-        });
+
+            talker = con.get_proxy_sync<Distrobox> (
+                "org.altlinux.APM",
+                "/org/altlinux/APM",
+                DBusProxyFlags.NONE
+            );
+
+            ((DBusProxy) talker).set_default_timeout (DBUS_TIMEOUT);
+
+            if (talker == null) {
+                error ("Failed to connect to bus");
+            }
+
+        } catch (IOError e) {
+            warning (e.message);
+        }
     }
 
     public static void ensure () {
@@ -197,7 +183,7 @@ public sealed class ACC.SessionTalker : Object {
         Cancellable? cancellable = null
     ) throws AError {
         try {
-            string result = yield talker.contaner_list (
+            string result = yield talker.container_list (
                 transaction,
                 cancellable
             );
@@ -205,7 +191,7 @@ public sealed class ACC.SessionTalker : Object {
             var obj_array = new Gee.ArrayList<ContainerInfo> ();
 
             var jsoner = new ApiBase.Jsoner (result, { "data", "containers" }, ApiBase.Case.CAMEL);
-            jsoner.deserialize_object_into (obj_array);
+            yield jsoner.deserialize_array_into_async (obj_array);
 
             return obj_array.to_array ();
 

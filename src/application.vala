@@ -29,6 +29,12 @@ public sealed class ACC.Application: Adw.Application {
         );
     }
 
+    static construct {
+        typeof (MenuButton).ensure ();
+        typeof (SoftwarePage).ensure ();
+        typeof (SystemPage).ensure ();
+    }
+
     construct {
         add_action_entries (ACTION_ENTRIES, this);
         set_accels_for_action ("app.quit", { "<primary>q" });
