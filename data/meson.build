@@ -1,5 +1,4 @@
 blueprint_files = files(
-  'ui/help-overlay.blp',
   'ui/window.blp',
 )
 
