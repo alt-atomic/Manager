@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-public sealed class Manager.Application: Adw.Application {
+public sealed class ACC.Application: Adw.Application {
 
     const ActionEntry[] ACTION_ENTRIES = {
         { "quit", quit },
@@ -25,7 +25,7 @@ public sealed class Manager.Application: Adw.Application {
     public Application () {
         Object (
             application_id: Config.APP_ID_DYN,
-            resource_base_path: "/ru/alt_atomic/Manager/"
+            resource_base_path: "/org/altlinux/AtomicControlCenter/"
         );
     }
 

@@ -18,12 +18,12 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-public enum Manager.ListParamsOrder {
+public enum ACC.ListParamsOrder {
     ASC,
     DESC,
 }
 
-public sealed class Manager.ListParams : ApiBase.DataObject {
+public sealed class ACC.ListParams : ApiBase.DataObject {
 
     /**
      * Container name.

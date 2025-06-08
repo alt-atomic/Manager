@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-namespace Manager {
+namespace ACC {
     public Adw.AboutDialog build_about () {
         string[] developers = {
             Config.DEVELOPER_DATA,

@@ -16,15 +16,15 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-[GtkTemplate (ui = "/ru/alt_atomic/Manager/ui/window.ui")]
-public sealed class Manager.Window: Adw.ApplicationWindow {
+[GtkTemplate (ui = "/org/altlinux/AtomicControlCenter/ui/window.ui")]
+public sealed class ACC.Window: Adw.ApplicationWindow {
 
     const ActionEntry[] ACTION_ENTRIES = {
         { "preferences", on_preferences_action },
         { "about", on_about_action },
     };
 
-    public Window (Manager.Application app) {
+    public Window (ACC.Application app) {
         Object (application: app);
     }
 

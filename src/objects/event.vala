@@ -27,7 +27,7 @@ public enum EventType {
     PROGRESS,
 }
 
-public sealed class Manager.Event : ApiBase.DataObject {
+public sealed class ACC.Event : ApiBase.DataObject {
 
     public string name { get; set; }
 

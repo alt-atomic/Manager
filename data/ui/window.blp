@@ -1,7 +1,7 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $ManagerWindow : Adw.ApplicationWindow {
+template $ACCWindow : Adw.ApplicationWindow {
   default-width: 600;
   default-height: 500;
   width-request: 360;
@@ -93,6 +93,6 @@ template $ManagerWindow : Adw.ApplicationWindow {
 menu primary_menu {
   section {
     item (_("Preferences"), "win.preferences")
-    item (_("About Manager"), "win.about")
+    item (_("About app"), "win.about")
   }
 }

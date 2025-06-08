@@ -17,7 +17,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-public sealed class Manager.PackageInfo : ApiBase.DataObject {
+public sealed class ACC.PackageInfo : ApiBase.DataObject {
 
     public Package package { get; set; }
 

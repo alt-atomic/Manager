@@ -95,7 +95,7 @@ public interface Distrobox : Object {
     ) throws GLib.DBusError, GLib.IOError;
 }
 
-public sealed class Manager.SessionTalker : Object {
+public sealed class ACC.SessionTalker : Object {
 
     static SessionTalker instance;
 

@@ -52,7 +52,7 @@ resources = gnome.compile_resources(
   resource_files,
   dependencies: blueprints,
   source_dir: meson.current_build_dir(),
-  c_name: 'manager'
+  c_name: 'atomic_control_center'
 )
 
 subdir('icons')

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schemalist gettext-domain="manager">
+<schemalist gettext-domain="atomic-control-center">
 
-	<schema id="ru.alt_atomic.Manager" path="/ru/alt_atomic/Manager/">
+	<schema id="org.altlinux.AtomicControlCenter" path="/org/altlinux/AtomicControlCenter/">
 
 		<key name="window-width" type="i">
 			<default>600</default>

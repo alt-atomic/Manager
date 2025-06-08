@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
-  <name>Manager</name>
-  <id>ru.alt_atomic.Manager</id>
+  <name>Atomic Control Center</name>
+  <id>org.altlinux.AtomicControlCenter</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
   <description>
@@ -23,15 +23,14 @@
   <summary>
 
   </summary>
-  <launchable type="desktop-id">ru.alt_atomic.Manager.desktop</launchable>
+  <launchable type="desktop-id">org.altlinux.AtomicControlCenter.desktop</launchable>
   <releases>
 
   </releases>
   <url type="homepage"></url>
   <url type="bugtracker"></url>
   <url type="help"></url>
-  <developer id="ru.alt_atomic.Manager">
-    <name>Vladimir Vaskov</name>
+  <developer id="org.altlinux">
+    <name>ALT Linux</name>
   </developer>
 </component>
-

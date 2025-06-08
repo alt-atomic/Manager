@@ -6,9 +6,9 @@ project(
   license: 'GPL-3.0-or-later',
 )
 
-app_name = 'Manager'
+app_name = 'Atomic Control Center'
 
-app_id = 'ru.alt_atomic.Manager'
+app_id = 'org.altlinux.AtomicControlCenter'
 app_id_dyn = app_id
 
 developer_name = 'Vladimir Vaskov'

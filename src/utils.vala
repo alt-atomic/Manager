@@ -18,7 +18,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-namespace Manager {
+namespace ACC {
     public const int DBUS_TIMEOUT = 600000;
 
     public const string ALT_SISYPHUS_IMAGE = "registry.altlinux.org/alt/base:sisyphus";

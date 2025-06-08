@@ -22,7 +22,7 @@ interface Apm : Object {
     public signal void notification (string data);
 }
 
-public sealed class Manager.EventHandler : Object {
+public sealed class ACC.EventHandler : Object {
 
     static EventHandler instance_session;
     static EventHandler instance_system;

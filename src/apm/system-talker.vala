@@ -62,7 +62,7 @@ public interface System : Object {
     ) throws GLib.DBusError, GLib.IOError;
 }
 
-public sealed class Manager.SystemTalker : Object {
+public sealed class ACC.SystemTalker : Object {
 
     static SystemTalker instance;
 

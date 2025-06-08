@@ -17,7 +17,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-public sealed class Manager.List : ApiBase.DataObject {
+public sealed class ACC.List : ApiBase.DataObject {
 
     /**
      * Human readable message.

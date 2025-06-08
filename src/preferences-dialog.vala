@@ -18,7 +18,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-public sealed class Manager.PreferencesDialog : Adw.PreferencesDialog {
+public sealed class ACC.PreferencesDialog : Adw.PreferencesDialog {
 
     construct {
         

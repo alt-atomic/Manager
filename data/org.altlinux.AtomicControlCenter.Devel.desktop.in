@@ -1,11 +1,11 @@
 [Desktop Entry]
 # Translators: app name should be translated
-Name=Manager (Devel)
+Name=Atomic Control Center (Devel)
 Comment=
 # Translators: keep number of ';'
 Keywords=
-Exec=manager
-Icon=ru.alt_atomic.Manager-Devel
+Exec=atomic-control-center
+Icon=org.altlinux.AtomicControlCenter.Devel
 Terminal=false
 Type=Application
 Categories=

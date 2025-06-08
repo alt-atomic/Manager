@@ -1,9 +1,9 @@
 {
-    "id" : "ru.alt_atomic.Manager.Devel",
+    "id" : "org.altlinux.AtomicControlCenter.Devel",
     "runtime" : "org.gnome.Platform",
     "runtime-version" : "master",
     "sdk" : "org.gnome.Sdk",
-    "command" : "manager",
+    "command" : "atomic-control-center",
     "finish-args" : [
         "--share=network",
         "--share=ipc",
@@ -42,7 +42,7 @@
             ]
         },
         {
-            "name" : "manager",
+            "name" : "atomic-control-center",
             "builddir" : true,
             "buildsystem" : "meson",
             "config-opts": [ "-Dis_devel=true" ],

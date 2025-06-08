@@ -42,7 +42,7 @@ jobs:
     - name: Run tests and lint
       uses: flatpak/flatpak-github-actions/flatpak-builder@v6
       with:
-        bundle: atomic-manager.flatpak
-        manifest-path: build-aux/flatpak/ru.alt_atomic.Manager.Devel.json
+        bundle: atomic-control-center.flatpak
+        manifest-path: build-aux/flatpak/org.altlinux.AtomicControlCenter.Devel.json
         run-tests: true
         cache-key: flatpak-builder-${{ github.sha }} 
