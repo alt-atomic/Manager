@@ -1,36 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<component type="desktop">
-  <name>Atomic Control Center</name>
+<component type="desktop-application">
   <id>org.altlinux.AtomicControlCenter</id>
+  <icon type="stock">org.altlinux.AtomicControlCenter</icon>
+  <name>Atomic Control Center</name>
+  <summary>Control center for ALT Atomic</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
   <description>
     <p>
-      
+      Control center for ALT Atomic
     </p>
   </description>
+  <translation type="gettext">atomic-control-center</translation>
+  <custom>
+    <value key="Purism::form_factor">mobile</value>
+  </custom>
+  <requires>
+    <display_length compare="ge">360</display_length>
+  </requires>
   <recommends>
     <control>keyboard</control>
     <control>pointing</control>
     <control>touch</control>
   </recommends>
-  <content_rating type="oars-1.1">
-    <!-- Can be generated here https://hughsie.github.io/oars/generate.html -->
-  </content_rating>
+  <branding>
+    <color type="primary" scheme_preference="light">#ffffff</color>
+    <color type="primary" scheme_preference="dark">#000000</color>
+  </branding>
+  <content_rating type="oars-1.1"></content_rating>
   <screenshots>
-    
+    <screenshot type="default">
+      <image>https://altlinux.space/alt-gnome/Foldy/raw/tag/v4.1/app/data/images/1-start-page.png</image>
+      <caption>Start page</caption>
+    </screenshot>
   </screenshots>
-  <summary>
-
-  </summary>
   <launchable type="desktop-id">org.altlinux.AtomicControlCenter.desktop</launchable>
   <releases>
 
   </releases>
-  <url type="homepage"></url>
-  <url type="bugtracker"></url>
-  <url type="help"></url>
+  <url type="homepage">https://altlinux.space/alt-atomic/atomic-control-center</url>
+  <url type="bugtracker">https://altlinux.space/alt-atomic/atomic-control-center/issues</url>
+  <url type="vcs-browser">https://altlinux.space/alt-atomic/atomic-control-center.git</url>
   <developer id="org.altlinux">
-    <name>ALT Linux</name>
+    <name>ALT Linux Team</name>
   </developer>
+  <kudos>
+    <kudo>ModernToolkit</kudo>
+  </kudos>
+  <categories>
+    <category>Utility</category>
+    <category>GNOME</category>
+    <category>GTK</category>
+  </categories>
+  <provides>
+    <binary>atomic-control-center</binary>
+  </provides>
 </component>
