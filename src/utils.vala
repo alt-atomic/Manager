@@ -20,4 +20,35 @@
 
 namespace Manager {
     public const int DBUS_TIMEOUT = 600000;
+
+    public const string ALT_SISYPHUS_IMAGE = "registry.altlinux.org/alt/base:sisyphus";
+
+    public errordomain AError {
+        UNKNOWN,
+        INTERNAL,
+        FAILED,
+        IO;
+
+        public static AError from_dbus_error (DBusError e) {
+            string[] parts = e.message.replace ("GDBus.Error:org.freedesktop.DBus.Error.", "").split (":");
+            string name = parts[0];
+            string message = parts[1];
+
+            switch (name) {
+                case "InvalidArgs":
+                case "NoSuchObject":
+                case "UnknownMethod":
+                case "UnknownInterface":
+                    error (message);
+                case "Failed":
+                    return new AError.FAILED (message);
+                default:
+                    return new AError.UNKNOWN (message);
+            }
+        }
+
+        public static AError get_base_internal () {
+            return new AError.INTERNAL (_("Internal error"));
+        }
+    }
 }

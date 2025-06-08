@@ -46,6 +46,12 @@ public interface Distrobox : Object {
         Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
+    public abstract async uint8[] get_icon_by_package (
+        string package_name,
+        string container,
+        Cancellable? cancellable
+    ) throws GLib.DBusError, GLib.IOError;
+
     public abstract async string info (
         string container,
         string package_name,
@@ -151,14 +157,14 @@ public sealed class Manager.SessionTalker : Object {
         return instance;
     }
 
-    public async ContainerInfo? container_add (
+    public async ContainerInfo container_add (
         string image,
         string name,
         string additional_packages = "",
         string init_hooks = "",
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
-    ) {
+    ) throws AError {
         try {
             string result = yield talker.container_add (
                 image,
@@ -177,17 +183,19 @@ public sealed class Manager.SessionTalker : Object {
             );
             return obj;
 
-        } catch (Error e) {
-            warning (e.message);
+        } catch (IOError e) {
+            error (e.message);
+        } catch (DBusError e) {
+            throw AError.from_dbus_error (e);
+        } catch (ApiBase.CommonError e) {
+            throw AError.get_base_internal ();
         }
-
-        return null;
     }
 
-    public async ContainerInfo[]? container_list (
+    public async ContainerInfo[] container_list (
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
-    ) {
+    ) throws AError {
         try {
             string result = yield talker.contaner_list (
                 transaction,
@@ -201,18 +209,20 @@ public sealed class Manager.SessionTalker : Object {
 
             return obj_array.to_array ();
 
-        } catch (Error e) {
-            warning (e.message);
+        } catch (IOError e) {
+            error (e.message);
+        } catch (DBusError e) {
+            throw AError.from_dbus_error (e);
+        } catch (ApiBase.CommonError e) {
+            throw AError.get_base_internal ();
         }
-
-        return null;
     }
 
-    public async ContainerInfo? container_remove (
+    public async ContainerInfo container_remove (
         string image,
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
-    ) {
+    ) throws AError {
         try {
             string result = yield talker.container_remove (
                 image,
@@ -228,18 +238,20 @@ public sealed class Manager.SessionTalker : Object {
             );
             return obj;
 
-        } catch (Error e) {
-            warning (e.message);
+        } catch (IOError e) {
+            error (e.message);
+        } catch (DBusError e) {
+            throw AError.from_dbus_error (e);
+        } catch (ApiBase.CommonError e) {
+            throw AError.get_base_internal ();
         }
-
-        return null;
     }
 
-    public async FilterInfo[]? get_filter_fields (
+    public async FilterInfo[] get_filter_fields (
         string container,
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
-    ) {
+    ) throws AError {
         try {
             string result = yield talker.get_filter_fields (
                 container,
@@ -254,19 +266,46 @@ public sealed class Manager.SessionTalker : Object {
 
             return obj_array.to_array ();
 
-        } catch (Error e) {
-            warning (e.message);
+        } catch (IOError e) {
+            error (e.message);
+        } catch (DBusError e) {
+            throw AError.from_dbus_error (e);
+        } catch (ApiBase.CommonError e) {
+            throw AError.get_base_internal ();
         }
-
-        return null;
     }
 
-    public async Info? info (
+    public async Gdk.Texture? get_icon_by_package (
+        string package_name,
+        string container,
+        Cancellable? cancellable = null
+    ) throws AError {
+        try {
+            uint8[] result = yield talker.get_icon_by_package (
+                package_name,
+                container,
+                cancellable
+            );
+
+            return Gdk.Texture.from_bytes (new Bytes (result));
+
+        } catch (IOError e) {
+            error (e.message);
+        } catch (DBusError e) {
+            throw AError.from_dbus_error (e);
+        } catch (ApiBase.CommonError e) {
+            throw AError.get_base_internal ();
+        } catch (Error e) {
+            return null;
+        }
+    }
+
+    public async Info info (
         string container,
         string package_name,
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
-    ) {
+    ) throws AError {
         try {
             string result = yield talker.info (
                 container,
@@ -283,20 +322,22 @@ public sealed class Manager.SessionTalker : Object {
             );
             return obj;
 
-        } catch (Error e) {
-            warning (e.message);
+        } catch (IOError e) {
+            error (e.message);
+        } catch (DBusError e) {
+            throw AError.from_dbus_error (e);
+        } catch (ApiBase.CommonError e) {
+            throw AError.get_base_internal ();
         }
-
-        return null;
     }
 
-    public async Info? install (
+    public async Info install (
         string container,
         string package_name,
         bool export = false,
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
-    ) {
+    ) throws AError {
         try {
             string result = yield talker.install (
                 container,
@@ -314,14 +355,16 @@ public sealed class Manager.SessionTalker : Object {
             );
             return obj;
 
-        } catch (Error e) {
-            warning (e.message);
+        } catch (IOError e) {
+            error (e.message);
+        } catch (DBusError e) {
+            throw AError.from_dbus_error (e);
+        } catch (ApiBase.CommonError e) {
+            throw AError.get_base_internal ();
         }
-
-        return null;
     }
 
-    public async List? list (
+    public async List list (
         string container,
         string sort = "",
         ListParamsOrder order = ListParamsOrder.ASC,
@@ -331,7 +374,7 @@ public sealed class Manager.SessionTalker : Object {
         bool force_update = false,
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
-    ) {
+    ) throws AError {
         try {
             string result = yield talker.list (
                 new ListParams () {
@@ -355,20 +398,22 @@ public sealed class Manager.SessionTalker : Object {
             );
             return obj;
 
-        } catch (Error e) {
-            warning (e.message);
+        } catch (IOError e) {
+            error (e.message);
+        } catch (DBusError e) {
+            throw AError.from_dbus_error (e);
+        } catch (ApiBase.CommonError e) {
+            throw AError.get_base_internal ();
         }
-
-        return null;
     }
 
-    public async Info? remove (
+    public async Info remove (
         string container,
         string package_name,
         bool only_export = false,
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
-    ) {
+    ) throws AError {
         try {
             string result = yield talker.remove (
                 container,
@@ -386,19 +431,21 @@ public sealed class Manager.SessionTalker : Object {
             );
             return obj;
 
-        } catch (Error e) {
-            warning (e.message);
+        } catch (IOError e) {
+            error (e.message);
+        } catch (DBusError e) {
+            throw AError.from_dbus_error (e);
+        } catch (ApiBase.CommonError e) {
+            throw AError.get_base_internal ();
         }
-
-        return null;
     }
 
-    public async Search? search (
+    public async Search search (
         string container,
         string package_name,
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
-    ) {
+    ) throws AError {
         try {
             string result = yield talker.search (
                 container,
@@ -415,18 +462,20 @@ public sealed class Manager.SessionTalker : Object {
             );
             return obj;
 
-        } catch (Error e) {
-            warning (e.message);
+        } catch (IOError e) {
+            error (e.message);
+        } catch (DBusError e) {
+            throw AError.from_dbus_error (e);
+        } catch (ApiBase.CommonError e) {
+            throw AError.get_base_internal ();
         }
-
-        return null;
     }
 
-    public async Update? update (
+    public async Update update (
         string container,
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
-    ) {
+    ) throws AError {
         try {
             string result = yield talker.update (
                 container,
@@ -442,10 +491,12 @@ public sealed class Manager.SessionTalker : Object {
             );
             return obj;
 
-        } catch (Error e) {
-            warning (e.message);
+        } catch (IOError e) {
+            error (e.message);
+        } catch (DBusError e) {
+            throw AError.from_dbus_error (e);
+        } catch (ApiBase.CommonError e) {
+            throw AError.get_base_internal ();
         }
-
-        return null;
     }
 }
