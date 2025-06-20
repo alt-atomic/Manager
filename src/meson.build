@@ -18,8 +18,10 @@ vala_sources = files(
   'objects/search.vala',
   'objects/update.vala',
 
-  'pages/software-page.vala',
-  'pages/system-page.vala',
+  'pages/explore-page-context.vala',
+  'pages/installed-page-content.vala',
+  'pages/main-page-content.vala',
+  'pages/system-page-context.vala',
 
   'widgets/menu-button.vala',
 

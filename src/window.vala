@@ -19,6 +19,9 @@
 [GtkTemplate (ui = "/org/altlinux/AtomicControlCenter/ui/window.ui")]
 public sealed class ACC.Window: Adw.ApplicationWindow {
 
+    [GtkChild]
+    unowned Adw.NavigationView nav_view;
+
     const ActionEntry[] ACTION_ENTRIES = {
         { "preferences", on_preferences_action },
         { "about", on_about_action },

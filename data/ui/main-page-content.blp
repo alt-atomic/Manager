@@ -1,0 +1,57 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $ACCMainPageContent : Adw.BreakpointBin {
+  width-request: 360;
+  height-request: 294;
+
+  Adw.Breakpoint {
+    condition ("max-width: 450px")
+
+    setters {
+      header_bar.title-widget: null;
+      view_switcher_bar.reveal: true;
+    }
+  }
+
+  Adw.Breakpoint {
+    condition ("min-width: 600px")
+
+    setters {
+      view_switcher.policy: wide;
+    }
+  }
+
+  Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar header_bar {
+      title-widget: Adw.ViewSwitcher view_switcher {
+        stack: stack;
+      };
+    }
+
+    content: Adw.ViewStack stack {
+      Adw.ViewStackPage {
+        title: _("Explore");
+        name: "explore";
+        icon-name: "acc-explore-symbolic";
+
+        child: $ACCExplorePageContent {};
+      }
+
+      Adw.ViewStackPage {
+        title: _("Installed");
+        name: "installed";
+        icon-name: "acc-installed-symbolic";
+
+        child: $ACCInstalledPageContent {};
+      }
+    };
+
+    [bottom]
+    Adw.ViewSwitcherBar view_switcher_bar {
+      stack: stack;
+      reveal: false;
+    }
+  }
+}

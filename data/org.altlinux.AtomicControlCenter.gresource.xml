@@ -2,9 +2,17 @@
 <gresources>
   <gresource prefix="/org/altlinux/AtomicControlCenter/">
     <file>style.css</file>
+    <file preprocess="xml-stripblanks">ui/explore-page-content.ui</file>
+    <file preprocess="xml-stripblanks">ui/installed-page-content.ui</file>
+    <file preprocess="xml-stripblanks">ui/main-page-content.ui</file>
     <file preprocess="xml-stripblanks">ui/menu-button.ui</file>
-    <file preprocess="xml-stripblanks">ui/software-page.ui</file>
-    <file preprocess="xml-stripblanks">ui/system-page.ui</file>
+    <file preprocess="xml-stripblanks">ui/system-page-content.ui</file>
     <file preprocess="xml-stripblanks">ui/window.ui</file>
+  </gresource>
+  <gresource prefix="/org/altlinux/AtomicControlCenter/icons/scalable/actions/">
+    <file alias="acc-explore-symbolic.svg">assets/icons/acc-explore-symbolic.svg</file>
+    <file alias="acc-image-symbolic.svg">assets/icons/acc-image-symbolic.svg</file>
+    <file alias="acc-installed-symbolic.svg">assets/icons/acc-installed-symbolic.svg</file>
+    <file alias="acc-system-symbolic.svg">assets/icons/acc-system-symbolic.svg</file>
   </gresource>
 </gresources>

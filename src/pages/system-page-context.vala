@@ -18,6 +18,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-[GtkTemplate (ui = "/org/altlinux/AtomicControlCenter/ui/system-page.ui")]
-public sealed class ACC.SystemPage: Adw.Bin {
+[GtkTemplate (ui = "/org/altlinux/AtomicControlCenter/ui/system-page-content.ui")]
+public sealed class ACC.SystemPageContent: Adw.Bin {
+
 }

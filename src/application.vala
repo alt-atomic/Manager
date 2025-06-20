@@ -30,9 +30,10 @@ public sealed class ACC.Application: Adw.Application {
     }
 
     static construct {
-        typeof (MenuButton).ensure ();
-        typeof (SoftwarePage).ensure ();
-        typeof (SystemPage).ensure ();
+        typeof (ExplorePageContent).ensure ();
+        typeof (InstalledPageContent).ensure ();
+        typeof (SystemPageContent).ensure ();
+        typeof (MainPageContent).ensure ();
     }
 
     construct {

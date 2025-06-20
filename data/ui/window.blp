@@ -7,71 +7,13 @@ template $ACCWindow : Adw.ApplicationWindow {
   width-request: 360;
   height-request: 294;
 
-  Adw.Breakpoint {
-    condition ("max-width: 450px")
-    setters {
-      switcher_bar.reveal: true;
-      header_bar.title-widget: null;
-    }
-  }
-
-  Adw.Breakpoint {
-    condition ("min-width: 600")
-    setters {
-      view_switcher.policy: wide;
-    }
-  }
-
   content: Adw.ToastOverlay {
-    Adw.NavigationView {
+    Adw.NavigationView nav_view {
       Adw.NavigationPage {
+        tag: "main";
         title: _("Atomic Control Center");
-
-        child: Adw.ToolbarView {
-          [top]
-          Adw.HeaderBar header_bar {
-            [end]
-            $ACCMenuButton {}
-            
-            title-widget: Adw.ViewSwitcher view_switcher {
-              stack: stack;
-              policy: narrow;
-            };
-          }
-
-          content: Adw.ViewStack stack {
-            hhomogeneous: false;
-
-            Adw.ViewStackPage {
-              name: "software";
-              title: _("Software");
-              icon-name: "org.gnome.Software-symbolic";
-
-              child: $ACCSoftwarePage {};
-            }
-
-            Adw.ViewStackPage {
-              name: "system";
-              title: _("System");
-              icon-name: "emblem-system-symbolic";
-
-              child: $ACCSystemPage {};
-            }
-          };
-
-          [bottom]
-          Adw.ViewSwitcherBar switcher_bar {
-            stack: stack;
-          }
-        };
+        child: $ACCMainPageContent {};
       }
     }
   };
-}
-
-menu primary_menu {
-  section {
-    item (_("Preferences"), "win.preferences")
-    item (_("About app"), "win.about")
-  }
 }

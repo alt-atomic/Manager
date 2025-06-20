@@ -51,4 +51,9 @@ namespace ACC {
             return new AError.INTERNAL (_("Internal error"));
         }
     }
+
+    public bool is_atomic () {
+        //  TODO
+        return true;
+    }
 }
