@@ -9,4 +9,5 @@ namespace Config {
     public const bool IS_DEVEL;
     public const string GETTEXT_PACKAGE;
     public const string GNOMELOCALEDIR;
+    public const string SYSCONFDIR;
 }

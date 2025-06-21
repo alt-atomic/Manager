@@ -39,6 +39,8 @@ public sealed class ACC.Window: Adw.ApplicationWindow {
         settings.bind ("window-width", this, "default-width", SettingsBindFlags.DEFAULT);
         settings.bind ("window-height", this, "default-height", SettingsBindFlags.DEFAULT);
         settings.bind ("window-maximized", this, "maximized", SettingsBindFlags.DEFAULT);
+
+        SystemManager.get_default ();
     }
 
     void on_preferences_action () {
