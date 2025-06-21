@@ -16,12 +16,16 @@ developer_data = 'Vladimir Vaskov <rirusha@altlinux.org>'
 
 glib_min_version = '2.76'
 
+gee_dep = dependency('gee-0.8')
 libadwaita_dep = dependency('libadwaita-1', version: '>= 1.6')
 libapi_base_dep = dependency('libapi-base-2', version: '>= 2.1', fallback : ['libapi-base', 'lib_dep'])
+libportal_dep = dependency('libportal')
 
 dependencies = [
+  gee_dep,
   libadwaita_dep,
   libapi_base_dep,
+  libportal_dep,
 ]
 
 add_project_arguments(
