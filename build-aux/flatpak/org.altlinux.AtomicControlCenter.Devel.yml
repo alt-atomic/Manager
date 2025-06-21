@@ -10,6 +10,9 @@ finish-args:
   - --device=dri
   - --socket=pulseaudio
   - --socket=wayland
+  - --talk-name=org.altlinux.APM
+  - --system-talk-name=org.altlinux.APM
+  - --filesystem=host-etc
 build-options:
   append-path: /usr/lib/sdk/vala/bin
   prepend-ld-library-path: /usr/lib/sdk/vala/lib
@@ -25,6 +28,23 @@ cleanup:
   - '*.la'
   - '*.a'
 modules:
+  - name: libportal
+    buildsystem: meson
+    config-opts:
+      - -Ddocs=false
+      - -Dbackend-gtk4=enabled
+    sources:
+      - type: git
+        url: https://github.com/flatpak/libportal.git
+        tag: 0.9.1
+
+  - name: libapi-base
+    buildsystem: meson
+    sources:
+      - type: git
+        url: https://gitlab.gnome.org/Rirusha/libapi-base.git
+        tag: v2.2
+
   - name: atomic-control-center
     builddir: true
     buildsystem: meson
