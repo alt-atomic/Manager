@@ -46,6 +46,14 @@ template $ACCMainPageContent : Adw.BreakpointBin {
 
         child: $ACCInstalledPageContent {};
       }
+
+      Adw.ViewStackPage {
+        title: _("Updates");
+        name: "updates";
+        icon-name: "acc-updates-symbolic";
+
+        child: $ACCInstalledPageContent {};
+      }
     };
 
     [bottom]

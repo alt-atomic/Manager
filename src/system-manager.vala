@@ -52,7 +52,7 @@ public sealed class ACC.SystemManager : Object {
         if (Xdp.Portal.running_under_flatpak ()) {
             etc_path = "/run/host/etc";
         } else {
-            etc_path = Config.SYSCONFDIR;
+            etc_path = Path.build_filename ("/", Config.SYSCONFDIR);
         }
 
         string image_data;
