@@ -19,8 +19,8 @@
 [GtkTemplate (ui = "/org/altlinux/AtomicControlCenter/ui/window.ui")]
 public sealed class ACC.Window: Adw.ApplicationWindow {
 
-    [GtkChild]
-    unowned Adw.NavigationView nav_view;
+    //  [GtkChild]
+    //  unowned Adw.NavigationView nav_view;
 
     const ActionEntry[] ACTION_ENTRIES = {
         { "preferences", on_preferences_action },
@@ -40,7 +40,7 @@ public sealed class ACC.Window: Adw.ApplicationWindow {
         settings.bind ("window-height", this, "default-height", SettingsBindFlags.DEFAULT);
         settings.bind ("window-maximized", this, "maximized", SettingsBindFlags.DEFAULT);
 
-        SystemManager.get_default ();
+        message (SystemManager.get_default ().current_image_data.image);
     }
 
     void on_preferences_action () {

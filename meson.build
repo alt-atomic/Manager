@@ -18,7 +18,7 @@ glib_min_version = '2.76'
 
 gee_dep = dependency('gee-0.8')
 libadwaita_dep = dependency('libadwaita-1', version: '>= 1.6')
-libapi_base_dep = dependency('libapi-base-2', version: '>= 2.1', fallback : ['libapi-base', 'lib_dep'])
+libapi_base_dep = dependency('libapi-base-3', version: '>= 3.0', fallback : ['libapi-base', 'lib_dep'])
 libportal_dep = dependency('libportal')
 
 dependencies = [
@@ -37,6 +37,7 @@ add_project_arguments(
 add_project_arguments(
   '--target-glib', glib_min_version,
   '--vapidir', meson.current_source_dir(),
+  '--vapidir', meson.current_source_dir() / 'vapi',
   language: ['vala']
 )
 

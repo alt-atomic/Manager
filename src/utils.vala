@@ -56,4 +56,9 @@ namespace ACC {
         //  TODO
         return true;
     }
+
+    public bool has_distrobox () {
+        //  TODO
+        return true;
+    }
 }

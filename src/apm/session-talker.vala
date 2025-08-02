@@ -173,7 +173,7 @@ public sealed class ACC.SessionTalker : Object {
             error (e.message);
         } catch (DBusError e) {
             throw AError.from_dbus_error (e);
-        } catch (ApiBase.CommonError e) {
+        } catch (ApiBase.JsonError e) {
             throw AError.get_base_internal ();
         }
     }
@@ -199,7 +199,7 @@ public sealed class ACC.SessionTalker : Object {
             error (e.message);
         } catch (DBusError e) {
             throw AError.from_dbus_error (e);
-        } catch (ApiBase.CommonError e) {
+        } catch (ApiBase.JsonError e) {
             throw AError.get_base_internal ();
         }
     }
@@ -228,7 +228,7 @@ public sealed class ACC.SessionTalker : Object {
             error (e.message);
         } catch (DBusError e) {
             throw AError.from_dbus_error (e);
-        } catch (ApiBase.CommonError e) {
+        } catch (ApiBase.JsonError e) {
             throw AError.get_base_internal ();
         }
     }
@@ -256,7 +256,7 @@ public sealed class ACC.SessionTalker : Object {
             error (e.message);
         } catch (DBusError e) {
             throw AError.from_dbus_error (e);
-        } catch (ApiBase.CommonError e) {
+        } catch (ApiBase.JsonError e) {
             throw AError.get_base_internal ();
         }
     }
@@ -279,7 +279,7 @@ public sealed class ACC.SessionTalker : Object {
             error (e.message);
         } catch (DBusError e) {
             throw AError.from_dbus_error (e);
-        } catch (ApiBase.CommonError e) {
+        } catch (ApiBase.JsonError e) {
             throw AError.get_base_internal ();
         } catch (Error e) {
             return null;
@@ -312,7 +312,7 @@ public sealed class ACC.SessionTalker : Object {
             error (e.message);
         } catch (DBusError e) {
             throw AError.from_dbus_error (e);
-        } catch (ApiBase.CommonError e) {
+        } catch (ApiBase.JsonError e) {
             throw AError.get_base_internal ();
         }
     }
@@ -345,7 +345,7 @@ public sealed class ACC.SessionTalker : Object {
             error (e.message);
         } catch (DBusError e) {
             throw AError.from_dbus_error (e);
-        } catch (ApiBase.CommonError e) {
+        } catch (ApiBase.JsonError e) {
             throw AError.get_base_internal ();
         }
     }
@@ -388,7 +388,7 @@ public sealed class ACC.SessionTalker : Object {
             error (e.message);
         } catch (DBusError e) {
             throw AError.from_dbus_error (e);
-        } catch (ApiBase.CommonError e) {
+        } catch (ApiBase.JsonError e) {
             throw AError.get_base_internal ();
         }
     }
@@ -421,7 +421,7 @@ public sealed class ACC.SessionTalker : Object {
             error (e.message);
         } catch (DBusError e) {
             throw AError.from_dbus_error (e);
-        } catch (ApiBase.CommonError e) {
+        } catch (ApiBase.JsonError e) {
             throw AError.get_base_internal ();
         }
     }
@@ -452,7 +452,7 @@ public sealed class ACC.SessionTalker : Object {
             error (e.message);
         } catch (DBusError e) {
             throw AError.from_dbus_error (e);
-        } catch (ApiBase.CommonError e) {
+        } catch (ApiBase.JsonError e) {
             throw AError.get_base_internal ();
         }
     }
@@ -481,7 +481,7 @@ public sealed class ACC.SessionTalker : Object {
             error (e.message);
         } catch (DBusError e) {
             throw AError.from_dbus_error (e);
-        } catch (ApiBase.CommonError e) {
+        } catch (ApiBase.JsonError e) {
             throw AError.get_base_internal ();
         }
     }

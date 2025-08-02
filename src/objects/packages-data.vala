@@ -12,32 +12,15 @@
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ * along with this program. If not, see
+ * <https://www.gnu.org/licenses/gpl-3.0-standalone.html>.
  * 
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-public enum ACC.EventState {
-    BEFORE,
-    AFTER;
-}
+public class ACC.PackagesData : ApiBase.DataObject {
 
-public enum ACC.EventType {
-    NOTIFICATION,
-    PROGRESS;
-}
+    public Gee.ArrayList<string> install { get; set; default = new Gee.ArrayList<string> (); }
 
-public sealed class ACC.Event : ApiBase.DataObject {
-
-    public string name { get; set; }
-
-    public string message { get; set; }
-
-    public EventState state { get; set; }
-
-    public EventType type_ { get; set; }
-
-    public int progress { get; set; }
-
-    public string transaction { get; set; }
+    public Gee.ArrayList<string> remove { get; set; default = new Gee.ArrayList<string> (); }
 }

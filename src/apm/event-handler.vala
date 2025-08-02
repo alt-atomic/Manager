@@ -17,6 +17,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+using ApiBase;
+
 [DBus (name = "org.altlinux.APM")]
 interface Apm : Object {
     public signal void notification (string data);
@@ -65,10 +67,9 @@ public sealed class ACC.EventHandler : Object {
 
                             apm_talker.notification.connect ((data) => {
                                 try {
-                                    var jsoner = new ApiBase.Jsoner (data, null, ApiBase.Case.CAMEL);
-                                    event_recieved ((Event) jsoner.deserialize_object (typeof (Event)));
+                                    event_recieved (Jsoner.simple_from_json<Event> (data, null, CAMEL));
 
-                                } catch (ApiBase.CommonError e) {
+                                } catch (JsonError e) {
                                     warning (e.message);
                                 }
                             });

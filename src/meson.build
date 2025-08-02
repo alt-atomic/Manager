@@ -10,11 +10,13 @@ vala_sources = files(
   'objects/container-info.vala',
   'objects/event.vala',
   'objects/filter-info.vala',
+  'objects/image-data.vala',
   'objects/info.vala',
   'objects/list-params.vala',
   'objects/list.vala',
   'objects/package-info.vala',
   'objects/package.vala',
+  'objects/packages-data.vala',
   'objects/search.vala',
   'objects/update.vala',
 

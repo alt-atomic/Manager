@@ -22,20 +22,27 @@ public sealed class ACC.SystemManager : Object {
 
     static SystemManager instance;
 
-    public string image { get; set; }
-
-    public Gee.ArrayList<string> install { get; set; default = new Gee.ArrayList<string> (); }
-
-    public Gee.ArrayList<string> remove { get; set; default = new Gee.ArrayList<string> (); }
-
-    public Gee.ArrayList<string> custom_commands { get; set; default = new Gee.ArrayList<string> (); }
+    ImageData _current_image_data;
+    public ImageData current_image_data {
+        get {
+            reload ();
+            return _current_image_data;
+        }
+    }
 
     public signal void changed ();
+
+    FileMonitor monitor;
+    ulong last_con = 0;
 
     SystemManager () {}
 
     construct {
+        _current_image_data = new ImageData ();
+
         reload ();
+
+        File a;
     }
 
     public static SystemManager get_default () {
@@ -55,15 +62,31 @@ public sealed class ACC.SystemManager : Object {
             etc_path = Path.build_filename ("/", Config.SYSCONFDIR);
         }
 
-        string image_data;
+        var config_file = File.new_build_filename (etc_path, "apm", "image.yml");
+
         try {
-            FileUtils.get_contents (Path.build_filename (etc_path, "apm", "image.yml"), out image_data);
+            var s = new Subprocess.newv ({"yq", ".", config_file.peek_path ()}, SubprocessFlags.STDOUT_PIPE);
+            string json_string;
+            s.communicate_utf8 (null, null, out json_string, null);
+            _current_image_data.fill_from_json (json_string);
+
+            if (last_con != 0) {
+                SignalHandler.disconnect (monitor, last_con);
+            }
+
+            monitor = config_file.monitor_file (GLib.FileMonitorFlags.NONE);
+            last_con = monitor.changed.connect ((file, other_file, event_type) => {
+                if (event_type == FileMonitorEvent.CHANGES_DONE_HINT) {
+                    changed ();
+                }
+            });
+
         } catch (Error e) {
-            warning (e.message);
+            error ("Failed to read image data: %s", e.message);
         }
     }
 
-    public void apply () {
-
+    public void apply (ImageData new_image_data) {
+        assert_not_reached ();
     }
 }
