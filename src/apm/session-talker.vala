@@ -161,13 +161,11 @@ public sealed class ACC.SessionTalker : Object {
                 cancellable
             );
 
-            var obj = new ContainerInfo ();
-            obj.fill_from_json (
+            return ApiBase.Jsoner.simple_from_json<ContainerInfo> (
                 result,
                 { "data", "containerInfo" },
                 ApiBase.Case.CAMEL
             );
-            return obj;
 
         } catch (IOError e) {
             error (e.message);
@@ -178,7 +176,7 @@ public sealed class ACC.SessionTalker : Object {
         }
     }
 
-    public async ContainerInfo[] container_list (
+    public async Gee.ArrayList<ContainerInfo> container_list (
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
     ) throws AError {
@@ -188,12 +186,11 @@ public sealed class ACC.SessionTalker : Object {
                 cancellable
             );
 
-            var obj_array = new Gee.ArrayList<ContainerInfo> ();
-
-            var jsoner = new ApiBase.Jsoner (result, { "data", "containers" }, ApiBase.Case.CAMEL);
-            yield jsoner.deserialize_array_into_async (obj_array);
-
-            return obj_array.to_array ();
+            return ApiBase.Jsoner.simple_array_from_json<ContainerInfo> (
+                result,
+                { "data", "containers" },
+                ApiBase.Case.CAMEL
+            );
 
         } catch (IOError e) {
             error (e.message);
@@ -216,13 +213,11 @@ public sealed class ACC.SessionTalker : Object {
                 cancellable
             );
 
-            var obj = new ContainerInfo ();
-            obj.fill_from_json (
+            return ApiBase.Jsoner.simple_from_json<ContainerInfo> (
                 result,
                 { "data", "containerInfo" },
                 ApiBase.Case.CAMEL
             );
-            return obj;
 
         } catch (IOError e) {
             error (e.message);
@@ -233,7 +228,7 @@ public sealed class ACC.SessionTalker : Object {
         }
     }
 
-    public async FilterInfo[] get_filter_fields (
+    public async Gee.ArrayList<FilterInfo> get_filter_fields (
         string container,
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
@@ -245,12 +240,11 @@ public sealed class ACC.SessionTalker : Object {
                 cancellable
             );
 
-            var obj_array = new Gee.ArrayList<FilterInfo> ();
-
-            var jsoner = new ApiBase.Jsoner (result, { "data" }, ApiBase.Case.CAMEL);
-            jsoner.deserialize_object_into (obj_array);
-
-            return obj_array.to_array ();
+            return ApiBase.Jsoner.simple_array_from_json<FilterInfo> (
+                result,
+                { "data", "filterFields" },
+                ApiBase.Case.CAMEL
+            );
 
         } catch (IOError e) {
             error (e.message);
@@ -279,8 +273,6 @@ public sealed class ACC.SessionTalker : Object {
             error (e.message);
         } catch (DBusError e) {
             throw AError.from_dbus_error (e);
-        } catch (ApiBase.JsonError e) {
-            throw AError.get_base_internal ();
         } catch (Error e) {
             return null;
         }
@@ -300,13 +292,11 @@ public sealed class ACC.SessionTalker : Object {
                 cancellable
             );
 
-            var obj = new Info ();
-            obj.fill_from_json (
+            return ApiBase.Jsoner.simple_from_json<Info> (
                 result,
                 { "data" },
                 ApiBase.Case.CAMEL
             );
-            return obj;
 
         } catch (IOError e) {
             error (e.message);
@@ -333,13 +323,11 @@ public sealed class ACC.SessionTalker : Object {
                 cancellable
             );
 
-            var obj = new Info ();
-            obj.fill_from_json (
+            return ApiBase.Jsoner.simple_from_json<Info> (
                 result,
                 { "data" },
                 ApiBase.Case.CAMEL
             );
-            return obj;
 
         } catch (IOError e) {
             error (e.message);
@@ -376,13 +364,11 @@ public sealed class ACC.SessionTalker : Object {
                 cancellable
             );
 
-            var obj = new List ();
-            obj.fill_from_json (
+            return ApiBase.Jsoner.simple_from_json<List> (
                 result,
                 { "data" },
                 ApiBase.Case.CAMEL
             );
-            return obj;
 
         } catch (IOError e) {
             error (e.message);
@@ -409,13 +395,11 @@ public sealed class ACC.SessionTalker : Object {
                 cancellable
             );
 
-            var obj = new Info ();
-            obj.fill_from_json (
+            return ApiBase.Jsoner.simple_from_json<Info> (
                 result,
                 { "data" },
                 ApiBase.Case.CAMEL
             );
-            return obj;
 
         } catch (IOError e) {
             error (e.message);
@@ -440,13 +424,11 @@ public sealed class ACC.SessionTalker : Object {
                 cancellable
             );
 
-            var obj = new Search ();
-            obj.fill_from_json (
+            return ApiBase.Jsoner.simple_from_json<Search> (
                 result,
                 { "data" },
                 ApiBase.Case.CAMEL
             );
-            return obj;
 
         } catch (IOError e) {
             error (e.message);
@@ -469,13 +451,11 @@ public sealed class ACC.SessionTalker : Object {
                 cancellable
             );
 
-            var obj = new Update ();
-            obj.fill_from_json (
+            return ApiBase.Jsoner.simple_from_json<Update> (
                 result,
                 { "data" },
                 ApiBase.Case.CAMEL
             );
-            return obj;
 
         } catch (IOError e) {
             error (e.message);
