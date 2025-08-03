@@ -81,6 +81,8 @@ public sealed class ACC.SystemManager : Object {
                 }
             });
 
+            changed ();
+
         } catch (Error e) {
             error ("Failed to read image data: %s", e.message);
         }
