@@ -28,6 +28,16 @@ template $ACCMainPageContent : Adw.BreakpointBin {
       title-widget: Adw.ViewSwitcher view_switcher {
         stack: stack;
       };
+
+      [end]
+      MenuButton {
+        styles [
+          "flat",
+        ]
+
+        icon-name: "open-menu-symbolic";
+        menu-model: primary_menu;
+      }
     }
 
     content: Adw.ViewStack stack {
@@ -61,5 +71,15 @@ template $ACCMainPageContent : Adw.BreakpointBin {
       stack: stack;
       reveal: false;
     }
+  }
+}
+
+menu primary_menu {
+  section {
+    item (_("Preferences"), "win.preferences")
+  }
+
+  section {
+    item (_("About application"), "win.about")
   }
 }

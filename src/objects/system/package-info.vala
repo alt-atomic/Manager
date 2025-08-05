@@ -17,6 +17,11 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+public enum PackageType {
+    SYSTEM,
+    STPLR
+}
+
 public sealed class ACC.Sys.PackageInfo : ApiBase.DataObject {
 
     public string name { get; set; }
@@ -31,9 +36,9 @@ public sealed class ACC.Sys.PackageInfo : ApiBase.DataObject {
 
     public string version_installed { get; set; }
 
-    public Gee.ArrayList<string> depends { get; set; default = new Gee.ArrayList<string>(); }
+    public Gee.ArrayList<string> depends { get; set; default = new Gee.ArrayList<string> (); }
 
-    public Gee.ArrayList<string> provides { get; set; default = new Gee.ArrayList<string>(); }
+    public Gee.ArrayList<string> provides { get; set; default = new Gee.ArrayList<string> (); }
 
     public int64 size { get; set; }
 

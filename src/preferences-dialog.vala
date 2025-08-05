@@ -18,9 +18,17 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+[GtkTemplate (ui = "/org/altlinux/AtomicControlCenter/ui/preferences-dialog.ui")]
 public sealed class ACC.PreferencesDialog : Adw.PreferencesDialog {
 
+    [GtkChild]
+    unowned Adw.SwitchRow application_mode_switch;
+
+    Settings settings;
+
     construct {
-        
+        settings = new Settings (Config.APP_ID);
+
+        settings.bind ("application-mode", application_mode_switch, "active", DEFAULT);
     }
 }

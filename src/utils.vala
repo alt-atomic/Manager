@@ -59,6 +59,6 @@ namespace ACC {
 
     public bool has_distrobox () {
         //  TODO
-        return true;
+        return File.new_for_path ("/usr/bin/distrobox").query_exists ();
     }
 }

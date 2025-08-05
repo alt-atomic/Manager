@@ -1,0 +1,17 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $ACCPreferencesDialog : Adw.PreferencesDialog {
+  Adw.PreferencesPage {
+    title: _("General");
+
+    Adw.PreferencesGroup {
+      title: _("General");
+
+      Adw.SwitchRow application_mode_switch {
+        title: _("Application mode");
+        subtitle: _("Work with application instead if packages");
+      }
+    }
+  }
+}

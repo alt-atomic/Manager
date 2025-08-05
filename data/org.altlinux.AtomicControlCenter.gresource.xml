@@ -2,10 +2,12 @@
 <gresources>
   <gresource prefix="/org/altlinux/AtomicControlCenter/">
     <file>style.css</file>
+    <file>org.altlinux.AtomicControlCenter.metainfo.xml</file>
     <file preprocess="xml-stripblanks">ui/explore-page-content.ui</file>
     <file preprocess="xml-stripblanks">ui/installed-page-content.ui</file>
     <file preprocess="xml-stripblanks">ui/main-page-content.ui</file>
     <file preprocess="xml-stripblanks">ui/menu-button.ui</file>
+    <file preprocess="xml-stripblanks">ui/preferences-dialog.ui</file>
     <file preprocess="xml-stripblanks">ui/system-page-content.ui</file>
     <file preprocess="xml-stripblanks">ui/updates-page-content.ui</file>
     <file preprocess="xml-stripblanks">ui/window.ui</file>

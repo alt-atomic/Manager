@@ -2,5 +2,32 @@ using Gtk 4.0;
 using Adw 1;
 
 template $ACCInstalledPageContent : Adw.Bin {
-  
+  ScrolledWindow scrolled_window {
+    hscrollbar-policy: never;
+    propagate-natural-height: true;
+
+    Adw.Clamp {
+      Box {
+        spacing: 12;
+        orientation: vertical;
+
+        ListBox list_box {
+          styles [
+            "boxed-list"
+          ]
+        }
+
+        ListBox {
+          styles [
+            "boxed-list"
+          ]
+
+          Adw.ButtonRow {
+            title: _("More");
+            activated => $on_button_activated();
+          }
+        }
+      }
+    }
+  }
 }

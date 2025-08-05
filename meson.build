@@ -11,9 +11,6 @@ app_name = 'Atomic Control Center'
 app_id = 'org.altlinux.AtomicControlCenter'
 app_id_dyn = app_id
 
-developer_name = 'Vladimir Vaskov'
-developer_data = 'Vladimir Vaskov <rirusha@altlinux.org>'
-
 glib_min_version = '2.76'
 
 gee_dep = dependency('gee-0.8')
@@ -53,8 +50,6 @@ conf = configuration_data()
 conf.set_quoted('APP_NAME', app_name)
 conf.set_quoted('APP_ID', app_id)
 conf.set_quoted('APP_ID_DYN', app_id_dyn)
-conf.set_quoted('DEVELOPER_NAME', developer_name)
-conf.set_quoted('DEVELOPER_DATA', developer_data)
 conf.set_quoted('G_LOG_DOMAIN', app_id)
 conf.set10('IS_DEVEL', get_option('is_devel'))
 conf.set_quoted('VERSION', meson.project_version())

@@ -3,6 +3,7 @@ blueprint_files = files(
   'ui/installed-page-content.blp',
   'ui/main-page-content.blp',
   'ui/menu-button.blp',
+  'ui/preferences-dialog.blp',
   'ui/system-page-content.blp',
   'ui/updates-page-content.blp',
   'ui/window.blp',

@@ -1,4 +1,4 @@
-/* Copyright 2024 Vladimir Vaskov <rirusha@altlinux.org>
+/* Copyright (C) 2025 Vladimir Vaskov <rirusha@altlinux.org>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,21 +18,20 @@
 
 namespace ACC {
     public Adw.AboutDialog build_about () {
-        string[] developers = {
-            Config.DEVELOPER_DATA,
-        };
+        return new Adw.AboutDialog.from_appdata (
+            @"/org/altlinux/AtomicControlCenter/org.altlinux.AtomicControlCenter.metainfo.xml",
+            Config.VERSION
+        ) {
+            application_icon = Config.APP_ID,
+            artists = {
 
-        return new Adw.AboutDialog () {
-            application_name = Config.APP_NAME,
-            application_icon = Config.APP_ID_DYN,
-            developer_name = Config.DEVELOPER_NAME,
-            version = Config.VERSION,
-            developers = developers,
-            // Translators: NAME <EMAIL.COM> or NAME SITE.ORG
+            },
+            developers = {
+                "Vladimir Vaskob <rirusha@altlinux.org>"
+            },
+            // Translators: NAME <EMAIL.COM> /n NAME <EMAIL.COM>
             translator_credits = _("translator-credits"),
-            license_type = Gtk.License.GPL_3_0,
-            copyright = "© 2024 " + Config.DEVELOPER_NAME,
-            release_notes_version = Config.VERSION
+            copyright = "© 2025 ALT Linux Team"
         };
     }
 }

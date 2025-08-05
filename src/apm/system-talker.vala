@@ -17,7 +17,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-[DBus (name = "org.altlinux.system")]
+[DBus (name = "org.altlinux.APM.system")]
 public interface System : Object {
 
     public abstract async string check_install (
@@ -88,13 +88,6 @@ public interface System : Object {
         string[] packages,
         bool apply_atomic,
         string transaction,
-        Cancellable? cancellable
-    ) throws GLib.DBusError, GLib.IOError;
-
-    public abstract async string search (
-        string package_name,
-        string transaction,
-        bool installed,
         Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
@@ -206,26 +199,26 @@ public sealed class ACC.SystemTalker : Object {
         }
     }
 
-    public async void check_update_kernel (
-        string transaction = Uuid.string_random (),
-        Cancellable? cancellable = null
-    ) throws AError {
-        try {
-            string result = yield talker.check_update_kernel (
-                transaction,
-                cancellable
-            );
+    //  public async void check_update_kernel (
+    //      string transaction = Uuid.string_random (),
+    //      Cancellable? cancellable = null
+    //  ) throws AError {
+    //      try {
+    //          string result = yield talker.check_update_kernel (
+    //              transaction,
+    //              cancellable
+    //          );
 
-            assert_not_reached ();
+    //          assert_not_reached ();
 
-        } catch (IOError e) {
-            error (e.message);
-        } catch (DBusError e) {
-            throw AError.from_dbus_error (e);
-        } catch (ApiBase.JsonError e) {
-            throw AError.get_base_internal ();
-        }
-    }
+    //      } catch (IOError e) {
+    //          error (e.message);
+    //      } catch (DBusError e) {
+    //          throw AError.from_dbus_error (e);
+    //      } catch (ApiBase.JsonError e) {
+    //          throw AError.get_base_internal ();
+    //      }
+    //  }
 
     public async Sys.OperationInfo check_upgrade (
         string transaction = Uuid.string_random (),
@@ -426,7 +419,7 @@ public sealed class ACC.SystemTalker : Object {
     ) throws AError {
         try {
             string result = yield talker.list (
-                new ListParams () {
+                new Sys.ListParams () {
                     sort = sort,
                     order = order,
                     limit = limit,
@@ -470,35 +463,6 @@ public sealed class ACC.SystemTalker : Object {
             return ApiBase.Jsoner.simple_from_json<Sys.OperationInfo> (
                 result,
                 { "data", "info" },
-                ApiBase.Case.CAMEL
-            );
-
-        } catch (IOError e) {
-            error (e.message);
-        } catch (DBusError e) {
-            throw AError.from_dbus_error (e);
-        } catch (ApiBase.JsonError e) {
-            throw AError.get_base_internal ();
-        }
-    }
-
-    public async Sys.PackagesInfo search (
-        string package_name,
-        bool installed,
-        string transaction = Uuid.string_random (),
-        Cancellable? cancellable = null
-    ) throws AError {
-        try {
-            string result = yield talker.search (
-                package_name,
-                transaction,
-                installed,
-                cancellable
-            );
-
-            return ApiBase.Jsoner.simple_from_json<Sys.PackagesInfo> (
-                result,
-                { "data" },
                 ApiBase.Case.CAMEL
             );
 

@@ -21,4 +21,38 @@
 [GtkTemplate (ui = "/org/altlinux/AtomicControlCenter/ui/installed-page-content.ui")]
 public sealed class ACC.InstalledPageContent: Adw.Bin {
 
+    [GtkChild]
+    unowned Gtk.ScrolledWindow scrolled_window;
+    [GtkChild]
+    unowned Gtk.ListBox list_box;
+
+    int last_offset = 0;
+    bool working = false;
+
+    construct {
+        load_next.begin ();
+    }
+
+    async void load_next () {
+        if (working) {
+            return;
+        }
+        working = true;
+
+        var list = yield SystemTalker.get_default ().list ("", ASC, 10, last_offset);
+
+        foreach (var item in list.packages) {
+            list_box.append (new Adw.ActionRow () {
+                title = item.name,
+                subtitle = item.description
+            });
+        }
+        last_offset += 10;
+        working = false;
+    }
+
+    [GtkCallback]
+    void on_button_activated () {
+        load_next.begin ();
+    }
 }
