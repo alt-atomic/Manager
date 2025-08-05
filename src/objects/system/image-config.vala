@@ -18,12 +18,11 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-public sealed class ACC.Search : ApiBase.DataObject {
+public class ACC.Sys.ImageConfig : ApiBase.DataObject {
 
-    /**
-     * Human readable message.
-     */
-    public string message { get; set; }
+    public string image { get; set; default = ""; }
 
-    public Gee.ArrayList<Package> packages { get; set; default = new Gee.ArrayList<Package> (); }
+    public PackagesData packages { get; set; }
+
+    public Gee.ArrayList<string> commands { get; set; default = new Gee.ArrayList<string> (); }
 }

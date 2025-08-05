@@ -22,8 +22,8 @@ public sealed class ACC.SystemManager : Object {
 
     static SystemManager instance;
 
-    ImageData _current_image_data;
-    public ImageData current_image_data {
+    Sys.ImageConfig _current_image_data;
+    public Sys.ImageConfig current_image_data {
         get {
             reload ();
             return _current_image_data;
@@ -38,7 +38,7 @@ public sealed class ACC.SystemManager : Object {
     SystemManager () {}
 
     construct {
-        _current_image_data = new ImageData ();
+        _current_image_data = new Sys.ImageConfig ();
 
         reload ();
 
@@ -80,7 +80,7 @@ public sealed class ACC.SystemManager : Object {
                     changed ();
                 }
             });
-
+ 
             changed ();
 
         } catch (Error e) {
@@ -88,7 +88,7 @@ public sealed class ACC.SystemManager : Object {
         }
     }
 
-    public void apply (ImageData new_image_data) {
+    public void apply (Sys.ImageConfig new_image_data) {
         assert_not_reached ();
     }
 }

@@ -338,7 +338,7 @@ public sealed class ACC.SessionTalker : Object {
         }
     }
 
-    public async List list (
+    public async PackagesInfo list (
         string container,
         string sort = "",
         ListParamsOrder order = ListParamsOrder.ASC,
@@ -364,7 +364,7 @@ public sealed class ACC.SessionTalker : Object {
                 cancellable
             );
 
-            return ApiBase.Jsoner.simple_from_json<List> (
+            return ApiBase.Jsoner.simple_from_json<PackagesInfo> (
                 result,
                 { "data" },
                 ApiBase.Case.CAMEL
@@ -410,7 +410,7 @@ public sealed class ACC.SessionTalker : Object {
         }
     }
 
-    public async Search search (
+    public async PackagesInfo search (
         string container,
         string package_name,
         string transaction = Uuid.string_random (),
@@ -424,7 +424,7 @@ public sealed class ACC.SessionTalker : Object {
                 cancellable
             );
 
-            return ApiBase.Jsoner.simple_from_json<Search> (
+            return ApiBase.Jsoner.simple_from_json<PackagesInfo> (
                 result,
                 { "data" },
                 ApiBase.Case.CAMEL

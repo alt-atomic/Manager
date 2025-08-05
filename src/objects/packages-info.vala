@@ -12,17 +12,19 @@
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with this program. If not, see
- * <https://www.gnu.org/licenses/gpl-3.0-standalone.html>.
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
  * 
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-public class ACC.ImageData : ApiBase.DataObject {
+public sealed class ACC.PackagesInfo : ApiBase.DataObject {
 
-    public string image { get; set; default = ""; }
+    /**
+     * Human readable message.
+     */
+    public string message { get; set; }
 
-    public PackagesData packages { get; set; }
+    public Gee.ArrayList<Package> packages { get; set; default = new Gee.ArrayList<Package> (); }
 
-    public Gee.ArrayList<string> commands { get; set; default = new Gee.ArrayList<string> (); }
+    public int64 total_count { get; set; }
 }
