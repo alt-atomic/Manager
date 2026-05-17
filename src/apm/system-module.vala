@@ -134,10 +134,10 @@ public sealed class ACC.SystemModule : Object {
     }
 
     public static void ensure () {
-        get_default ();
+        get_inst ();
     }
 
-    public static SystemModule get_default () {
+    public static SystemModule get_inst () {
         if (instance == null) {
             instance = new SystemModule ();
         }

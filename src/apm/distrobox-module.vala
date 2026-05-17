@@ -132,10 +132,10 @@ public sealed class ACC.DistroboxModule : Object {
     }
 
     public static void ensure () {
-        get_default ();
+        get_inst ();
     }
 
-    public static DistroboxModule get_default () {
+    public static DistroboxModule get_inst () {
         if (instance == null) {
             instance = new DistroboxModule ();
         }

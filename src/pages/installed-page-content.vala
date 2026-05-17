@@ -39,7 +39,7 @@ public sealed class ACC.InstalledPageContent: Adw.Bin {
         }
         working = true;
 
-        var list = yield SystemModule.get_default ().list ("", ASC, 10, last_offset);
+        var list = yield SystemModule.get_inst ().list ("", ASC, 10, last_offset);
 
         foreach (var item in list.packages) {
             list_box.append (new Adw.ActionRow () {

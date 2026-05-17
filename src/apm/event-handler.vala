@@ -86,11 +86,11 @@ public sealed class ACC.EventHandler : Object {
     }
 
     public static void ensure () {
-        get_default_session ();
-        get_default_system ();
+        get_inst_session ();
+        get_inst_system ();
     }
 
-    public static EventHandler get_default_session () {
+    public static EventHandler get_inst_session () {
         if (instance_session == null) {
             instance_session = new EventHandler (BusType.SESSION);
         }
@@ -98,7 +98,7 @@ public sealed class ACC.EventHandler : Object {
         return instance_session;
     }
 
-    public static EventHandler get_default_system () {
+    public static EventHandler get_inst_system () {
         if (instance_system == null) {
             instance_system = new EventHandler (BusType.SYSTEM);
         }
