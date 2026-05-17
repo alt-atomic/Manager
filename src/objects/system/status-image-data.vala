@@ -18,7 +18,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-public class ACC.Sys.StatusImageData : ApiBase.DataObject {
+public class ACC.Sys.StatusImageData : Serialize.DataObject {
 
     public StatusImageImageData image { get; set; }
 

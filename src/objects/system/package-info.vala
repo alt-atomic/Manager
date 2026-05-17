@@ -22,7 +22,7 @@ public enum PackageType {
     STPLR
 }
 
-public sealed class ACC.Sys.PackageInfo : ApiBase.DataObject {
+public sealed class ACC.Sys.PackageInfo : Serialize.DataObject {
 
     public string name { get; set; }
 

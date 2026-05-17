@@ -157,18 +157,13 @@ public sealed class ACC.SystemTalker : Object {
                 cancellable
             );
 
-            return ApiBase.Jsoner.simple_from_json<Sys.OperationInfo> (
+            return Serialize.JsonWorker.simple_from_json<Sys.OperationInfo> (
                 result,
-                { "data", "info" },
-                ApiBase.Case.CAMEL
+                { "data", "info" }
             );
 
-        } catch (IOError e) {
-            error (e.message);
-        } catch (DBusError e) {
-            throw AError.from_dbus_error (e);
-        } catch (ApiBase.JsonError e) {
-            throw AError.get_base_internal ();
+        } catch (Error e) {
+            throw AError.from_error (e);
         }
     }
 
@@ -184,18 +179,13 @@ public sealed class ACC.SystemTalker : Object {
                 cancellable
             );
 
-            return ApiBase.Jsoner.simple_from_json<Sys.OperationInfo> (
+            return Serialize.JsonWorker.simple_from_json<Sys.OperationInfo> (
                 result,
-                { "data", "info" },
-                ApiBase.Case.CAMEL
+                { "data", "info" }
             );
 
-        } catch (IOError e) {
-            error (e.message);
-        } catch (DBusError e) {
-            throw AError.from_dbus_error (e);
-        } catch (ApiBase.JsonError e) {
-            throw AError.get_base_internal ();
+        } catch (Error e) {
+            throw AError.from_error (e);
         }
     }
 
@@ -215,7 +205,7 @@ public sealed class ACC.SystemTalker : Object {
     //          error (e.message);
     //      } catch (DBusError e) {
     //          throw AError.from_dbus_error (e);
-    //      } catch (ApiBase.JsonError e) {
+    //      } catch (Serialize.JsonWorkerror e) {
     //          throw AError.get_base_internal ();
     //      }
     //  }
@@ -230,18 +220,13 @@ public sealed class ACC.SystemTalker : Object {
                 cancellable
             );
 
-            return ApiBase.Jsoner.simple_from_json<Sys.OperationInfo> (
+            return Serialize.JsonWorker.simple_from_json<Sys.OperationInfo> (
                 result,
-                { "data", "info" },
-                ApiBase.Case.CAMEL
+                { "data", "info" }
             );
 
-        } catch (IOError e) {
-            error (e.message);
-        } catch (DBusError e) {
-            throw AError.from_dbus_error (e);
-        } catch (ApiBase.JsonError e) {
-            throw AError.get_base_internal ();
+        } catch (Error e) {
+            throw AError.from_error (e);
         }
     }
 
@@ -255,18 +240,13 @@ public sealed class ACC.SystemTalker : Object {
                 cancellable
             );
 
-            return ApiBase.Jsoner.simple_from_json<Sys.BootedImage> (
+            return Serialize.JsonWorker.simple_from_json<Sys.BootedImage> (
                 result,
-                { "data", "bootedImage" },
-                ApiBase.Case.CAMEL
+                { "data", "bootedImage" }
             );
 
-        } catch (IOError e) {
-            error (e.message);
-        } catch (DBusError e) {
-            throw AError.from_dbus_error (e);
-        } catch (ApiBase.JsonError e) {
-            throw AError.get_base_internal ();
+        } catch (Error e) {
+            throw AError.from_error (e);
         }
     }
 
@@ -286,18 +266,13 @@ public sealed class ACC.SystemTalker : Object {
                 cancellable
             );
 
-            return ApiBase.Jsoner.simple_array_from_json<Sys.HistoryRecord> (
+            return Serialize.JsonWorker.simple_array_from_json<Sys.HistoryRecord> (
                 result,
-                { "data", "history" },
-                ApiBase.Case.CAMEL
+                { "data", "history" }
             );
 
-        } catch (IOError e) {
-            error (e.message);
-        } catch (DBusError e) {
-            throw AError.from_dbus_error (e);
-        } catch (ApiBase.JsonError e) {
-            throw AError.get_base_internal ();
+        } catch (Error e) {
+            throw AError.from_error (e);
         }
     }
 
@@ -311,18 +286,13 @@ public sealed class ACC.SystemTalker : Object {
                 cancellable
             );
 
-            return ApiBase.Jsoner.simple_from_json<Sys.BootedImage> (
+            return Serialize.JsonWorker.simple_from_json<Sys.BootedImage> (
                 result,
-                { "data", "bootedImage" },
-                ApiBase.Case.CAMEL
+                { "data", "bootedImage" }
             );
 
-        } catch (IOError e) {
-            error (e.message);
-        } catch (DBusError e) {
-            throw AError.from_dbus_error (e);
-        } catch (ApiBase.JsonError e) {
-            throw AError.get_base_internal ();
+        } catch (Error e) {
+            throw AError.from_error (e);
         }
     }
 
@@ -336,18 +306,13 @@ public sealed class ACC.SystemTalker : Object {
                 cancellable
             );
 
-            return ApiBase.Jsoner.simple_from_json<Sys.BootedImage> (
+            return Serialize.JsonWorker.simple_from_json<Sys.BootedImage> (
                 result,
-                { "data", "bootedImage" },
-                ApiBase.Case.CAMEL
+                { "data", "bootedImage" }
             );
 
-        } catch (IOError e) {
-            error (e.message);
-        } catch (DBusError e) {
-            throw AError.from_dbus_error (e);
-        } catch (ApiBase.JsonError e) {
-            throw AError.get_base_internal ();
+        } catch (Error e) {
+            throw AError.from_error (e);
         }
     }
 
@@ -363,18 +328,13 @@ public sealed class ACC.SystemTalker : Object {
                 cancellable
             );
 
-            return ApiBase.Jsoner.simple_from_json<Sys.PackageInfo> (
+            return Serialize.JsonWorker.simple_from_json<Sys.PackageInfo> (
                 result,
-                { "data", "packageInfo" },
-                ApiBase.Case.CAMEL
+                { "data", "packageInfo" }
             );
 
-        } catch (IOError e) {
-            error (e.message);
-        } catch (DBusError e) {
-            throw AError.from_dbus_error (e);
-        } catch (ApiBase.JsonError e) {
-            throw AError.get_base_internal ();
+        } catch (Error e) {
+            throw AError.from_error (e);
         }
     }
 
@@ -392,18 +352,13 @@ public sealed class ACC.SystemTalker : Object {
                 cancellable
             );
 
-            return ApiBase.Jsoner.simple_from_json<Sys.OperationInfo> (
+            return Serialize.JsonWorker.simple_from_json<Sys.OperationInfo> (
                 result,
-                { "data", "info" },
-                ApiBase.Case.CAMEL
+                { "data", "info" }
             );
 
-        } catch (IOError e) {
-            error (e.message);
-        } catch (DBusError e) {
-            throw AError.from_dbus_error (e);
-        } catch (ApiBase.JsonError e) {
-            throw AError.get_base_internal ();
+        } catch (Error e) {
+            throw AError.from_error (e);
         }
     }
 
@@ -431,18 +386,13 @@ public sealed class ACC.SystemTalker : Object {
                 cancellable
             );
 
-            return ApiBase.Jsoner.simple_from_json<Sys.PackagesInfo> (
+            return Serialize.JsonWorker.simple_from_json<Sys.PackagesInfo> (
                 result,
-                { "data" },
-                ApiBase.Case.CAMEL
+                { "data" }
             );
 
-        } catch (IOError e) {
-            error (e.message);
-        } catch (DBusError e) {
-            throw AError.from_dbus_error (e);
-        } catch (ApiBase.JsonError e) {
-            throw AError.get_base_internal ();
+        } catch (Error e) {
+            throw AError.from_error (e);
         }
     }
 
@@ -460,18 +410,13 @@ public sealed class ACC.SystemTalker : Object {
                 cancellable
             );
 
-            return ApiBase.Jsoner.simple_from_json<Sys.OperationInfo> (
+            return Serialize.JsonWorker.simple_from_json<Sys.OperationInfo> (
                 result,
-                { "data", "info" },
-                ApiBase.Case.CAMEL
+                { "data", "info" }
             );
 
-        } catch (IOError e) {
-            error (e.message);
-        } catch (DBusError e) {
-            throw AError.from_dbus_error (e);
-        } catch (ApiBase.JsonError e) {
-            throw AError.get_base_internal ();
+        } catch (Error e) {
+            throw AError.from_error (e);
         }
     }
 
@@ -485,18 +430,13 @@ public sealed class ACC.SystemTalker : Object {
                 cancellable
             );
 
-            return ApiBase.Jsoner.simple_from_json<Sys.PackagesInfo> (
+            return Serialize.JsonWorker.simple_from_json<Sys.PackagesInfo> (
                 result,
-                { "data" },
-                ApiBase.Case.CAMEL
+                { "data" }
             );
 
-        } catch (IOError e) {
-            error (e.message);
-        } catch (DBusError e) {
-            throw AError.from_dbus_error (e);
-        } catch (ApiBase.JsonError e) {
-            throw AError.get_base_internal ();
+        } catch (Error e) {
+            throw AError.from_error (e);
         }
     }
 }

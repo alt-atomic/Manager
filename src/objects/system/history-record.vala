@@ -18,7 +18,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-public class ACC.Sys.HistoryRecord : ApiBase.DataObject {
+public class ACC.Sys.HistoryRecord : Serialize.DataObject {
 
     public string image { get; set; }
 

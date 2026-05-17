@@ -23,7 +23,7 @@ public enum ACC.ListParamsOrder {
     DESC,
 }
 
-public sealed class ACC.ListParams : ApiBase.DataObject {
+public sealed class ACC.ListParams : Serialize.DataObject {
 
     /**
      * Container name.

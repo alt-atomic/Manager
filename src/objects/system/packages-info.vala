@@ -18,7 +18,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-public class ACC.Sys.PackagesInfo : ApiBase.DataObject {
+public class ACC.Sys.PackagesInfo : Serialize.DataObject {
 
     public string message { get; set; default = ""; }
 

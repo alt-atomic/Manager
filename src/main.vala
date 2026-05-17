@@ -21,6 +21,10 @@ int main (string[] args) {
     Intl.bind_textdomain_codeset (Config.GETTEXT_PACKAGE, "UTF-8");
     Intl.textdomain (Config.GETTEXT_PACKAGE);
 
+    var settings = Serialize.get_settings ();
+    settings.names_case = CAMEL;
+    Serialize.set_settings (settings);
+
     var app = new ACC.Application ();
     return app.run (args);
 }

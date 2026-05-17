@@ -27,9 +27,23 @@ namespace ACC {
         UNKNOWN,
         INTERNAL,
         FAILED,
+        DATA,
         IO;
 
-        public static AError from_dbus_error (DBusError e) {
+        public static AError from_error (Error e) {
+            if (e is IOError) {
+                return new AError.IO ("IO Error: %s", e.message);
+            } else if (e is DBusError) {
+                return from_dbus_error ((DBusError) e);
+            } else if (e is Serialize.Error) {
+                return new AError.DATA ("Data Error: %s", e.message);
+            } else {
+                warning ("Unknown error: %s::%s", e.domain.to_string (), e.message);
+                return new AError.INTERNAL (_("Internal error"));
+            }
+        }
+
+        static AError from_dbus_error (DBusError e) {
             string[] parts = e.message.replace ("GDBus.Error:org.freedesktop.DBus.Error.", "").split (":");
             string name = parts[0];
             string message = parts[1];
@@ -45,10 +59,6 @@ namespace ACC {
                 default:
                     return new AError.UNKNOWN (message);
             }
-        }
-
-        public static AError get_base_internal () {
-            return new AError.INTERNAL (_("Internal error"));
         }
     }
 

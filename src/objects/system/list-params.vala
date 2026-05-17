@@ -18,7 +18,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-public sealed class ACC.Sys.ListParams : ApiBase.DataObject {
+public sealed class ACC.Sys.ListParams : Serialize.DataObject {
 
     /**
      * Sort field.

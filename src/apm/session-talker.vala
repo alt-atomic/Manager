@@ -161,18 +161,13 @@ public sealed class ACC.SessionTalker : Object {
                 cancellable
             );
 
-            return ApiBase.Jsoner.simple_from_json<ContainerInfo> (
+            return Serialize.JsonWorker.simple_from_json<ContainerInfo> (
                 result,
-                { "data", "containerInfo" },
-                ApiBase.Case.CAMEL
+                { "data", "containerInfo" }
             );
 
-        } catch (IOError e) {
-            error (e.message);
-        } catch (DBusError e) {
-            throw AError.from_dbus_error (e);
-        } catch (ApiBase.JsonError e) {
-            throw AError.get_base_internal ();
+        } catch (Error e) {
+            throw AError.from_error (e);
         }
     }
 
@@ -186,18 +181,13 @@ public sealed class ACC.SessionTalker : Object {
                 cancellable
             );
 
-            return ApiBase.Jsoner.simple_array_from_json<ContainerInfo> (
+            return Serialize.JsonWorker.simple_array_from_json<ContainerInfo> (
                 result,
-                { "data", "containers" },
-                ApiBase.Case.CAMEL
+                { "data", "containers" }
             );
 
-        } catch (IOError e) {
-            error (e.message);
-        } catch (DBusError e) {
-            throw AError.from_dbus_error (e);
-        } catch (ApiBase.JsonError e) {
-            throw AError.get_base_internal ();
+        } catch (Error e) {
+            throw AError.from_error (e);
         }
     }
 
@@ -213,18 +203,13 @@ public sealed class ACC.SessionTalker : Object {
                 cancellable
             );
 
-            return ApiBase.Jsoner.simple_from_json<ContainerInfo> (
+            return Serialize.JsonWorker.simple_from_json<ContainerInfo> (
                 result,
-                { "data", "containerInfo" },
-                ApiBase.Case.CAMEL
+                { "data", "containerInfo" }
             );
 
-        } catch (IOError e) {
-            error (e.message);
-        } catch (DBusError e) {
-            throw AError.from_dbus_error (e);
-        } catch (ApiBase.JsonError e) {
-            throw AError.get_base_internal ();
+        } catch (Error e) {
+            throw AError.from_error (e);
         }
     }
 
@@ -240,18 +225,13 @@ public sealed class ACC.SessionTalker : Object {
                 cancellable
             );
 
-            return ApiBase.Jsoner.simple_array_from_json<FilterInfo> (
+            return Serialize.JsonWorker.simple_array_from_json<FilterInfo> (
                 result,
-                { "data", "filterFields" },
-                ApiBase.Case.CAMEL
+                { "data", "filterFields" }
             );
 
-        } catch (IOError e) {
-            error (e.message);
-        } catch (DBusError e) {
-            throw AError.from_dbus_error (e);
-        } catch (ApiBase.JsonError e) {
-            throw AError.get_base_internal ();
+        } catch (Error e) {
+            throw AError.from_error (e);
         }
     }
 
@@ -269,12 +249,8 @@ public sealed class ACC.SessionTalker : Object {
 
             return Gdk.Texture.from_bytes (new Bytes (result));
 
-        } catch (IOError e) {
-            error (e.message);
-        } catch (DBusError e) {
-            throw AError.from_dbus_error (e);
         } catch (Error e) {
-            return null;
+            throw AError.from_error (e);
         }
     }
 
@@ -292,18 +268,13 @@ public sealed class ACC.SessionTalker : Object {
                 cancellable
             );
 
-            return ApiBase.Jsoner.simple_from_json<Info> (
+            return Serialize.JsonWorker.simple_from_json<Info> (
                 result,
-                { "data" },
-                ApiBase.Case.CAMEL
+                { "data" }
             );
 
-        } catch (IOError e) {
-            error (e.message);
-        } catch (DBusError e) {
-            throw AError.from_dbus_error (e);
-        } catch (ApiBase.JsonError e) {
-            throw AError.get_base_internal ();
+        } catch (Error e) {
+            throw AError.from_error (e);
         }
     }
 
@@ -323,18 +294,13 @@ public sealed class ACC.SessionTalker : Object {
                 cancellable
             );
 
-            return ApiBase.Jsoner.simple_from_json<Info> (
+            return Serialize.JsonWorker.simple_from_json<Info> (
                 result,
-                { "data" },
-                ApiBase.Case.CAMEL
+                { "data" }
             );
 
-        } catch (IOError e) {
-            error (e.message);
-        } catch (DBusError e) {
-            throw AError.from_dbus_error (e);
-        } catch (ApiBase.JsonError e) {
-            throw AError.get_base_internal ();
+        } catch (Error e) {
+            throw AError.from_error (e);
         }
     }
 
@@ -364,18 +330,13 @@ public sealed class ACC.SessionTalker : Object {
                 cancellable
             );
 
-            return ApiBase.Jsoner.simple_from_json<PackagesInfo> (
+            return Serialize.JsonWorker.simple_from_json<PackagesInfo> (
                 result,
-                { "data" },
-                ApiBase.Case.CAMEL
+                { "data" }
             );
 
-        } catch (IOError e) {
-            error (e.message);
-        } catch (DBusError e) {
-            throw AError.from_dbus_error (e);
-        } catch (ApiBase.JsonError e) {
-            throw AError.get_base_internal ();
+        } catch (Error e) {
+            throw AError.from_error (e);
         }
     }
 
@@ -395,18 +356,13 @@ public sealed class ACC.SessionTalker : Object {
                 cancellable
             );
 
-            return ApiBase.Jsoner.simple_from_json<Info> (
+            return Serialize.JsonWorker.simple_from_json<Info> (
                 result,
-                { "data" },
-                ApiBase.Case.CAMEL
+                { "data" }
             );
 
-        } catch (IOError e) {
-            error (e.message);
-        } catch (DBusError e) {
-            throw AError.from_dbus_error (e);
-        } catch (ApiBase.JsonError e) {
-            throw AError.get_base_internal ();
+        } catch (Error e) {
+            throw AError.from_error (e);
         }
     }
 
@@ -424,18 +380,13 @@ public sealed class ACC.SessionTalker : Object {
                 cancellable
             );
 
-            return ApiBase.Jsoner.simple_from_json<PackagesInfo> (
+            return Serialize.JsonWorker.simple_from_json<PackagesInfo> (
                 result,
-                { "data" },
-                ApiBase.Case.CAMEL
+                { "data" }
             );
 
-        } catch (IOError e) {
-            error (e.message);
-        } catch (DBusError e) {
-            throw AError.from_dbus_error (e);
-        } catch (ApiBase.JsonError e) {
-            throw AError.get_base_internal ();
+        } catch (Error e) {
+            throw AError.from_error (e);
         }
     }
 
@@ -451,18 +402,13 @@ public sealed class ACC.SessionTalker : Object {
                 cancellable
             );
 
-            return ApiBase.Jsoner.simple_from_json<Update> (
+            return Serialize.JsonWorker.simple_from_json<Update> (
                 result,
-                { "data" },
-                ApiBase.Case.CAMEL
+                { "data" }
             );
 
-        } catch (IOError e) {
-            error (e.message);
-        } catch (DBusError e) {
-            throw AError.from_dbus_error (e);
-        } catch (ApiBase.JsonError e) {
-            throw AError.get_base_internal ();
+        } catch (Error e) {
+            throw AError.from_error (e);
         }
     }
 }

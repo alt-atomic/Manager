@@ -18,7 +18,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-public class ACC.Sys.OperationInfo : ApiBase.DataObject {
+public class ACC.Sys.OperationInfo : Serialize.DataObject {
 
     public Gee.ArrayList<string> extra_installed { get; set; default = new Gee.ArrayList<string> (); }
 
