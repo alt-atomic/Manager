@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <id>org.altlinux.Software</id>
-  <icon type="stock">org.altlinux.Software</icon>
+  <id>@APP_ID@.Devel</id>
+  <icon type="stock">@APP_ID@.Devel</icon>
   <name>Atomic Control Center</name>
-  <summary>Control center for ALT Atomic</summary>
+  <summary>Control center for ALT Atomic (Devel build)</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
   <description>
@@ -34,13 +34,18 @@
       <caption>Start page</caption>
     </screenshot>
   </screenshots>
-  <launchable type="desktop-id">org.altlinux.Software.desktop</launchable>
+  <launchable type="desktop-id">@APP_ID@.Devel.desktop</launchable>
   <releases>
-
+    <!-- Need for about in devel version -->
+    <release version="@VERSION@" date="@DATE@" type="development">
+      <description>
+        <p>Sorry @USER@! But my release note is in another metainfo</p>
+      </description>
+    </release>
   </releases>
-  <url type="homepage">https://altlinux.space/alt-atomic/atomic-control-center</url>
-  <url type="bugtracker">https://altlinux.space/alt-atomic/atomic-control-center/issues</url>
-  <url type="vcs-browser">https://altlinux.space/alt-atomic/atomic-control-center.git</url>
+  <url type="homepage">@HOMEPAGE@</url>
+  <url type="bugtracker">@BUGTRACKER@</url>
+  <url type="help">@HELP@</url>
   <developer id="org.altlinux">
     <name>ALT Linux Team</name>
   </developer>

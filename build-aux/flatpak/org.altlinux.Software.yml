@@ -24,7 +24,7 @@ modules:
     builddir: true
     buildsystem: meson
     config-opts:
-      - -Dis_devel=true
+      - -Dnightly=true
     sources:
       - type: dir
         path: ../../

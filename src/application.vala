@@ -24,7 +24,7 @@ public sealed class ACC.Application: Adw.Application {
 
     public Application () {
         Object (
-            application_id: Config.APP_ID_DYN,
+            application_id: Config.APP_ID_RELEVANT,
             resource_base_path: "/org/altlinux/Software/"
         );
     }

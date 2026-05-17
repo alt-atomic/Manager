@@ -6,12 +6,13 @@ project(
   license: 'GPL-3.0-or-later',
 )
 
-app_name = 'Atomic Control Center'
 
+app_name = 'Atomic Control Center'
 app_id = 'org.altlinux.Software'
-app_id_dyn = app_id
 
 glib_min_version = '2.76'
+
+nightly = false
 
 gee_dep = dependency('gee-0.8')
 libadwaita_dep = dependency('libadwaita-1', version: '>= 1.6')
@@ -37,24 +38,46 @@ add_project_arguments(
 )
 
 i18n = import('i18n')
+py = import('python')
 gnome = import('gnome')
 
-devel_postfix = ''
+name_suffix = ''
+version_suffix = ''
+app_id_suffix = ''
 
-if get_option('is_devel')
-  app_name += ' (Devel)'
-  devel_postfix = '.Devel'
+if get_option('nightly')
+  git = find_program('git', required: false)
+  hash = ''
+
+  if git.found()
+    hash = run_command(git.full_path(), 'rev-parse', '--short', 'HEAD', check: true).stdout().strip()
+  endif
+
+  nightly = true
+  version_suffix = '.nightly'
+  if hash != ''
+    version_suffix += '.' + hash
+  endif
+  name_suffix = ' (Devel)'
+  app_id_suffix = '.Devel'
 endif
 
-app_id_dyn += devel_postfix
+version = meson.project_version() + version_suffix
+
+app_id_relevant = 'org.altlinux.Software' + app_id_suffix
+app_name = 'Atomic Control Center' + name_suffix
+
+homepage = 'https://atomic.alt-gnome.ru/'
+bugtracker = 'https://altlinux.space/alt-atomic/atomic-control-center/issues'
+help = 'https://alt-gnome.altlinux.team/matrix-to/#/#alt-atomic:alt-gnome.ru'
 
 conf = configuration_data()
 conf.set_quoted('APP_NAME', app_name)
 conf.set_quoted('APP_ID', app_id)
-conf.set_quoted('APP_ID_DYN', app_id_dyn)
+conf.set_quoted('APP_ID_RELEVANT', app_id_relevant)
 conf.set_quoted('G_LOG_DOMAIN', app_id)
-conf.set10('IS_DEVEL', get_option('is_devel'))
-conf.set_quoted('VERSION', meson.project_version())
+conf.set10('IS_DEVEL', get_option('nightly'))
+conf.set_quoted('VERSION', version)
 conf.set_quoted('GETTEXT_PACKAGE', meson.project_name())
 conf.set_quoted('DATADIR', get_option('prefix') / get_option('datadir'))
 conf.set_quoted('SYSCONFDIR', get_option('sysconfdir'))
