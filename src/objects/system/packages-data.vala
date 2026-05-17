@@ -20,7 +20,7 @@
 
 public class ACC.Sys.PackagesData : Serialize.DataObject {
 
-    public Gee.ArrayList<string> install { get; set; default = new Gee.ArrayList<string> (); }
+    public Serialize.Array<string> install { get; set; default = new Serialize.Array<string> (); }
 
-    public Gee.ArrayList<string> remove { get; set; default = new Gee.ArrayList<string> (); }
+    public Serialize.Array<string> remove { get; set; default = new Serialize.Array<string> (); }
 }

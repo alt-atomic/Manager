@@ -24,5 +24,5 @@ public class ACC.Sys.ImageConfig : Serialize.DataObject {
 
     public PackagesData packages { get; set; }
 
-    public Gee.ArrayList<string> commands { get; set; default = new Gee.ArrayList<string> (); }
+    public Serialize.Array<string> commands { get; set; default = new Serialize.Array<string> (); }
 }

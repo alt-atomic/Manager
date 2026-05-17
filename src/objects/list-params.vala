@@ -53,7 +53,7 @@ public sealed class ACC.ListParams : Serialize.DataObject {
     /**
      * Filter field.
      */
-    public Gee.ArrayList<string> filters { get; set; default = new Gee.ArrayList<string> (); }
+    public Serialize.Array<string> filters { get; set; default = new Serialize.Array<string> (); }
 
     /**
      * Force update package list.

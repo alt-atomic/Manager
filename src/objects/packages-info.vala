@@ -24,7 +24,7 @@ public sealed class ACC.PackagesInfo : Serialize.DataObject {
      */
     public string message { get; set; }
 
-    public Gee.ArrayList<Package> packages { get; set; default = new Gee.ArrayList<Package> (); }
+    public Serialize.Array<Package> packages { get; set; default = new Serialize.Array<Package> (); }
 
     public int64 total_count { get; set; }
 }

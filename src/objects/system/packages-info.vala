@@ -22,7 +22,7 @@ public class ACC.Sys.PackagesInfo : Serialize.DataObject {
 
     public string message { get; set; default = ""; }
 
-    public Gee.ArrayList<PackageInfo> packages { get; set; default = new Gee.ArrayList<PackageInfo> (); }
+    public Serialize.Array<PackageInfo> packages { get; set; default = new Serialize.Array<PackageInfo> (); }
 
     public int total_count { get; set; }
 }

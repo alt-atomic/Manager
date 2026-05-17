@@ -26,5 +26,5 @@ public sealed class ACC.FilterInfo : Serialize.DataObject {
 
     public string type_ { get; set; }
 
-    public Gee.ArrayList<string> choice { get; set; default = new Gee.ArrayList<string> (); }
+    public Serialize.Array<string> choice { get; set; default = new Serialize.Array<string> (); }
 }

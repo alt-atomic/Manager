@@ -20,13 +20,13 @@
 
 public class ACC.Sys.OperationInfo : Serialize.DataObject {
 
-    public Gee.ArrayList<string> extra_installed { get; set; default = new Gee.ArrayList<string> (); }
+    public Serialize.Array<string> extra_installed { get; set; default = new Serialize.Array<string> (); }
 
-    public Gee.ArrayList<string> upgraded_packages { get; set; default = new Gee.ArrayList<string> (); }
+    public Serialize.Array<string> upgraded_packages { get; set; default = new Serialize.Array<string> (); }
 
-    public Gee.ArrayList<string> new_installed_packages { get; set; default = new Gee.ArrayList<string> (); }
+    public Serialize.Array<string> new_installed_packages { get; set; default = new Serialize.Array<string> (); }
 
-    public Gee.ArrayList<string> removed_packages { get; set; default = new Gee.ArrayList<string> (); }
+    public Serialize.Array<string> removed_packages { get; set; default = new Serialize.Array<string> (); }
 
     public int upgraded_count { get; set; }
 

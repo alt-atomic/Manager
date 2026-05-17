@@ -171,7 +171,7 @@ public sealed class ACC.SessionTalker : Object {
         }
     }
 
-    public async Gee.ArrayList<ContainerInfo> container_list (
+    public async Serialize.Array<ContainerInfo> container_list (
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
     ) throws AError {
@@ -213,7 +213,7 @@ public sealed class ACC.SessionTalker : Object {
         }
     }
 
-    public async Gee.ArrayList<FilterInfo> get_filter_fields (
+    public async Serialize.Array<FilterInfo> get_filter_fields (
         string container,
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
@@ -323,7 +323,7 @@ public sealed class ACC.SessionTalker : Object {
                     order = order,
                     limit = limit,
                     offset = offset,
-                    filters = new Gee.ArrayList<string>.wrap (filter_field),
+                    filters = new Serialize.Array<string>.wrap (filter_field),
                     force_update = force_update
                 }.to_json (),
                 transaction,

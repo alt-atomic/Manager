@@ -21,7 +21,7 @@ public sealed class ACC.PackageInfo : Serialize.DataObject {
 
     public Package package { get; set; }
 
-    public Gee.ArrayList<string> paths { get; set; default = new Gee.ArrayList<string> (); }
+    public Serialize.Array<string> paths { get; set; default = new Serialize.Array<string> (); }
 
     public bool is_console { get; set; }
 }

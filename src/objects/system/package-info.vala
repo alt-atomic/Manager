@@ -36,9 +36,9 @@ public sealed class ACC.Sys.PackageInfo : Serialize.DataObject {
 
     public string version_installed { get; set; }
 
-    public Gee.ArrayList<string> depends { get; set; default = new Gee.ArrayList<string> (); }
+    public Serialize.Array<string> depends { get; set; default = new Serialize.Array<string> (); }
 
-    public Gee.ArrayList<string> provides { get; set; default = new Gee.ArrayList<string> (); }
+    public Serialize.Array<string> provides { get; set; default = new Serialize.Array<string> (); }
 
     public int64 size { get; set; }
 

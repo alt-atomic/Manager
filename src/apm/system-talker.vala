@@ -250,7 +250,7 @@ public sealed class ACC.SystemTalker : Object {
         }
     }
 
-    public async Gee.ArrayList<Sys.HistoryRecord> image_history (
+    public async Serialize.Array<Sys.HistoryRecord> image_history (
         string image_name = "",
         int64 limit = 50,
         int64 offset = 0,
@@ -379,7 +379,7 @@ public sealed class ACC.SystemTalker : Object {
                     order = order,
                     limit = limit,
                     offset = offset,
-                    filters = new Gee.ArrayList<string>.wrap (filter_field),
+                    filters = new Serialize.Array<string>.wrap (filter_field),
                     force_update = force_update
                 }.to_json (),
                 transaction,
