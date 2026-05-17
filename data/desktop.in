@@ -5,7 +5,7 @@ Comment=Control center for ALT Atomic
 # Translators: keep number of ';'
 Keywords=atomic;control;center;settings;
 Exec=atomic-control-center
-Icon=org.altlinux.AtomicControlCenter
+Icon=org.altlinux.Software
 Terminal=false
 Type=Application
 Categories=Utility;GNOME;GTK;

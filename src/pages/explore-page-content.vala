@@ -18,7 +18,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-[GtkTemplate (ui = "/org/altlinux/AtomicControlCenter/ui/explore-page-content.ui")]
+[GtkTemplate (ui = "/org/altlinux/Software/ui/explore-page-content.ui")]
 public sealed class ACC.ExplorePageContent: Adw.Bin {
 
 }

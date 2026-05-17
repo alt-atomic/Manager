@@ -18,7 +18,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-[GtkTemplate (ui = "/org/altlinux/AtomicControlCenter/ui/main-page-content.ui")]
+[GtkTemplate (ui = "/org/altlinux/Software/ui/main-page-content.ui")]
 public sealed class ACC.MainPageContent: Adw.BreakpointBin {
 
     [GtkChild]

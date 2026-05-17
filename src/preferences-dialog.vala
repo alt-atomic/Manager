@@ -18,7 +18,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-[GtkTemplate (ui = "/org/altlinux/AtomicControlCenter/ui/preferences-dialog.ui")]
+[GtkTemplate (ui = "/org/altlinux/Software/ui/preferences-dialog.ui")]
 public sealed class ACC.PreferencesDialog : Adw.PreferencesDialog {
 
     [GtkChild]

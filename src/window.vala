@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-[GtkTemplate (ui = "/org/altlinux/AtomicControlCenter/ui/window.ui")]
+[GtkTemplate (ui = "/org/altlinux/Software/ui/window.ui")]
 public sealed class ACC.Window: Adw.ApplicationWindow {
 
     //  [GtkChild]

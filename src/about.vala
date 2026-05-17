@@ -19,7 +19,7 @@
 namespace ACC {
     public Adw.AboutDialog build_about () {
         return new Adw.AboutDialog.from_appdata (
-            @"/org/altlinux/AtomicControlCenter/org.altlinux.AtomicControlCenter.metainfo.xml",
+            "/org/altlinux/Software/org.altlinux.Software.metainfo.xml",
             Config.VERSION
         ) {
             application_icon = Config.APP_ID,

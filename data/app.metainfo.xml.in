@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <id>org.altlinux.AtomicControlCenter</id>
-  <icon type="stock">org.altlinux.AtomicControlCenter</icon>
+  <id>org.altlinux.Software</id>
+  <icon type="stock">org.altlinux.Software</icon>
   <name>Atomic Control Center</name>
   <summary>Control center for ALT Atomic</summary>
   <metadata_license>CC0-1.0</metadata_license>
@@ -34,7 +34,7 @@
       <caption>Start page</caption>
     </screenshot>
   </screenshots>
-  <launchable type="desktop-id">org.altlinux.AtomicControlCenter.desktop</launchable>
+  <launchable type="desktop-id">org.altlinux.Software.desktop</launchable>
   <releases>
 
   </releases>

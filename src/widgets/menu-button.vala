@@ -18,6 +18,6 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-[GtkTemplate (ui = "/org/altlinux/AtomicControlCenter/ui/menu-button.ui")]
+[GtkTemplate (ui = "/org/altlinux/Software/ui/menu-button.ui")]
 public sealed class ACC.MenuButton: Adw.Bin {
 }

@@ -1,4 +1,4 @@
-id: org.altlinux.AtomicControlCenter.Devel
+id: org.altlinux.Software.Devel
 runtime: org.gnome.Platform
 runtime-version: master
 sdk: org.gnome.Sdk

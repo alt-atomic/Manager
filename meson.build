@@ -8,7 +8,7 @@ project(
 
 app_name = 'Atomic Control Center'
 
-app_id = 'org.altlinux.AtomicControlCenter'
+app_id = 'org.altlinux.Software'
 app_id_dyn = app_id
 
 glib_min_version = '2.76'
@@ -39,10 +39,14 @@ add_project_arguments(
 i18n = import('i18n')
 gnome = import('gnome')
 
+devel_postfix = ''
+
 if get_option('is_devel')
   app_name += ' (Devel)'
-  app_id_dyn += '.Devel'
+  devel_postfix = '.Devel'
 endif
+
+app_id_dyn += devel_postfix
 
 conf = configuration_data()
 conf.set_quoted('APP_NAME', app_name)

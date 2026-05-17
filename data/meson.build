@@ -10,7 +10,7 @@ blueprint_files = files(
 )
 
 desktop_file = i18n.merge_file(
-  input: '@0@.desktop.in'.format(app_id_dyn),
+  input: 'desktop' + devel_postfix + '.in',
   output: '@0@.desktop'.format(app_id_dyn),
   type: 'desktop',
   po_dir: '../po',
@@ -24,7 +24,7 @@ if desktop_utils.found()
 endif
 
 appstream_file = i18n.merge_file(
-  input: '@0@.metainfo.xml.in'.format(app_id),
+  input: 'app.metainfo.xml.in',
   output: '@0@.metainfo.xml'.format(app_id),
   po_dir: '../po',
   install: true,
@@ -36,7 +36,7 @@ if appstreamcli.found()
   test('Validate appstream file', appstreamcli, args: ['validate', appstream_file])
 endif
 
-install_data('@0@.gschema.xml'.format(app_id),
+install_data('gschema.xml',
   install_dir: get_option('datadir') / 'glib-2.0' / 'schemas'
 )
 
@@ -53,7 +53,7 @@ blueprints = custom_target('blueprints',
   command: [find_program('blueprint-compiler'), 'batch-compile', '@OUTPUT@', '@CURRENT_SOURCE_DIR@', '@INPUT@'],
 )
 
-resource_files = files('@0@.gresource.xml'.format(app_id))
+resource_files = files('gresource.xml')
 resources = gnome.compile_resources(
   meson.project_name() + '-resources',
   resource_files,
