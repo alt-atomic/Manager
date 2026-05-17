@@ -6,8 +6,6 @@ project(
   license: 'GPL-3.0-or-later',
 )
 
-
-app_name = 'Atomic Control Center'
 app_id = 'org.altlinux.Software'
 
 glib_min_version = '2.76'
@@ -66,6 +64,7 @@ version = meson.project_version() + version_suffix
 
 app_id_relevant = 'org.altlinux.Software' + app_id_suffix
 app_name = 'Atomic Control Center' + name_suffix
+app_name_classic = 'Atomic Control Center' + name_suffix
 
 homepage = 'https://atomic.alt-gnome.ru/'
 bugtracker = 'https://altlinux.space/alt-atomic/atomic-control-center/issues'
@@ -73,6 +72,7 @@ help = 'https://alt-gnome.altlinux.team/matrix-to/#/#alt-atomic:alt-gnome.ru'
 
 conf = configuration_data()
 conf.set_quoted('APP_NAME', app_name)
+conf.set_quoted('APP_NAME_CLASSIC', app_name_classic)
 conf.set_quoted('APP_ID', app_id)
 conf.set_quoted('APP_ID_RELEVANT', app_id_relevant)
 conf.set_quoted('G_LOG_DOMAIN', app_id)

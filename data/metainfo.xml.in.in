@@ -44,9 +44,6 @@
   <developer id="org.altlinux">
     <name>ALT Linux Team</name>
   </developer>
-  <kudos>
-    <kudo>ModernToolkit</kudo>
-  </kudos>
   <categories>
     <category>Utility</category>
     <category>GNOME</category>
