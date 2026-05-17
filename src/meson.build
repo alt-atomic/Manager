@@ -3,9 +3,10 @@ vapi_sources = files(
 )
 
 vala_sources = files(
+  'apm/distrobox-module.vala',
   'apm/event-handler.vala',
-  'apm/session-talker.vala',
-  'apm/system-talker.vala',
+  'apm/repo-module.vala',
+  'apm/system-module.vala',
 
   'objects/system/booted-image.vala',
   'objects/system/history-record.vala',

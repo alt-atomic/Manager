@@ -17,63 +17,52 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-[DBus (name = "org.altlinux.APM.system")]
-public interface System : Object {
+[DBus (name = "org.altlinux.distrobox")]
+public interface Distrobox : Object {
 
-    public abstract async string check_install (
-        string[] packages,
+    public abstract async string container_add (
+        string image,
+        string name,
+        string additional_packages,
+        string init_hooks,
         string transaction,
         Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
-    public abstract async string check_remove (
-        string[] packages,
+    public abstract async string container_list (
         string transaction,
         Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
-    public abstract async string check_update_kernel (
+    public abstract async string container_remove (
+        string name,
         string transaction,
         Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
-    public abstract async string check_upgrade (
+    public abstract async string get_filter_fields (
+        string container,
         string transaction,
         Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
-    public abstract async string image_apply (
-        string transaction,
-        Cancellable? cancellable
-    ) throws GLib.DBusError, GLib.IOError;
-
-    public abstract async string image_history (
-        string transaction,
-        string image_name,
-        int64 limit,
-        int64 offset,
-        Cancellable? cancellable
-    ) throws GLib.DBusError, GLib.IOError;
-
-    public abstract async string image_status (
-        string transaction,
-        Cancellable? cancellable
-    ) throws GLib.DBusError, GLib.IOError;
-
-    public abstract async string image_update (
-        string transaction,
+    public abstract async uint8[] get_icon_by_package (
+        string package_name,
+        string container,
         Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
     public abstract async string info (
+        string container,
         string package_name,
         string transaction,
         Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
     public abstract async string install (
-        string[] packages,
-        bool apply_atomic,
+        string container,
+        string package_name,
+        bool export,
         string transaction,
         Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
@@ -85,38 +74,47 @@ public interface System : Object {
     ) throws GLib.DBusError, GLib.IOError;
 
     public abstract async string remove (
-        string[] packages,
-        bool apply_atomic,
+        string container,
+        string package_name,
+        bool only_export,
+        string transaction,
+        Cancellable? cancellable
+    ) throws GLib.DBusError, GLib.IOError;
+
+    public abstract async string search (
+        string container,
+        string package_name,
         string transaction,
         Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
     public abstract async string update (
+        string container,
         string transaction,
         Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 }
 
-public sealed class ACC.SystemTalker : Object {
+public sealed class ACC.DistroboxModule : Object {
 
-    static SystemTalker instance;
+    static DistroboxModule instance;
 
     DBusConnection con;
-    public System talker { get; private set; }
+    Distrobox talker;
 
-    SystemTalker () {
+    DistroboxModule () {
         Object ();
     }
 
     construct {
         try {
-            con = Bus.get_sync (BusType.SYSTEM);
+            con = Bus.get_sync (BusType.SESSION);
 
             if (con == null) {
                 error ("Failed to connect to bus");
             }
 
-            talker = con.get_proxy_sync<System> (
+            talker = con.get_proxy_sync<Distrobox> (
                 "org.altlinux.APM",
                 "/org/altlinux/APM",
                 DBusProxyFlags.NONE
@@ -137,29 +135,35 @@ public sealed class ACC.SystemTalker : Object {
         get_default ();
     }
 
-    public static SystemTalker get_default () {
+    public static DistroboxModule get_default () {
         if (instance == null) {
-            instance = new SystemTalker ();
+            instance = new DistroboxModule ();
         }
 
         return instance;
     }
 
-    public async Sys.OperationInfo check_install (
-        string[] packages,
+    public async ContainerInfo container_add (
+        string image,
+        string name,
+        string additional_packages = "",
+        string init_hooks = "",
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
     ) throws AError {
         try {
-            string result = yield talker.check_install (
-                packages,
+            string result = yield talker.container_add (
+                image,
+                name,
+                additional_packages,
+                init_hooks,
                 transaction,
                 cancellable
             );
 
-            return Serialize.JsonWorker.simple_from_json<Sys.OperationInfo> (
+            return Serialize.JsonWorker.simple_from_json<ContainerInfo> (
                 result,
-                { "data", "info" }
+                { "data", "containerInfo" }
             );
 
         } catch (Error e) {
@@ -167,21 +171,19 @@ public sealed class ACC.SystemTalker : Object {
         }
     }
 
-    public async Sys.OperationInfo check_remove (
-        string[] packages,
+    public async Serialize.Array<ContainerInfo> container_list (
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
     ) throws AError {
         try {
-            string result = yield talker.check_remove (
-                packages,
+            string result = yield talker.container_list (
                 transaction,
                 cancellable
             );
 
-            return Serialize.JsonWorker.simple_from_json<Sys.OperationInfo> (
+            return Serialize.JsonWorker.simple_array_from_json<ContainerInfo> (
                 result,
-                { "data", "info" }
+                { "data", "containers" }
             );
 
         } catch (Error e) {
@@ -189,40 +191,21 @@ public sealed class ACC.SystemTalker : Object {
         }
     }
 
-    //  public async void check_update_kernel (
-    //      string transaction = Uuid.string_random (),
-    //      Cancellable? cancellable = null
-    //  ) throws AError {
-    //      try {
-    //          string result = yield talker.check_update_kernel (
-    //              transaction,
-    //              cancellable
-    //          );
-
-    //          assert_not_reached ();
-
-    //      } catch (IOError e) {
-    //          error (e.message);
-    //      } catch (DBusError e) {
-    //          throw AError.from_dbus_error (e);
-    //      } catch (Serialize.JsonWorkerror e) {
-    //          throw AError.get_base_internal ();
-    //      }
-    //  }
-
-    public async Sys.OperationInfo check_upgrade (
+    public async ContainerInfo container_remove (
+        string image,
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
     ) throws AError {
         try {
-            string result = yield talker.check_upgrade (
+            string result = yield talker.container_remove (
+                image,
                 transaction,
                 cancellable
             );
 
-            return Serialize.JsonWorker.simple_from_json<Sys.OperationInfo> (
+            return Serialize.JsonWorker.simple_from_json<ContainerInfo> (
                 result,
-                { "data", "info" }
+                { "data", "containerInfo" }
             );
 
         } catch (Error e) {
@@ -230,19 +213,21 @@ public sealed class ACC.SystemTalker : Object {
         }
     }
 
-    public async Sys.BootedImage image_apply (
+    public async Serialize.Array<FilterInfo> get_filter_fields (
+        string container,
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
     ) throws AError {
         try {
-            string result = yield talker.image_apply (
+            string result = yield talker.get_filter_fields (
+                container,
                 transaction,
                 cancellable
             );
 
-            return Serialize.JsonWorker.simple_from_json<Sys.BootedImage> (
+            return Serialize.JsonWorker.simple_array_from_json<FilterInfo> (
                 result,
-                { "data", "bootedImage" }
+                { "data", "filterFields" }
             );
 
         } catch (Error e) {
@@ -250,87 +235,42 @@ public sealed class ACC.SystemTalker : Object {
         }
     }
 
-    public async Serialize.Array<Sys.HistoryRecord> image_history (
-        string image_name = "",
-        int64 limit = 50,
-        int64 offset = 0,
-        string transaction = Uuid.string_random (),
+    public async Gdk.Texture? get_icon_by_package (
+        string package_name,
+        string container,
         Cancellable? cancellable = null
     ) throws AError {
         try {
-            string result = yield talker.image_history (
-                transaction,
-                image_name,
-                limit,
-                offset,
+            uint8[] result = yield talker.get_icon_by_package (
+                package_name,
+                container,
                 cancellable
             );
 
-            return Serialize.JsonWorker.simple_array_from_json<Sys.HistoryRecord> (
-                result,
-                { "data", "history" }
-            );
+            return Gdk.Texture.from_bytes (new Bytes (result));
 
         } catch (Error e) {
             throw AError.from_error (e);
         }
     }
 
-    public async Sys.BootedImage image_status (
-        string transaction = Uuid.string_random (),
-        Cancellable? cancellable = null
-    ) throws AError {
-        try {
-            string result = yield talker.image_status (
-                transaction,
-                cancellable
-            );
-
-            return Serialize.JsonWorker.simple_from_json<Sys.BootedImage> (
-                result,
-                { "data", "bootedImage" }
-            );
-
-        } catch (Error e) {
-            throw AError.from_error (e);
-        }
-    }
-
-    public async Sys.BootedImage image_update (
-        string transaction = Uuid.string_random (),
-        Cancellable? cancellable = null
-    ) throws AError {
-        try {
-            string result = yield talker.image_update (
-                transaction,
-                cancellable
-            );
-
-            return Serialize.JsonWorker.simple_from_json<Sys.BootedImage> (
-                result,
-                { "data", "bootedImage" }
-            );
-
-        } catch (Error e) {
-            throw AError.from_error (e);
-        }
-    }
-
-    public async Sys.PackageInfo info (
+    public async Info info (
+        string container,
         string package_name,
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
     ) throws AError {
         try {
             string result = yield talker.info (
+                container,
                 package_name,
                 transaction,
                 cancellable
             );
 
-            return Serialize.JsonWorker.simple_from_json<Sys.PackageInfo> (
+            return Serialize.JsonWorker.simple_from_json<Info> (
                 result,
-                { "data", "packageInfo" }
+                { "data" }
             );
 
         } catch (Error e) {
@@ -338,23 +278,25 @@ public sealed class ACC.SystemTalker : Object {
         }
     }
 
-    public async Sys.OperationInfo install (
-        string[] packages,
-        bool apply_atomic,
+    public async Info install (
+        string container,
+        string package_name,
+        bool export = false,
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
     ) throws AError {
         try {
             string result = yield talker.install (
-                packages,
-                apply_atomic,
+                container,
+                package_name,
+                export,
                 transaction,
                 cancellable
             );
 
-            return Serialize.JsonWorker.simple_from_json<Sys.OperationInfo> (
+            return Serialize.JsonWorker.simple_from_json<Info> (
                 result,
-                { "data", "info" }
+                { "data" }
             );
 
         } catch (Error e) {
@@ -362,7 +304,8 @@ public sealed class ACC.SystemTalker : Object {
         }
     }
 
-    public async Sys.PackagesInfo list (
+    public async PackagesInfo list (
+        string container,
         string sort = "",
         ListParamsOrder order = ListParamsOrder.ASC,
         int limit = 10,
@@ -374,7 +317,8 @@ public sealed class ACC.SystemTalker : Object {
     ) throws AError {
         try {
             string result = yield talker.list (
-                new Sys.ListParams () {
+                new ListParams () {
+                    container = container,
                     sort = sort,
                     order = order,
                     limit = limit,
@@ -386,7 +330,7 @@ public sealed class ACC.SystemTalker : Object {
                 cancellable
             );
 
-            return Serialize.JsonWorker.simple_from_json<Sys.PackagesInfo> (
+            return Serialize.JsonWorker.simple_from_json<PackagesInfo> (
                 result,
                 { "data" }
             );
@@ -396,23 +340,25 @@ public sealed class ACC.SystemTalker : Object {
         }
     }
 
-    public async Sys.OperationInfo remove (
-        string[] packages,
-        bool apply_atomic,
+    public async Info remove (
+        string container,
+        string package_name,
+        bool only_export = false,
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
     ) throws AError {
         try {
             string result = yield talker.remove (
-                packages,
-                apply_atomic,
+                container,
+                package_name,
+                only_export,
                 transaction,
                 cancellable
             );
 
-            return Serialize.JsonWorker.simple_from_json<Sys.OperationInfo> (
+            return Serialize.JsonWorker.simple_from_json<Info> (
                 result,
-                { "data", "info" }
+                { "data" }
             );
 
         } catch (Error e) {
@@ -420,17 +366,43 @@ public sealed class ACC.SystemTalker : Object {
         }
     }
 
-    public async Sys.PackagesInfo update (
+    public async PackagesInfo search (
+        string container,
+        string package_name,
+        string transaction = Uuid.string_random (),
+        Cancellable? cancellable = null
+    ) throws AError {
+        try {
+            string result = yield talker.search (
+                container,
+                package_name,
+                transaction,
+                cancellable
+            );
+
+            return Serialize.JsonWorker.simple_from_json<PackagesInfo> (
+                result,
+                { "data" }
+            );
+
+        } catch (Error e) {
+            throw AError.from_error (e);
+        }
+    }
+
+    public async Update update (
+        string container,
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
     ) throws AError {
         try {
             string result = yield talker.update (
+                container,
                 transaction,
                 cancellable
             );
 
-            return Serialize.JsonWorker.simple_from_json<Sys.PackagesInfo> (
+            return Serialize.JsonWorker.simple_from_json<Update> (
                 result,
                 { "data" }
             );

@@ -41,8 +41,8 @@ public sealed class ACC.Application: Adw.Application {
         set_accels_for_action ("app.quit", { "<primary>q" });
 
         EventHandler.ensure ();
-        SessionTalker.ensure ();
-        SystemTalker.ensure ();
+        DistroboxModule.ensure ();
+        SystemModule.ensure ();
     }
 
     public override void activate () {
