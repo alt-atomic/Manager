@@ -8,6 +8,14 @@ vala_sources = files(
   'apm/repo-module.vala',
   'apm/system-module.vala',
 
+  'objects/repo/add-remove-response.vala',
+  'objects/repo/branches-response.vala',
+  'objects/repo/info.vala',
+  'objects/repo/list-response.vala',
+  'objects/repo/set-response.vala',
+  'objects/repo/simulate-response.vala',
+  'objects/repo/task-packages-response.vala',
+
   'objects/system/booted-image.vala',
   'objects/system/history-record.vala',
   'objects/system/image-config.vala',

@@ -56,7 +56,6 @@ compile_commands.json
 .flatpak-builder
 build
 build-dir
-repo
 
 .vscode/*
 !.vscode/tasks.json
