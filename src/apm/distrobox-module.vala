@@ -17,6 +17,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+using ACC.Objects;
+
 [DBus (name = "org.altlinux.distrobox")]
 public interface Distrobox : Object {
 
@@ -26,6 +28,7 @@ public interface Distrobox : Object {
         string additional_packages,
         string init_hooks,
         string transaction,
+        bool background,
         Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
@@ -41,7 +44,6 @@ public interface Distrobox : Object {
     ) throws GLib.DBusError, GLib.IOError;
 
     public abstract async string get_filter_fields (
-        string container,
         string transaction,
         Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
@@ -68,7 +70,13 @@ public interface Distrobox : Object {
     ) throws GLib.DBusError, GLib.IOError;
 
     public abstract async string list (
-        string params_j_s_o_n,
+        string container,
+        string sort,
+        string order,
+        int limit,
+        int offset,
+        string filters_j_s_o_n,
+        bool force_update,
         string transaction,
         Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
@@ -146,8 +154,8 @@ public sealed class ACC.DistroboxModule : Object {
     public async ContainerInfo container_add (
         string image,
         string name,
-        string additional_packages = "",
-        string init_hooks = "",
+        string additional_packages,
+        string init_hooks,
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
     ) throws AError {
@@ -158,6 +166,7 @@ public sealed class ACC.DistroboxModule : Object {
                 additional_packages,
                 init_hooks,
                 transaction,
+                false,
                 cancellable
             );
 
@@ -192,13 +201,13 @@ public sealed class ACC.DistroboxModule : Object {
     }
 
     public async ContainerInfo container_remove (
-        string image,
+        string name,
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
     ) throws AError {
         try {
             string result = yield talker.container_remove (
-                image,
+                name,
                 transaction,
                 cancellable
             );
@@ -213,21 +222,19 @@ public sealed class ACC.DistroboxModule : Object {
         }
     }
 
-    public async Serialize.Array<FilterInfo> get_filter_fields (
-        string container,
+    public async Serialize.Array<FilterFieldsInfo> get_filter_fields (
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
     ) throws AError {
         try {
             string result = yield talker.get_filter_fields (
-                container,
                 transaction,
                 cancellable
             );
 
-            return Serialize.JsonWorker.simple_array_from_json<FilterInfo> (
+            return Serialize.JsonWorker.simple_array_from_json<FilterFieldsInfo> (
                 result,
-                { "data", "filterFields" }
+                { "data" }
             );
 
         } catch (Error e) {
@@ -254,7 +261,7 @@ public sealed class ACC.DistroboxModule : Object {
         }
     }
 
-    public async Info info (
+    public async Objects.Distrobox.PackageInfo info (
         string container,
         string package_name,
         string transaction = Uuid.string_random (),
@@ -268,9 +275,9 @@ public sealed class ACC.DistroboxModule : Object {
                 cancellable
             );
 
-            return Serialize.JsonWorker.simple_from_json<Info> (
+            return Serialize.JsonWorker.simple_from_json<Objects.Distrobox.PackageInfo> (
                 result,
-                { "data" }
+                { "data", "packageInfo" }
             );
 
         } catch (Error e) {
@@ -278,10 +285,10 @@ public sealed class ACC.DistroboxModule : Object {
         }
     }
 
-    public async Info install (
+    public async Objects.Distrobox.PackageInfo install (
         string container,
         string package_name,
-        bool export = false,
+        bool export,
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
     ) throws AError {
@@ -294,9 +301,9 @@ public sealed class ACC.DistroboxModule : Object {
                 cancellable
             );
 
-            return Serialize.JsonWorker.simple_from_json<Info> (
+            return Serialize.JsonWorker.simple_from_json<Objects.Distrobox.PackageInfo> (
                 result,
-                { "data" }
+                { "data", "packageInfo" }
             );
 
         } catch (Error e) {
@@ -304,35 +311,33 @@ public sealed class ACC.DistroboxModule : Object {
         }
     }
 
-    public async PackagesInfo list (
+    public async Objects.Distrobox.ListResponse list (
         string container,
-        string sort = "",
-        ListParamsOrder order = ListParamsOrder.ASC,
-        int limit = 10,
-        int offset = 10,
-        string[] filter_field = {},
-        bool force_update = false,
+        string sort,
+        string order,
+        int limit,
+        int offset,
+        string filters_j_s_o_n,
+        bool force_update,
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
     ) throws AError {
         try {
             string result = yield talker.list (
-                new ListParams () {
-                    container = container,
-                    sort = sort,
-                    order = order,
-                    limit = limit,
-                    offset = offset,
-                    filters = new Serialize.Array<string>.wrap (filter_field),
-                    force_update = force_update
-                }.to_json (),
+                container,
+                sort,
+                order,
+                limit,
+                offset,
+                filters_j_s_o_n,
+                force_update,
                 transaction,
                 cancellable
             );
 
-            return Serialize.JsonWorker.simple_from_json<PackagesInfo> (
+            return Serialize.JsonWorker.simple_from_json<Objects.Distrobox.ListResponse> (
                 result,
-                { "data" }
+                { "data", "packageInfo" }
             );
 
         } catch (Error e) {
@@ -340,10 +345,10 @@ public sealed class ACC.DistroboxModule : Object {
         }
     }
 
-    public async Info remove (
+    public async Objects.Distrobox.PackageInfo remove (
         string container,
         string package_name,
-        bool only_export = false,
+        bool only_export,
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
     ) throws AError {
@@ -356,9 +361,9 @@ public sealed class ACC.DistroboxModule : Object {
                 cancellable
             );
 
-            return Serialize.JsonWorker.simple_from_json<Info> (
+            return Serialize.JsonWorker.simple_from_json<Objects.Distrobox.PackageInfo> (
                 result,
-                { "data" }
+                { "data", "packageInfo" }
             );
 
         } catch (Error e) {
@@ -366,7 +371,7 @@ public sealed class ACC.DistroboxModule : Object {
         }
     }
 
-    public async PackagesInfo search (
+    public async Serialize.Array<Objects.Distrobox.Package> search (
         string container,
         string package_name,
         string transaction = Uuid.string_random (),
@@ -380,9 +385,9 @@ public sealed class ACC.DistroboxModule : Object {
                 cancellable
             );
 
-            return Serialize.JsonWorker.simple_from_json<PackagesInfo> (
+            return Serialize.JsonWorker.simple_array_from_json<Objects.Distrobox.Package> (
                 result,
-                { "data" }
+                { "data", "packages" }
             );
 
         } catch (Error e) {
@@ -390,7 +395,7 @@ public sealed class ACC.DistroboxModule : Object {
         }
     }
 
-    public async Update update (
+    public async Objects.Distrobox.UpdateResponse update (
         string container,
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
@@ -402,7 +407,7 @@ public sealed class ACC.DistroboxModule : Object {
                 cancellable
             );
 
-            return Serialize.JsonWorker.simple_from_json<Update> (
+            return Serialize.JsonWorker.simple_from_json<Objects.Distrobox.UpdateResponse> (
                 result,
                 { "data" }
             );

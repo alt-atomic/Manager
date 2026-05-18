@@ -17,41 +17,97 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+using ACC.Objects;
+
 [DBus (name = "org.altlinux.APM.system")]
 public interface System : Object {
+
+    public abstract async string application_categories (
+        string transaction,
+        Cancellable? cancellable
+    ) throws GLib.DBusError, GLib.IOError;
+
+    public abstract async string application_get_filter_fields (
+        string pkgname,
+        string transaction,
+        Cancellable? cancellable
+    ) throws GLib.DBusError, GLib.IOError;
+
+    public abstract async string application_info (
+        string transaction,
+        Cancellable? cancellable
+    ) throws GLib.DBusError, GLib.IOError;
+
+    public abstract async string application_list (
+        string sort,
+        string order,
+        int limit,
+        int offset,
+        string filters_j_s_o_n,
+        string transaction,
+        Cancellable? cancellable
+    ) throws GLib.DBusError, GLib.IOError;
+
+    public abstract async string application_update (
+        string transaction,
+        bool background,
+        Cancellable? cancellable
+    ) throws GLib.DBusError, GLib.IOError;
 
     public abstract async string check_install (
         string[] packages,
         string transaction,
+        bool background,
         Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
     public abstract async string check_remove (
         string[] packages,
+        bool depends,
         string transaction,
-        Cancellable? cancellable
-    ) throws GLib.DBusError, GLib.IOError;
-
-    public abstract async string check_update_kernel (
-        string transaction,
+        bool background,
         Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
     public abstract async string check_upgrade (
+        string transaction,
+        bool background,
+        Cancellable? cancellable
+    ) throws GLib.DBusError, GLib.IOError;
+
+    public abstract async string get_apt_config_overrides (
+        Cancellable? cancellable
+    ) throws GLib.DBusError, GLib.IOError;
+
+    public abstract async string get_filter_fields (
         string transaction,
         Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
     public abstract async string image_apply (
         string transaction,
+        bool background,
+        bool pull_image,
+        bool no_cache,
+        string config_path,
+        string workdir,
+        Cancellable? cancellable
+    ) throws GLib.DBusError, GLib.IOError;
+
+    public abstract async string image_get_config (
         Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
     public abstract async string image_history (
         string transaction,
         string image_name,
-        int64 limit,
-        int64 offset,
+        int limit,
+        int offset,
+        Cancellable? cancellable
+    ) throws GLib.DBusError, GLib.IOError;
+
+    public abstract async string image_save_config (
+        string config,
         Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
@@ -62,6 +118,8 @@ public interface System : Object {
 
     public abstract async string image_update (
         string transaction,
+        bool background,
+        bool no_cache,
         Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
@@ -73,26 +131,65 @@ public interface System : Object {
 
     public abstract async string install (
         string[] packages,
-        bool apply_atomic,
+        bool download_only,
         string transaction,
+        bool background,
         Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
     public abstract async string list (
-        string params_j_s_o_n,
+        string sort,
+        string order,
+        int limit,
+        int offset,
+        string filters_j_s_o_n,
+        bool force_update,
+        string transaction,
+        Cancellable? cancellable
+    ) throws GLib.DBusError, GLib.IOError;
+
+    public abstract async string multi_info (
+        string[] packages,
         string transaction,
         Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
     public abstract async string remove (
         string[] packages,
-        bool apply_atomic,
+        bool purge,
+        bool depends,
         string transaction,
+        bool background,
+        Cancellable? cancellable
+    ) throws GLib.DBusError, GLib.IOError;
+
+    public abstract async string search (
+        string package_name,
+        string transaction,
+        bool installed,
+        Cancellable? cancellable
+    ) throws GLib.DBusError, GLib.IOError;
+
+    public abstract async string sections (
+        string transaction,
+        Cancellable? cancellable
+    ) throws GLib.DBusError, GLib.IOError;
+
+    public abstract async string set_apt_config_overrides (
+        HashTable<string, string> options,
         Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 
     public abstract async string update (
         string transaction,
+        bool background,
+        Cancellable? cancellable
+    ) throws GLib.DBusError, GLib.IOError;
+
+    public abstract async string upgrade (
+        bool download_only,
+        string transaction,
+        bool background,
         Cancellable? cancellable
     ) throws GLib.DBusError, GLib.IOError;
 }
@@ -145,7 +242,121 @@ public sealed class ACC.SystemModule : Object {
         return instance;
     }
 
-    public async Sys.OperationInfo check_install (
+    public async ApplicationCategoriesResponse application_categories (
+        string transaction = Uuid.string_random (),
+        Cancellable? cancellable = null
+    ) throws AError {
+        try {
+            string result = yield talker.application_categories (
+                transaction,
+                cancellable
+            );
+
+            return Serialize.JsonWorker.simple_from_json<ApplicationCategoriesResponse> (
+                result,
+                { "data" }
+            );
+
+        } catch (Error e) {
+            throw AError.from_error (e);
+        }
+    }
+
+    public async ApplicationFilterFieldsAppStreamResponse application_get_filter_fields (
+        string pkgname,
+        string transaction = Uuid.string_random (),
+        Cancellable? cancellable = null
+    ) throws AError {
+        try {
+            string result = yield talker.application_get_filter_fields (
+                pkgname,
+                transaction,
+                cancellable
+            );
+
+            return Serialize.JsonWorker.simple_from_json<ApplicationFilterFieldsAppStreamResponse> (
+                result,
+                { "data" }
+            );
+
+        } catch (Error e) {
+            throw AError.from_error (e);
+        }
+    }
+
+    public async ApplicationInfoResponse application_info (
+        string pkgname,
+        string transaction = Uuid.string_random (),
+        Cancellable? cancellable = null
+    ) throws AError {
+        try {
+            string result = yield talker.application_info (
+                transaction,
+                cancellable
+            );
+
+            return Serialize.JsonWorker.simple_from_json<ApplicationInfoResponse> (
+                result,
+                { "data" }
+            );
+
+        } catch (Error e) {
+            throw AError.from_error (e);
+        }
+    }
+
+    public async ApplicationListResponse application_list (
+        string sort,
+        string order,
+        int limit,
+        int offset,
+        string filters_j_s_o_n,
+        string transaction = Uuid.string_random (),
+        Cancellable? cancellable = null
+    ) throws AError {
+        try {
+            string result = yield talker.application_list (
+                sort,
+                order,
+                limit,
+                offset,
+                filters_j_s_o_n,
+                transaction,
+                cancellable
+            );
+
+            return Serialize.JsonWorker.simple_from_json<ApplicationListResponse> (
+                result,
+                { "data" }
+            );
+
+        } catch (Error e) {
+            throw AError.from_error (e);
+        }
+    }
+
+    public async ApplicationUpdateResponse application_update (
+        string transaction = Uuid.string_random (),
+        Cancellable? cancellable = null
+    ) throws AError {
+        try {
+            string result = yield talker.application_update (
+                transaction,
+                false,
+                cancellable
+            );
+
+            return Serialize.JsonWorker.simple_from_json<ApplicationUpdateResponse> (
+                result,
+                { "data" }
+            );
+
+        } catch (Error e) {
+            throw AError.from_error (e);
+        }
+    }
+
+    public async CheckResponse check_install (
         string[] packages,
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
@@ -154,12 +365,13 @@ public sealed class ACC.SystemModule : Object {
             string result = yield talker.check_install (
                 packages,
                 transaction,
+                false,
                 cancellable
             );
 
-            return Serialize.JsonWorker.simple_from_json<Sys.OperationInfo> (
+            return Serialize.JsonWorker.simple_from_json<CheckResponse> (
                 result,
-                { "data", "info" }
+                { "data" }
             );
 
         } catch (Error e) {
@@ -167,21 +379,24 @@ public sealed class ACC.SystemModule : Object {
         }
     }
 
-    public async Sys.OperationInfo check_remove (
+    public async CheckResponse check_remove (
         string[] packages,
+        bool depends,
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
     ) throws AError {
         try {
             string result = yield talker.check_remove (
                 packages,
+                depends,
                 transaction,
+                false,
                 cancellable
             );
 
-            return Serialize.JsonWorker.simple_from_json<Sys.OperationInfo> (
+            return Serialize.JsonWorker.simple_from_json<CheckResponse> (
                 result,
-                { "data", "info" }
+                { "data" }
             );
 
         } catch (Error e) {
@@ -189,40 +404,20 @@ public sealed class ACC.SystemModule : Object {
         }
     }
 
-    //  public async void check_update_kernel (
-    //      string transaction = Uuid.string_random (),
-    //      Cancellable? cancellable = null
-    //  ) throws AError {
-    //      try {
-    //          string result = yield talker.check_update_kernel (
-    //              transaction,
-    //              cancellable
-    //          );
-
-    //          assert_not_reached ();
-
-    //      } catch (IOError e) {
-    //          error (e.message);
-    //      } catch (DBusError e) {
-    //          throw AError.from_dbus_error (e);
-    //      } catch (Serialize.JsonWorkerror e) {
-    //          throw AError.get_base_internal ();
-    //      }
-    //  }
-
-    public async Sys.OperationInfo check_upgrade (
+    public async CheckResponse check_upgrade (
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
     ) throws AError {
         try {
             string result = yield talker.check_upgrade (
                 transaction,
+                false,
                 cancellable
             );
 
-            return Serialize.JsonWorker.simple_from_json<Sys.OperationInfo> (
+            return Serialize.JsonWorker.simple_from_json<CheckResponse> (
                 result,
-                { "data", "info" }
+                { "data" }
             );
 
         } catch (Error e) {
@@ -230,19 +425,66 @@ public sealed class ACC.SystemModule : Object {
         }
     }
 
-    public async Sys.BootedImage image_apply (
+    public async AptConfigResponse get_apt_config_overrides (
+        Cancellable? cancellable = null
+    ) throws AError {
+        try {
+            string result = yield talker.get_apt_config_overrides (
+                cancellable
+            );
+
+            return Serialize.JsonWorker.simple_from_json<AptConfigResponse> (
+                result,
+                { "data" }
+            );
+
+        } catch (Error e) {
+            throw AError.from_error (e);
+        }
+    }
+
+    public async Serialize.Array<FilterFieldsInfo> get_filter_fields (
+        string transaction = Uuid.string_random (),
+        Cancellable? cancellable = null
+    ) throws AError {
+        try {
+            string result = yield talker.get_filter_fields (
+                transaction,
+                cancellable
+            );
+
+            return Serialize.JsonWorker.simple_array_from_json<FilterFieldsInfo> (
+                result,
+                { "data" }
+            );
+
+        } catch (Error e) {
+            throw AError.from_error (e);
+        }
+    }
+
+    public async ImageApplyResponse image_apply (
+        bool pull_image,
+        bool no_cache,
+        string config_path,
+        string workdir,
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
     ) throws AError {
         try {
             string result = yield talker.image_apply (
                 transaction,
+                false,
+                pull_image,
+                no_cache,
+                config_path,
+                workdir,
                 cancellable
             );
 
-            return Serialize.JsonWorker.simple_from_json<Sys.BootedImage> (
+            return Serialize.JsonWorker.simple_from_json<ImageApplyResponse> (
                 result,
-                { "data", "bootedImage" }
+                { "data" }
             );
 
         } catch (Error e) {
@@ -250,10 +492,28 @@ public sealed class ACC.SystemModule : Object {
         }
     }
 
-    public async Serialize.Array<Sys.HistoryRecord> image_history (
-        string image_name = "",
-        int64 limit = 50,
-        int64 offset = 0,
+    public async Objects.Config image_get_config (
+        Cancellable? cancellable = null
+    ) throws AError {
+        try {
+            string result = yield talker.image_get_config (
+                cancellable
+            );
+
+            return Serialize.JsonWorker.simple_from_json<Objects.Config> (
+                result,
+                { "data", "config" }
+            );
+
+        } catch (Error e) {
+            throw AError.from_error (e);
+        }
+    }
+
+    public async Serialize.Array<ImageHistoryRecord> image_history (
+        string image_name,
+        int limit,
+        int offset,
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
     ) throws AError {
@@ -266,7 +526,7 @@ public sealed class ACC.SystemModule : Object {
                 cancellable
             );
 
-            return Serialize.JsonWorker.simple_array_from_json<Sys.HistoryRecord> (
+            return Serialize.JsonWorker.simple_array_from_json<ImageHistoryRecord> (
                 result,
                 { "data", "history" }
             );
@@ -276,7 +536,27 @@ public sealed class ACC.SystemModule : Object {
         }
     }
 
-    public async Sys.BootedImage image_status (
+    public async Objects.Config image_save_config (
+        Objects.Config config,
+        Cancellable? cancellable = null
+    ) throws AError {
+        try {
+            string result = yield talker.image_save_config (
+                config.to_json (),
+                cancellable
+            );
+
+            return Serialize.JsonWorker.simple_from_json<Objects.Config> (
+                result,
+                { "data", "config" }
+            );
+
+        } catch (Error e) {
+            throw AError.from_error (e);
+        }
+    }
+
+    public async BootImageInfo image_status (
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
     ) throws AError {
@@ -286,7 +566,7 @@ public sealed class ACC.SystemModule : Object {
                 cancellable
             );
 
-            return Serialize.JsonWorker.simple_from_json<Sys.BootedImage> (
+            return Serialize.JsonWorker.simple_from_json<BootImageInfo> (
                 result,
                 { "data", "bootedImage" }
             );
@@ -296,17 +576,20 @@ public sealed class ACC.SystemModule : Object {
         }
     }
 
-    public async Sys.BootedImage image_update (
+    public async BootImageInfo image_update (
+        bool no_cache,
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
     ) throws AError {
         try {
             string result = yield talker.image_update (
                 transaction,
+                false,
+                no_cache,
                 cancellable
             );
 
-            return Serialize.JsonWorker.simple_from_json<Sys.BootedImage> (
+            return Serialize.JsonWorker.simple_from_json<BootImageInfo> (
                 result,
                 { "data", "bootedImage" }
             );
@@ -316,7 +599,7 @@ public sealed class ACC.SystemModule : Object {
         }
     }
 
-    public async Sys.PackageInfo info (
+    public async PackageInfo info (
         string package_name,
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
@@ -328,7 +611,7 @@ public sealed class ACC.SystemModule : Object {
                 cancellable
             );
 
-            return Serialize.JsonWorker.simple_from_json<Sys.PackageInfo> (
+            return Serialize.JsonWorker.simple_from_json<PackageInfo> (
                 result,
                 { "data", "packageInfo" }
             );
@@ -338,21 +621,22 @@ public sealed class ACC.SystemModule : Object {
         }
     }
 
-    public async Sys.OperationInfo install (
+    public async OperationInfo install (
         string[] packages,
-        bool apply_atomic,
+        bool download_only,
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
     ) throws AError {
         try {
             string result = yield talker.install (
                 packages,
-                apply_atomic,
+                download_only,
                 transaction,
+                false,
                 cancellable
             );
 
-            return Serialize.JsonWorker.simple_from_json<Sys.OperationInfo> (
+            return Serialize.JsonWorker.simple_from_json<OperationInfo> (
                 result,
                 { "data", "info" }
             );
@@ -362,31 +646,29 @@ public sealed class ACC.SystemModule : Object {
         }
     }
 
-    public async Sys.PackagesInfo list (
-        string sort = "",
-        ListParamsOrder order = ListParamsOrder.ASC,
-        int limit = 10,
-        int offset = 10,
-        string[] filter_field = {},
-        bool force_update = false,
+    public async ListResponse list (
+        string sort,
+        string order,
+        int limit,
+        int offset,
+        string filters_j_s_o_n,
+        bool force_update,
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
     ) throws AError {
         try {
             string result = yield talker.list (
-                new Sys.ListParams () {
-                    sort = sort,
-                    order = order,
-                    limit = limit,
-                    offset = offset,
-                    filters = new Serialize.Array<string>.wrap (filter_field),
-                    force_update = force_update
-                }.to_json (),
+                sort,
+                order,
+                limit,
+                offset,
+                filters_j_s_o_n,
+                force_update,
                 transaction,
                 cancellable
             );
 
-            return Serialize.JsonWorker.simple_from_json<Sys.PackagesInfo> (
+            return Serialize.JsonWorker.simple_from_json<ListResponse> (
                 result,
                 { "data" }
             );
@@ -396,21 +678,46 @@ public sealed class ACC.SystemModule : Object {
         }
     }
 
-    public async Sys.OperationInfo remove (
+    public async MultiInfoResponse multi_info (
         string[] packages,
-        bool apply_atomic,
+        string transaction = Uuid.string_random (),
+        Cancellable? cancellable = null
+    ) throws AError {
+        try {
+            string result = yield talker.multi_info (
+                packages,
+                transaction,
+                cancellable
+            );
+
+            return Serialize.JsonWorker.simple_from_json<MultiInfoResponse> (
+                result,
+                { "data" }
+            );
+
+        } catch (Error e) {
+            throw AError.from_error (e);
+        }
+    }
+
+    public async OperationInfo remove (
+        string[] packages,
+        bool purge,
+        bool depends,
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
     ) throws AError {
         try {
             string result = yield talker.remove (
                 packages,
-                apply_atomic,
+                purge,
+                depends,
                 transaction,
+                false,
                 cancellable
             );
 
-            return Serialize.JsonWorker.simple_from_json<Sys.OperationInfo> (
+            return Serialize.JsonWorker.simple_from_json<OperationInfo> (
                 result,
                 { "data", "info" }
             );
@@ -420,17 +727,105 @@ public sealed class ACC.SystemModule : Object {
         }
     }
 
-    public async Sys.PackagesInfo update (
+    public async SearchResponse search (
+        string package_name,
+        bool installed,
+        string transaction = Uuid.string_random (),
+        Cancellable? cancellable = null
+    ) throws AError {
+        try {
+            string result = yield talker.search (
+                package_name,
+                transaction,
+                installed,
+                cancellable
+            );
+
+            return Serialize.JsonWorker.simple_from_json<SearchResponse> (
+                result,
+                { "data" }
+            );
+
+        } catch (Error e) {
+            throw AError.from_error (e);
+        }
+    }
+
+    public async SectionsResponse sections (
+        string transaction = Uuid.string_random (),
+        Cancellable? cancellable = null
+    ) throws AError {
+        try {
+            string result = yield talker.sections (
+                transaction,
+                cancellable
+            );
+
+            return Serialize.JsonWorker.simple_from_json<SectionsResponse> (
+                result,
+                { "data" }
+            );
+
+        } catch (Error e) {
+            throw AError.from_error (e);
+        }
+    }
+
+    public async AptConfigResponse set_apt_config_overrides (
+        HashTable<string, string> options,
+        Cancellable? cancellable = null
+    ) throws AError {
+        try {
+            string result = yield talker.set_apt_config_overrides (
+                options,
+                cancellable
+            );
+
+            return Serialize.JsonWorker.simple_from_json<AptConfigResponse> (
+                result,
+                { "data" }
+            );
+
+        } catch (Error e) {
+            throw AError.from_error (e);
+        }
+    }
+
+    public async UpdateResponse update (
         string transaction = Uuid.string_random (),
         Cancellable? cancellable = null
     ) throws AError {
         try {
             string result = yield talker.update (
                 transaction,
+                false,
                 cancellable
             );
 
-            return Serialize.JsonWorker.simple_from_json<Sys.PackagesInfo> (
+            return Serialize.JsonWorker.simple_from_json<UpdateResponse> (
+                result,
+                { "data" }
+            );
+
+        } catch (Error e) {
+            throw AError.from_error (e);
+        }
+    }
+
+    public async UpgradeResponse upgrade (
+        bool download_only,
+        string transaction = Uuid.string_random (),
+        Cancellable? cancellable = null
+    ) throws AError {
+        try {
+            string result = yield talker.upgrade (
+                download_only,
+                transaction,
+                false,
+                cancellable
+            );
+
+            return Serialize.JsonWorker.simple_from_json<UpgradeResponse> (
                 result,
                 { "data" }
             );

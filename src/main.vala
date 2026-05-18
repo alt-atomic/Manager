@@ -22,7 +22,7 @@ int main (string[] args) {
     Intl.textdomain (Config.GETTEXT_PACKAGE);
 
     var settings = Serialize.get_settings ();
-    settings.names_case = CAMEL;
+    //  settings.names_case = CAMEL;
     Serialize.set_settings (settings);
 
     var app = new ACC.Application ();

@@ -17,16 +17,6 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-public enum ACC.EventState {
-    BEFORE,
-    AFTER;
-}
-
-public enum ACC.EventType {
-    NOTIFICATION,
-    PROGRESS;
-}
-
 public sealed class ACC.Event : Serialize.DataObject {
 
     public string name { get; set; }

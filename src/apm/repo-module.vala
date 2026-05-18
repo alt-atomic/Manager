@@ -17,6 +17,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+using ACC.Objects;
+
 [DBus (name = "org.altlinux.APM.repo")]
 public interface Repo : Object {
 

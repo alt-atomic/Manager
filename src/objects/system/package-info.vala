@@ -17,14 +17,11 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-public enum PackageType {
-    SYSTEM,
-    STPLR
-}
-
-public sealed class ACC.Sys.PackageInfo : Serialize.DataObject {
+public sealed class ACC.Objects.PackageInfo : Serialize.DataObject {
 
     public string name { get; set; }
+
+    public string architecture { get; set; }
 
     public string section { get; set; }
 
@@ -34,21 +31,31 @@ public sealed class ACC.Sys.PackageInfo : Serialize.DataObject {
 
     public string version { get; set; }
 
+    public string version_raw { get; set; }
+
     public string version_installed { get; set; }
 
-    public Serialize.Array<string> depends { get; set; default = new Serialize.Array<string> (); }
+    public string[] depends { get; set; }
 
-    public Serialize.Array<string> provides { get; set; default = new Serialize.Array<string> (); }
+    public string[] aliases { get; set; }
+
+    public string[] provides { get; set; }
 
     public int64 size { get; set; }
 
     public string filename { get; set; }
 
+    public string summary { get; set; }
+
     public string description { get; set; }
+
+    public ApplicationInfo appstream { get; set; }
 
     public string last_changelog { get; set; }
 
     public bool installed { get; set; }
 
     public int type_package { get; set; }
+
+    public string[] files { get; set; }
 }

@@ -39,16 +39,20 @@ public sealed class ACC.InstalledPageContent: Adw.Bin {
         }
         working = true;
 
-        var list = yield SystemModule.get_inst ().list ("", ASC, 10, last_offset);
+        try {
+            var list = yield SystemModule.get_inst ().list ("", "asc", 10, last_offset, "", false);
 
-        foreach (var item in list.packages) {
-            list_box.append (new Adw.ActionRow () {
-                title = item.name,
-                subtitle = item.description
-            });
+            foreach (var item in list.packages) {
+                list_box.append (new Adw.ActionRow () {
+                    title = item.name,
+                    subtitle = item.description
+                });
+            }
+            last_offset += 10;
+            working = false;
+        } catch (Error e) {
+            warning (e.message);
         }
-        last_offset += 10;
-        working = false;
     }
 
     [GtkCallback]

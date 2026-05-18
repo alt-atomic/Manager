@@ -17,7 +17,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-public sealed class ACC.RepoListResponse : Serialize.DataObject {
+public sealed class ACC.Objects.RepoListResponse : Serialize.DataObject {
 
     public string message { get; set; }
 
