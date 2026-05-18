@@ -100,6 +100,7 @@ vala_sources = files(
   'objects/system/update-response.vala',
   'objects/system/upgrade-response.vala',
 
+  'objects/constants.vala',
   'objects/enums.vala',
   'objects/event.vala',
   'objects/filter-fields-info.vala',
