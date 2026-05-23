@@ -27,7 +27,7 @@ public sealed class ACC.Objects.ApplicationReleaseInfo : Serialize.DataObject {
 
     public int64 timestamp { get; set; }
 
-    [Description (name = "type")]
+    [Description (nick = "type")]
     public string type_ { get; set; }
 
     public string urgency { get; set; }

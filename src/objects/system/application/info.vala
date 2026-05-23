@@ -19,7 +19,7 @@
 
 public sealed class ACC.Objects.ApplicationInfo : Serialize.DataObject {
 
-    [Description (name = "type")]
+    [Description (nick = "type")]
     public string type_ { get; set; }
 
     public string id { get; set; }

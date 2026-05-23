@@ -19,7 +19,7 @@
 
 public sealed class ACC.Objects.ApplicationReleaseIssueInfo : Serialize.DataObject {
 
-    [Description (name = "type")]
+    [Description (nick = "type")]
     public string type_ { get; set; }
 
     public string url { get; set; }

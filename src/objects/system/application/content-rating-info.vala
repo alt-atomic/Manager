@@ -19,7 +19,7 @@
 
 public sealed class ACC.Objects.ApplicationContentRatingInfo : Serialize.DataObject {
 
-    [Description (name = "type")]
+    [Description (nick = "type")]
     public string type_ { get; set; }
 
     public Serialize.Dict<string> attributes { get; set; default = new Serialize.Dict<string> (); }

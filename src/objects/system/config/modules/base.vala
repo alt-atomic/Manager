@@ -21,7 +21,7 @@ public class ACC.Objects.ConfigModule : Serialize.DataObject, Serialize.TypeFami
 
     public string name { get; set; }
 
-    [Description (name = "type")]
+    [Description (nick = "type")]
     public string type_ { get; set; }
 
     public string id { get; set; }

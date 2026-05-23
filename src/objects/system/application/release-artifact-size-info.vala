@@ -19,7 +19,7 @@
 
 public sealed class ACC.Objects.ApplicationReleaseArtifactSizeInfo : Serialize.DataObject {
 
-    [Description (name = "type")]
+    [Description (nick = "type")]
     public string type_ { get; set; }
 
     public int64 value { get; set; }
