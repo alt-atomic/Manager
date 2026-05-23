@@ -19,10 +19,10 @@
 namespace ACC {
     public Adw.AboutDialog build_about () {
         return new Adw.AboutDialog.from_appdata (
-            "/org/altlinux/Software/org.altlinux.Software.metainfo.xml",
+            "/org/altlinux/Software/%s.metainfo.xml".printf (Config.APP_ID_RELEVANT),
             Config.VERSION
         ) {
-            application_icon = Config.APP_ID,
+            application_icon = Config.APP_ID_RELEVANT,
             artists = {
 
             },
