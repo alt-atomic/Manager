@@ -19,8 +19,8 @@
 [GtkTemplate (ui = "/org/altlinux/Software/ui/window.ui")]
 public sealed class ACC.Window: Adw.ApplicationWindow {
 
-    //  [GtkChild]
-    //  unowned Adw.NavigationView nav_view;
+    [GtkChild]
+    unowned Adw.NavigationView nav_view;
 
     const ActionEntry[] ACTION_ENTRIES = {
         { "preferences", on_preferences_action },
@@ -34,7 +34,16 @@ public sealed class ACC.Window: Adw.ApplicationWindow {
     construct {
         var settings = new Settings (Config.APP_ID);
 
-        add_action_entries (ACTION_ENTRIES, this);
+        var entries = ACTION_ENTRIES;
+
+        if (is_atomic ()) {
+            entries += ActionEntry () {
+                name = "system-settings",
+                activate = on_system_settings
+            };
+        }
+
+        add_action_entries (entries, this);
 
         settings.bind ("window-width", this, "default-width", SettingsBindFlags.DEFAULT);
         settings.bind ("window-height", this, "default-height", SettingsBindFlags.DEFAULT);
@@ -47,5 +56,9 @@ public sealed class ACC.Window: Adw.ApplicationWindow {
 
     void on_about_action () {
         build_about ().present (this);
+    }
+
+    void on_system_settings () {
+        nav_view.push (new Adw.NavigationPage (new SystemPageContent (), _("System settings")));
     }
 }

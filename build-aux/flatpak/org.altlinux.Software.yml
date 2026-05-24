@@ -20,6 +20,17 @@ modules:
         url: https://altlinux.space/rirusha/libapi-base.git
         branch: main
 
+  - name: libcassette
+    buildsystem: meson
+    builddir: true
+    config-opts:
+      - -Dlib_only=true
+      - -Dinstall_lib_s=true
+    sources:
+      - type: git
+        url: https://altlinux.space/rirusha/Cassette.git
+        branch: main
+
   - name: atomic-control-center
     builddir: true
     buildsystem: meson

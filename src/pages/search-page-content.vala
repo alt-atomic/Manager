@@ -18,7 +18,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-[GtkTemplate (ui = "/org/altlinux/Software/ui/updates-page-content.ui")]
-public sealed class ACC.UpdatePageContent: Adw.Bin {
+[GtkTemplate (ui = "/org/altlinux/Software/ui/search-page-content.ui")]
+public sealed class ACC.SearchPageContent: Adw.Bin {
 
 }

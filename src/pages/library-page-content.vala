@@ -18,8 +18,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-[GtkTemplate (ui = "/org/altlinux/Software/ui/installed-page-content.ui")]
-public sealed class ACC.InstalledPageContent: Adw.Bin {
+[GtkTemplate (ui = "/org/altlinux/Software/ui/library-page-content.ui")]
+public sealed class ACC.LibraryPageContent: Adw.Bin {
 
     [GtkChild]
     unowned Gtk.ScrolledWindow scrolled_window;

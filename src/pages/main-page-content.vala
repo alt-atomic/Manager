@@ -25,8 +25,5 @@ public sealed class ACC.MainPageContent: Adw.BreakpointBin {
     unowned Adw.ViewStack stack;
 
     construct {
-        if (is_atomic ()) {
-            stack.add_titled_with_icon (new SystemPageContent (), "system", _("System"), "acc-system-symbolic");
-        }
     }
 }

@@ -15,11 +15,13 @@ nightly = false
 gee_dep = dependency('gee-0.8')
 libadwaita_dep = dependency('libadwaita-1', version: '>= 1.6')
 libapi_base_dep = dependency('libserialize-7', version: '>= 7.5', fallback : ['libapi-base', 'serialize_lib_dep'])
+libcassette_dep = dependency('libcassette-0')
 
 dependencies = [
   gee_dep,
   libadwaita_dep,
   libapi_base_dep,
+  libcassette_dep,
 ]
 
 add_project_arguments(

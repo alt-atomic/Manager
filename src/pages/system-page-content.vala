@@ -19,6 +19,6 @@
  */
 
 [GtkTemplate (ui = "/org/altlinux/Software/ui/system-page-content.ui")]
-public sealed class ACC.SystemPageContent: Adw.Bin {
+public sealed class ACC.SystemPageContent: Adw.BreakpointBin {
 
 }

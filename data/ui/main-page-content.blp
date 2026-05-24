@@ -1,5 +1,6 @@
 using Gtk 4.0;
 using Adw 1;
+using Cassette 0;
 
 template $ACCMainPageContent: Adw.BreakpointBin {
   width-request: 360;
@@ -30,13 +31,33 @@ template $ACCMainPageContent: Adw.BreakpointBin {
       };
 
       [end]
-      MenuButton {
+      Cassette.MenuButton {
         styles [
           "flat",
         ]
 
         icon-name: "open-menu-symbolic";
-        menu-model: primary_menu;
+        sheet-title: _("Primary menu");
+        menu: Cassette.Menu {
+          Cassette.MenuSection {
+            Cassette.MenuItem {
+              label: _("Preferences");
+              action-name: "win.preferences";
+            }
+
+            Cassette.MenuItem {
+              label: _("System settings");
+              action-name: "win.system-settings";
+            }
+          }
+          
+          Cassette.MenuSection {
+            Cassette.MenuItem {
+              label: _("About application");
+              action-name: "win.about";
+            }
+          }
+        };
       }
     }
 
@@ -50,19 +71,19 @@ template $ACCMainPageContent: Adw.BreakpointBin {
       }
 
       Adw.ViewStackPage {
-        title: _("Installed");
-        name: "installed";
-        icon-name: "acc-installed-symbolic";
+        title: _("Library");
+        name: "library";
+        icon-name: "acc-library-symbolic";
 
-        child: $ACCInstalledPageContent {};
+        child: $ACCLibraryPageContent {};
       }
 
       Adw.ViewStackPage {
-        title: _("Updates");
-        name: "updates";
-        icon-name: "acc-updates-symbolic";
+        title: _("Search");
+        name: "search";
+        icon-name: "acc-search-symbolic";
 
-        child: $ACCInstalledPageContent {};
+        child: $ACCSearchPageContent {};
       }
     };
 
@@ -71,15 +92,5 @@ template $ACCMainPageContent: Adw.BreakpointBin {
       stack: stack;
       reveal: false;
     }
-  }
-}
-
-menu primary_menu {
-  section {
-    item (_("Preferences"), "win.preferences")
-  }
-
-  section {
-    item (_("About application"), "win.about")
   }
 }

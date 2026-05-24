@@ -31,8 +31,9 @@ public sealed class ACC.Application: Adw.Application {
 
     static construct {
         typeof (ExplorePageContent).ensure ();
-        typeof (InstalledPageContent).ensure ();
+        typeof (LibraryPageContent).ensure ();
         typeof (SystemPageContent).ensure ();
+        typeof (SearchPageContent).ensure ();
         typeof (MainPageContent).ensure ();
     }
 
@@ -43,6 +44,12 @@ public sealed class ACC.Application: Adw.Application {
         EventHandler.ensure ();
         DistroboxModule.ensure ();
         SystemModule.ensure ();
+    }
+
+    public override void startup () {
+        base.startup ();
+
+        Cassette.init ();
     }
 
     public override void activate () {
