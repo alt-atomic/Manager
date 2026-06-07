@@ -28,7 +28,7 @@ public sealed class ACC.Objects.ImageInspect : Serialize.DataObject {
     public string created { get; set; }
 
     public string docker_version { get; set; }
-    
+
     public Serialize.Dict<string> labels { get; set; default = new Serialize.Dict<string> (); }
 
     public string architecture { get; set; }
