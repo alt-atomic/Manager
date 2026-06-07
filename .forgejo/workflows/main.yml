@@ -57,10 +57,6 @@ jobs:
           apt-get update
           apt-get install -y apt-repo
 
-      - name: Add tape repo
-        run: |
-          apt-repo add ${{ env.TAPE_REPO }}
-
       - name: Add case repo
         run: |
           apt-repo add ${{ env.CASE_REPO }}
@@ -167,5 +163,5 @@ jobs:
         if: github.event_name != 'pull_request' && github.ref_name == 'main'
         with:
           directory: ~/.cache/hasherc/alt-software/out/RPMS
-          token: ${{ secrets.TOKEN }}
+          token: ${{ secrets.PACKAGES_TOKEN }}
           group: alt-software-nightly
