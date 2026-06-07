@@ -1,3 +1,5 @@
+meson
+vala
 'pkgconfig(libcase-0)'
 'typelib(Case)=0'
 'pkgconfig(gee-0.8)'
@@ -5,6 +7,7 @@
 'pkgconfig(libadwaita-1)'
 'pkgconfig(libserialize-7)'
 'pkgconfig(polkit-gobject-1)'
+'pkgconfig(systemd)'
 /usr/bin/blueprint-compiler
 /usr/bin/gcc
 /usr/bin/meson
