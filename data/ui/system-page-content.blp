@@ -17,6 +17,7 @@ template $ACCSystemPageContent: Adw.BreakpointBin {
 
         icon-name: "open-menu-symbolic";
         sheet-title: _("Primary menu");
+
         menu: Case.Menu {
           Case.MenuSection {
             Case.MenuItem {
@@ -24,7 +25,7 @@ template $ACCSystemPageContent: Adw.BreakpointBin {
               action-name: "win.preferences";
             }
           }
-          
+
           Case.MenuSection {
             Case.MenuItem {
               label: _("About application");
@@ -60,9 +61,8 @@ template $ACCSystemPageContent: Adw.BreakpointBin {
               activatable: false;
 
               Adw.Bin {
-                Label image_name_label {
-                }
-              } 
+                Label image_name_label {}
+              }
             }
           }
         }
