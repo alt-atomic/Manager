@@ -3,6 +3,8 @@
 
 %define _unpackaged_files_terminate_build 1
 
+%define _libexecdir %_prefix/libexec
+
 %define app_id org.altlinux.Software.Devel
 
 Name: alt-software
@@ -18,6 +20,7 @@ VCS: https://altlinux.space/alt-gnome/alt-software.git
 Source: %name-%version.tar
 
 BuildRequires(pre): rpm-macros-meson
+BuildRequires(pre): rpm-macros-systemd
 BuildRequires: rpm-build-vala
 BuildRequires: rpm-build-gir
 BuildRequires: meson
@@ -61,3 +64,8 @@ BuildRequires: /usr/bin/glib-compile-schemas
 %_desktopdir/%app_id.desktop
 %_iconsdir/hicolor/*/apps/%app_id.svg
 %_iconsdir/hicolor/*/apps/%app_id-symbolic.svg
+%_sysconfdir/dbus-1/system.d/org.altlinux.Software.conf
+%_libexecdir/org.altlinux.Software
+%_unitdir/alt-software.service
+%_datadir/dbus-1/system-services/org.altlinux.Software.service
+%_datadir/polkit-1/actions/org.altlinux.Software.policy
