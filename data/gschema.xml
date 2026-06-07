@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schemalist gettext-domain="atomic-control-center">
+<schemalist gettext-domain="alt-software">
 
 	<schema id="org.altlinux.Software" path="/org/altlinux/Software/">
 

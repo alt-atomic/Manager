@@ -1,5 +1,5 @@
 # If you want to suggest changes, please send PR on
-# https://altlinux.space/alt-gnome/atomic-control-center to altlinux branch 
+# https://altlinux.space/alt-gnome/alt-software to altlinux branch 
 
 %define _unpackaged_files_terminate_build 1
 
@@ -13,7 +13,7 @@ Summary: Control Center for ALT Atomic system
 License: GPL-3.0-or-later
 Group: Sound
 URL: https://atomic.alt-gnome.ru/
-VCS: https://altlinux.space/alt-gnome/atomic-control-center.git
+VCS: https://altlinux.space/alt-gnome/alt-software.git
 
 Source: %name-%version.tar
 

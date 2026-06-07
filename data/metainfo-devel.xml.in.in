@@ -11,7 +11,7 @@
       Control center for ALT Atomic
     </p>
   </description>
-  <translation type="gettext">atomic-control-center</translation>
+  <translation type="gettext">alt-software</translation>
   <custom>
     <value key="Purism::form_factor">mobile</value>
   </custom>
@@ -55,6 +55,6 @@
     <category>GTK</category>
   </categories>
   <provides>
-    <binary>atomic-control-center</binary>
+    <binary>alt-software</binary>
   </provides>
 </component>

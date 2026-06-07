@@ -79,7 +79,7 @@ app_name = 'Atomic Control Center' + name_suffix
 app_name_classic = 'Atomic Control Center' + name_suffix
 
 homepage = 'https://atomic.alt-gnome.ru/'
-bugtracker = 'https://altlinux.space/alt-atomic/atomic-control-center/issues'
+bugtracker = 'https://altlinux.space/alt-atomic/alt-software/issues'
 help = 'https://alt-gnome.altlinux.team/matrix-to/#/#alt-atomic:alt-gnome.ru'
 
 conf = configuration_data()

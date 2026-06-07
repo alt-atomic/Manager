@@ -2,7 +2,7 @@ id: org.altlinux.Software.Devel
 runtime: org.gnome.Platform
 runtime-version: master
 sdk: org.gnome.Sdk
-command: atomic-control-center
+command: alt-software
 finish-args:
   - --share=network
   - --share=ipc
@@ -28,7 +28,7 @@ modules:
         url: https://altlinux.space/rirusha/libcase_dep.git
         branch: main
 
-  - name: atomic-control-center
+  - name: alt-software
     builddir: true
     buildsystem: meson
     config-opts:
