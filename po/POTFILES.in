@@ -1,0 +1,10 @@
+data/ui/library-page-content.blp
+data/ui/main-page-content.blp
+data/ui/menu-button.blp
+data/ui/preferences-dialog.blp
+data/ui/system-page-content.blp
+data/ui/window.blp
+src/about.vala
+src/errors.vala
+src/objects/constants.vala
+src/window.vala
