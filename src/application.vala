@@ -49,7 +49,7 @@ public sealed class ACC.Application: Adw.Application {
     public override void startup () {
         base.startup ();
 
-        Cassette.init ();
+        Case.init ();
     }
 
     public override void activate () {

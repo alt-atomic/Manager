@@ -9,6 +9,8 @@ vala_sources = files(
   'apm/repo-module.vala',
   'apm/system-module.vala',
 
+  'dbus/service.vala',
+
   'pages/explore-page-content.vala',
   'pages/library-page-content.vala',
   'pages/main-page-content.vala',

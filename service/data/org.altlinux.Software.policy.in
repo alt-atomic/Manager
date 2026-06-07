@@ -1,0 +1,11 @@
+<policyconfig>
+  <action id="@SERVICE_NAME@.InspectRootImage">
+    <description>Get information from system containers storage</description>
+    <message>Authentication is required</message>
+    <defaults>
+      <allow_any>yes</allow_any>
+      <allow_inactive>yes</allow_inactive>
+      <allow_active>yes</allow_active>
+    </defaults>
+  </action>
+</policyconfig>

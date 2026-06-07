@@ -8,20 +8,30 @@ project(
 
 app_id = 'org.altlinux.Software'
 
+libexecdir = get_option('prefix') / get_option('libexecdir')
+datadir = get_option('prefix') / get_option('datadir')
+sysconfdir = get_option('prefix') / get_option('sysconfdir')
+
 glib_min_version = '2.76'
 
 nightly = false
 
+systemd = dependency('systemd')
+
 gee_dep = dependency('gee-0.8')
+gio_dep = dependency('gio-2.0')
 libadwaita_dep = dependency('libadwaita-1', version: '>= 1.6')
-libapi_base_dep = dependency('libserialize-7', version: '>= 7.5', fallback : ['libapi-base', 'serialize_lib_dep'])
-libcassette_dep = dependency('libcassette-0')
+libserialize = dependency('libserialize-7', version: '>= 7.5', fallback : ['libapi-base', 'serialize_lib_dep'])
+libcase_dep = dependency('libcase-0', fallback : ['libcase', 'lib_dep'])
+polkit_dep = dependency('polkit-gobject-1')
+posix_dep = meson.get_compiler('vala').find_library('posix')
 
 dependencies = [
   gee_dep,
+  gio_dep,
   libadwaita_dep,
-  libapi_base_dep,
-  libcassette_dep,
+  libserialize,
+  libcase_dep,
 ]
 
 add_project_arguments(
@@ -91,6 +101,7 @@ config_h_dir = include_directories('.')
 subdir('data')
 subdir('po')
 subdir('src')
+subdir('service')
 
 gnome.post_install(
   glib_compile_schemas: true,

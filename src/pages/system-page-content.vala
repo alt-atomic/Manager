@@ -21,4 +21,32 @@
 [GtkTemplate (ui = "/org/altlinux/Software/ui/system-page-content.ui")]
 public sealed class ACC.SystemPageContent: Adw.BreakpointBin {
 
+    [GtkChild]
+    unowned Gtk.Label image_name_label;
+    [GtkChild]
+    unowned Gtk.ListBoxRow image_row;
+
+    construct {
+        init.begin ();
+    }
+
+    async void init () {
+        var info = yield SystemModule.get_inst ().image_status ();
+
+        var config = yield SystemModule.get_inst ().image_get_config ();
+
+        var current_image = config.image;
+        var current_info = yield Software.get_system_image_info (current_image);
+
+        var remote_info = yield inspect_remote_image (current_image);
+
+        image_name_label.label = current_image;
+
+        if (current_info.digest != remote_info.digest) {
+            image_row.activatable = true;
+        }
+
+        message ("CURRENT_VERSION: %s", current_info.labels["org.opencontainers.image.version"]);
+        message ("NEW_VERSION %s", remote_info.labels["org.opencontainers.image.version"]);
+    }
 }

@@ -1,0 +1,14 @@
+'pkgconfig(libcase-0)'
+'typelib(Case)=0'
+'pkgconfig(gee-0.8)'
+'pkgconfig(gio-2.0)'
+'pkgconfig(libadwaita-1)'
+'pkgconfig(libserialize-7)'
+'pkgconfig(polkit-gobject-1)'
+/usr/bin/blueprint-compiler
+/usr/bin/gcc
+/usr/bin/meson
+/usr/bin/valac
+gettext-devel
+/usr/bin/appstreamcli
+/usr/bin/glib-compile-schemas

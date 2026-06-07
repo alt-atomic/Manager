@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025-2026 Vladimir Romanov <rirusha@altlinux.org>
+ * Copyright (C) 2024-2026 Vladimir Romanov <rirusha@altlinux.org>
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,37 +18,19 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-using ACC.Objects;
-
-namespace ACC {
-    internal const int DBUS_TIMEOUT = 600000;
-
-    internal bool is_atomic () {
-        //  TODO
-        return true;
-    }
-
-    internal bool has_distrobox () {
-        //  TODO
-        return File.new_for_path ("/usr/bin/distrobox").query_exists ();
-    }
-
-    internal async ImageInspect inspect_remote_image (
-        string name,
-        GLib.Cancellable? cancellable = null
-    ) throws GLib.Error {
+namespace Software {
+    string real_inspect_root_image (string name) throws Error {
         var sp = new Subprocess.newv (
             {
                 "skopeo",
                 "inspect",
-                @"docker://$name"
+                @"containers-storage:$name",
             },
             SubprocessFlags.STDOUT_PIPE
         );
-
         string res;
-        yield sp.communicate_utf8_async (null, cancellable, out res, null);
+        sp.communicate_utf8 (null, null, out res, null);
 
-        return yield Serialize.JsonWorker.simple_from_json_async<ImageInspect> (res);
+        return res;
     }
 }

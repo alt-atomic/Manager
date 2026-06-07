@@ -1,6 +1,6 @@
 using Gtk 4.0;
 using Adw 1;
-using Cassette 0;
+using Case 0;
 
 template $ACCMainPageContent: Adw.BreakpointBin {
   width-request: 360;
@@ -31,28 +31,28 @@ template $ACCMainPageContent: Adw.BreakpointBin {
       };
 
       [end]
-      Cassette.MenuButton {
+      Case.MenuButton {
         styles [
           "flat",
         ]
 
         icon-name: "open-menu-symbolic";
         sheet-title: _("Primary menu");
-        menu: Cassette.Menu {
-          Cassette.MenuSection {
-            Cassette.MenuItem {
+        menu: Case.Menu {
+          Case.MenuSection {
+            Case.MenuItem {
               label: _("Preferences");
               action-name: "win.preferences";
             }
 
-            Cassette.MenuItem {
+            Case.MenuItem {
               label: _("System settings");
               action-name: "win.system-settings";
             }
           }
           
-          Cassette.MenuSection {
-            Cassette.MenuItem {
+          Case.MenuSection {
+            Case.MenuItem {
               label: _("About application");
               action-name: "win.about";
             }

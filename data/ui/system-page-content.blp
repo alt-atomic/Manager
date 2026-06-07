@@ -1,6 +1,6 @@
 using Gtk 4.0;
 using Adw 1;
-using Cassette 0;
+using Case 0;
 
 template $ACCSystemPageContent: Adw.BreakpointBin {
   width-request: 360;
@@ -10,23 +10,23 @@ template $ACCSystemPageContent: Adw.BreakpointBin {
     [top]
     Adw.HeaderBar header_bar {
       [end]
-      Cassette.MenuButton {
+      Case.MenuButton {
         styles [
           "flat",
         ]
 
         icon-name: "open-menu-symbolic";
         sheet-title: _("Primary menu");
-        menu: Cassette.Menu {
-          Cassette.MenuSection {
-            Cassette.MenuItem {
+        menu: Case.Menu {
+          Case.MenuSection {
+            Case.MenuItem {
               label: _("Preferences");
               action-name: "win.preferences";
             }
           }
           
-          Cassette.MenuSection {
-            Cassette.MenuItem {
+          Case.MenuSection {
+            Case.MenuItem {
               label: _("About application");
               action-name: "win.about";
             }
@@ -34,5 +34,39 @@ template $ACCSystemPageContent: Adw.BreakpointBin {
         };
       }
     }
+
+    content: ScrolledWindow {
+      propagate-natural-height: true;
+      hscrollbar-policy: never;
+
+      Adw.Clamp {
+        maximum-size: 500;
+        margin-start: 12;
+        margin-bottom: 12;
+        margin-end: 12;
+        margin-top: 12;
+
+        Box {
+          orientation: vertical;
+
+          ListBox {
+            styles [
+              "boxed-list",
+            ]
+
+            selection-mode: none;
+
+            ListBoxRow image_row {
+              activatable: false;
+
+              Adw.Bin {
+                Label image_name_label {
+                }
+              } 
+            }
+          }
+        }
+      }
+    };
   }
 }

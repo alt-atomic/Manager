@@ -1,0 +1,62 @@
+# If you want to suggest changes, please send PR on
+# https://altlinux.space/alt-gnome/atomic-control-center to altlinux branch 
+
+%define _unpackaged_files_terminate_build 1
+
+%define app_id org.altlinux.Software.Devel
+
+Name: alt-software
+Version: @VERSION@
+Release: alt@RELEASE@
+
+Summary: Control Center for ALT Atomic system
+License: GPL-3.0-or-later
+Group: Sound
+URL: https://atomic.alt-gnome.ru/
+VCS: https://altlinux.space/alt-gnome/atomic-control-center.git
+
+Source: %name-%version.tar
+
+BuildRequires(pre): rpm-macros-meson
+BuildRequires: rpm-build-vala
+BuildRequires: rpm-build-gir
+BuildRequires: meson
+BuildRequires: vala
+BuildRequires: blueprint-compiler
+BuildRequires: pkgconfig(libcase-0)
+BuildRequires: typelib(Case) = 0
+BuildRequires: pkgconfig(gee-0.8)
+BuildRequires: pkgconfig(gio-2.0)
+BuildRequires: pkgconfig(libadwaita-1)
+BuildRequires: pkgconfig(libserialize-7)
+BuildRequires: pkgconfig(polkit-gobject-1)
+BuildRequires: gettext-devel
+%ifdef with_check
+BuildRequires: /usr/bin/appstreamcli
+BuildRequires: /usr/bin/glib-compile-schemas
+%endif
+
+%description
+%summary.
+
+%prep
+%setup
+
+%build
+%meson -Dnightly=true
+%meson_build
+
+%install
+%meson_install
+%find_lang %name
+
+%check
+%meson_test
+
+%files -f %name.lang
+%_bindir/%name
+%_datadir/glib-2.0/schemas/%app_id.gschema.xml
+%_datadir/metainfo/%app_id.metainfo.xml
+%_desktopdir/%app_id.desktop
+%_iconsdir/hicolor/*/apps/%app_id.svg
+%_iconsdir/hicolor/*/apps/%app_id-symbolic.svg

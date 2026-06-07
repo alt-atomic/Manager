@@ -6,6 +6,9 @@ vala_sources += files(
   'distrobox/package.vala',
   'distrobox/update-response.vala',
 
+  'oci/image-inspect.vala',
+  'oci/layer-data.vala',
+
   'repo/add-remove-response.vala',
   'repo/branches-response.vala',
   'repo/info.vala',

@@ -1,0 +1,8 @@
+[Unit]
+Description=Atomic Control Center priveleged daemon
+
+[Service]
+Type=dbus
+BusName=@SERVICE_NAME@
+User=@USER@
+ExecStart=@LIBEXECDIR@/@SERVICE_NAME@
