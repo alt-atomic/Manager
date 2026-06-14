@@ -10,7 +10,7 @@ endif
 
 setup:
 	$(SUDO) xargs apm s install -y < ./build-aux/altlinux/build-deps || true
-	meson setup --wipe _build -Dnightly=true
+	meson setup --wipe _build -Dnightly=true --prefix=/usr
 
 compile:
 	meson compile -C _build
