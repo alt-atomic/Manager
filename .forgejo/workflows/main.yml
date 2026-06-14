@@ -67,7 +67,7 @@ jobs:
       - name: Build
         run: make compile
 
-      - name: Build
+      - name: Test
         run: make test
 
       - name: Setup git
