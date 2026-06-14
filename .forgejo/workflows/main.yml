@@ -55,25 +55,20 @@ jobs:
       - name: Install apt-repo
         run: |
           apt-get update
-          apt-get install -y apt-repo
+          apt-get install -y apt-repo apm
 
       - name: Add case repo
         run: |
-          apt-repo add ${{ env.CASE_REPO }}
-
-      - name: Install deps
-        run: |
-          apt-get update
-          xargs apt-get install -y < ./build-aux/altlinux/build-deps
+          apm repo add ${{ env.CASE_REPO }}
 
       - name: Setup
-        run: meson setup _build -Dnightly=true
+        run: make setup
 
       - name: Build
-        run: meson compile -C _build
+        run: make compile
 
       - name: Build
-        run: meson test -C _build
+        run: make test
 
       - name: Setup git
         if: github.event_name != 'pull_request' && github.ref_name == 'main'
